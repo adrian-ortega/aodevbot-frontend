@@ -1,40 +1,55 @@
 <script setup>
-import url from 'url';
+import soundFxConfetti from '../assets/audio/confetti-poppers.mp3';
 import { storeToRefs } from 'pinia';
 import { useRedeemablesStore } from '../stores/redeemables';
+import { useEffectsStore } from '../stores/effects';
 import { useSoundsStore } from '../stores/sounds';
-import { watch, ref } from 'vue';
+import { watch, ref, reactive } from 'vue';
+import { randomFromArray } from '../util';
 const redeemablesStore = useRedeemablesStore();
 const { firstToChat } = storeToRefs(redeemablesStore);
 
+const effects = useEffectsStore();
+
+const redemption = reactive({});
 const hiddenCheer = ref(false);
 const animateIn = ref(false);
 const animateOut = ref(false);
 
-const showMessage = async () => {
+const showMessage = async (payload) => {
   const soundsStore = useSoundsStore();
-  const soundFx = url.pathToFileURL('@/assets/autio/confetti-poppers.mp3');
   hiddenCheer.value = false;
   animateIn.value = true;
   animateOut.value = false;
-  soundsStore.play(soundFx);
+  effects.confettiFromSides();
+  soundsStore.play(soundFxConfetti);
 
-  console.log('confetti');
-  // @TODO add confetti
+  redemption.name = payload.name;
+  redemption.message = randomFromArray([
+    'is First! you all saw it! They were here FIRST!',
+    'There\'s no denying it, you\'re first!',
+    'I think you get points for being first right? Maybe. Anyway you did it!',
+    'Fwah Fwah Fwah Fwaaahh YOU\'RE FIRST!'
+  ]);
 
   setTimeout(() => {
-    console.log('confetti done');
     animateOut.value = true;
     animateIn.value = false;
-
-    // @TODO remove confetti
+    effects.clearConffetiCanvas();
   });
 }
 
-watch(firstToChat, (value) => { 
-  if (value !== null) showMessage();
+watch(firstToChat, (value) => {
+  if (value !== null) showMessage({ ...value });
 });
 </script>
 <template>
-  {{ firstToChat }}
+  <div class="redemption first-to-chat">
+    <div class="channel-notification from-center">
+      <div>
+        <h4>{{ redemption.name }}</h4>
+        <div :vhtml="redemption.message"></div>
+      </div>
+    </div>
+  </div>
 </template>

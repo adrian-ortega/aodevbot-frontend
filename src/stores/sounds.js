@@ -6,7 +6,6 @@ export const useSoundsStore = defineStore('sounds', () => {
     const sound = new Howl({
       src: [src]
     });
-    console.log(src, sound);
     sound.play();
     return sound;
   };
