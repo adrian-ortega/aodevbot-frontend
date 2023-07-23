@@ -43,8 +43,9 @@ export const useWebsocketStore = defineStore('websockets', () => {
       connected.value = false;
       setTimeout(() => {
         // @TODO AO - Implement reconnect/retries, for not just connect again
+        console.log('Reconnecting');
         connect();
-      }, ONE_MINUTE)
+      }, ONE_SECOND * 5)
     };
     ws.onerror = () => {
       // @TODO
@@ -70,10 +71,15 @@ export const useWebsocketStore = defineStore('websockets', () => {
     delete messageActions[id];
   }
 
+  const send = (event, payload) => ws.send(JSON.stringify({
+    event, payload
+  }));
+
   connect();
   return {
     connected,
     onConnect,
-    onMessage
+    onMessage,
+    send
   }
 });
