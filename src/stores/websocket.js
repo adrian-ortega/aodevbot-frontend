@@ -42,8 +42,6 @@ export const useWebsocketStore = defineStore('websockets', () => {
     ws.onclose = () => {
       connected.value = false;
       setTimeout(() => {
-        // @TODO AO - Implement reconnect/retries, for not just connect again
-        console.log('Reconnecting');
         connect();
       }, ONE_SECOND * 5)
     };

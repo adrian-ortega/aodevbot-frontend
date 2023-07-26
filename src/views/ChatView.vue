@@ -1,11 +1,7 @@
 <script setup>
-import ChatReplies from '../components/ChatReplies.vue';
-import ChatReplyForm from '../components/ChatReplyForm.vue';
+import Chat from '../components/Chat.vue'
 </script>
 
 <template>
-  <div class="chat">
-    <ChatReplies/>
-    <ChatReplyForm/>
-  </div>
+  <Chat/>
 </template>

@@ -14,13 +14,27 @@ const submitForm = () => {
 </script>
 
 <template>
-  <form class="chat__form" action="/" method="POST" @submit.prevent="submitForm">
-    <input
+  <form
+    class="chat__form"
+    action="/"
+    method="POST"
+    @submit.prevent="submitForm"
+  >
+    <div class="chat__input">
+      <input
       type="text"
       ref="chatInputElement"
       v-model="chatInput"
       @keyup.enter.prevent="submitForm"
     />
-    <button @click.prevent="submitForm">Send</button>
+    </div>
+    <div class="chat__settings">
+      <div>
+        <button class="button">O</button>
+      </div>
+      <div>
+        <button class="button button--primary" @click.prevent="submitForm">Send</button>
+      </div>
+    </div>
   </form>
 </template>

@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+input {
+  appearance: none;
+  width: 100%;
+  height: var(--input-height);
+  background: none;
+  color: var(--white);
+  padding: 0 0.5em;
+  border: 1px solid var(--gray-ter);
+  border-radius: var(--radius);
+  transition: all 0.1s linear;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--body-background-color), 
+                0 0 0 5px var(--primary-alpha-30);
+  }
+}
