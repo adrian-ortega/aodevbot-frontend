@@ -23,7 +23,9 @@
 
   &__bg {
     position: absolute;
+    background-color: var(--white-alpha-10);
     background-size: cover;
+    background-position: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -13,7 +13,10 @@
   height: var(--button-height);
   padding: 0 0.75em;
   transition: all 0.1s linear;
-  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &:hover,
   &:focus {
@@ -21,15 +24,28 @@
     color: var(--button-color-hover-fg);
   }
 
+  &[disabled=true],
+  &.is-disabled {
+    cursor: default;
+
+    &:hover,
+    &:focus {
+      background: inherit;
+    }
+  }
+
   > span {
     display: inline-flex;
   }
 
+  .text + .avatar,
   .text + .icon {
     margin-right: 0.5em;
   }
 
-  .icon + .text {
+  .avatar:first-child + .text,
+  .icon:first-child + .text,
+  .text + .icon:last-child {
     margin-left: 0.5em;
   }
 

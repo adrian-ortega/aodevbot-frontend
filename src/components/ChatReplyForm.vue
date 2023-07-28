@@ -12,6 +12,10 @@ const submitForm = () => {
   chatInput.value = '';
   chatStore.sendChatMessage(message)
 }
+
+const focusInput = () => {
+  chatInputElement.value.focus()
+}
 </script>
 
 <template>
@@ -22,7 +26,7 @@ const submitForm = () => {
     @submit.prevent="submitForm"
   >
     <div class="chat__input">
-      <ChatUserSelector/>
+      <ChatUserSelector @chat-focus="focusInput"/>
       <input
       type="text"
       ref="chatInputElement"

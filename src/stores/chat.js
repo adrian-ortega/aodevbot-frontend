@@ -24,10 +24,15 @@ export const useChatStore = defineStore('chat', () => {
     state.chatters = [...data];
   }
 
+  const setChatter = (twitch_id) => {
+    const chatter = state.chatters.find(c => c.twitch_id === twitch_id);
+    state.chatter = { ...chatter };
+  }
+
   const sendChatMessage = (message) => {
     wsStore.send('chat-message', {
       message,
-      twitch_id: 87329705
+      twitch_id: state.chatter.twitch_id
     })
   }
 
@@ -48,7 +53,9 @@ export const useChatStore = defineStore('chat', () => {
     chatters: computed(() => state.chatters),
     status: computed(() => state.status),
     replies: computed(() => state.replies),
+
     fetchChatters,
+    setChatter,
     sendChatMessage
   }
 });
