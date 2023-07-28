@@ -6,8 +6,23 @@ export const useChatStore = defineStore('chat', () => {
   const wsStore = useWebsocketStore();
   const state = reactive({
     status: 'Disconnected',
+    chatter: null,
+    chatters: [],
     replies: []
   });
+
+  const setBroadcasterAsDefaultChatter = async () => {
+    const response = await fetch('/api/broadcaster');
+    const data = await response.json();
+    state.chatter = { ...data };
+  }
+
+  const fetchChatters = async () => {
+    const response = await fetch('/api/chatters');
+    const data = await response.json();
+
+    state.chatters = [...data];
+  }
 
   const sendChatMessage = (message) => {
     wsStore.send('chat-message', {
@@ -24,11 +39,16 @@ export const useChatStore = defineStore('chat', () => {
   const { connected: wsConnected } = storeToRefs(wsStore);
   watch(wsConnected, (value) => {
     state.status = value ? 'Connected' : 'Reconnecting'
-  })
+  });
+
+  setBroadcasterAsDefaultChatter();
 
   return {
+    chatter: computed(() => state.chatter),
+    chatters: computed(() => state.chatters),
     status: computed(() => state.status),
     replies: computed(() => state.replies),
+    fetchChatters,
     sendChatMessage
   }
 });

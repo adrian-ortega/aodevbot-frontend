@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+.v-debug {
+
+  .container {
+    height: 100%;
+    min-height: 100%;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr minmax(33vw, 360px);
+    grid-template-areas: "header header"
+                        "content sidebar";
+    .content {
+      grid-area: content;
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+      border-left: 1px solid var(--gray-ter);
+    }
+  }
+}

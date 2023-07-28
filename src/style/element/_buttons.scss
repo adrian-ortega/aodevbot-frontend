@@ -21,12 +21,42 @@
     color: var(--button-color-hover-fg);
   }
 
+  > span {
+    display: inline-flex;
+  }
+
+  .text + .icon {
+    margin-right: 0.5em;
+  }
+
+  .icon + .text {
+    margin-left: 0.5em;
+  }
+
   &--primary {
     background: var(--primary);
 
     &:hover,
     &:focus {
       background: var(--primary-bis);
+    }
+  }
+
+  &--close {
+    height: auto;
+    background: none;
+    padding: 0.1em;
+  }
+
+  &--transparent {
+    background: transparent;
+  }
+
+  &--close,
+  &--transparent {
+    &:focus,
+    &:hover {
+      background: var(--white-alpha-10)
     }
   }
 }

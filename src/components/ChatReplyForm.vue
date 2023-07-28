@@ -1,4 +1,5 @@
 <script setup>
+import ChatUserSelector from './ChatUserSelector.vue'
 import { useChatStore } from '../stores/chat.js';
 import { ref } from 'vue';
 
@@ -21,6 +22,7 @@ const submitForm = () => {
     @submit.prevent="submitForm"
   >
     <div class="chat__input">
+      <ChatUserSelector/>
       <input
       type="text"
       ref="chatInputElement"
