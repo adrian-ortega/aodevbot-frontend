@@ -10,11 +10,17 @@
   --gray-ter: #3d4250;
   --white: #F0FFFF;
   --white-alpha-10: hsla(0, 0%, 100%, 10%);
+  --white-alpha-30: hsla(0, 0%, 100%, 30%);
 
   --body-background-color: #202124;
 
   --font-family-body: 'Roboto', sans-serif;
   --font-base-size: 16px;
+  --font-size-normal: 1em;
+  --font-size-1: 1em;
+  --font-size-2: 1.25em;
+  --font-size-3: 2.2em;
+
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   
@@ -28,4 +34,8 @@
   --button-color-bg: var(--gray);
   --button-color-hover-fg: var(--white);
   --button-color-hover-bg: var(--primary);
+
+  --page-gap: 0.25em;
+  --page-header-height: auto;
+  --page-footer-height: auto;
 }

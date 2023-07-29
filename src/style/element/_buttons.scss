@@ -5,6 +5,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius);
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   font-size: 1em;
   line-height: 1;
@@ -22,16 +23,6 @@
   &:focus {
     background: var(--button-color-hover-bg);
     color: var(--button-color-hover-fg);
-  }
-
-  &[disabled=true],
-  &.is-disabled {
-    cursor: default;
-
-    &:hover,
-    &:focus {
-      background: inherit;
-    }
   }
 
   > span {
@@ -73,6 +64,23 @@
     &:focus,
     &:hover {
       background: var(--white-alpha-10)
+    }
+  }
+
+  &--fw {
+    width: 100%;
+  }
+
+
+  &[disabled="true"],
+  &.is-disabled {
+    
+    &,
+    &:hover,
+    &:focus {
+      cursor: default;
+      background: var(--white-alpha-10);
+      color: var(--white-alpha-30);
     }
   }
 }

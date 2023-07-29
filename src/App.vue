@@ -5,9 +5,12 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 watch(route, (to) => {
-  const { name: routeName } = to;
+  const { name: routeName, meta } = to;
   const $root = document.getElementById('app');
   $root.className = `v-${routeName}`;
+  if (meta.containerClasses) {
+    $root.classList.add(...meta.containerClasses);
+  }
 }, {
   flush: 'pre',
   immediate: true,

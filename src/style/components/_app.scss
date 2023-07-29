@@ -8,4 +8,21 @@ body, html {
 #app {
   height: 100%;
   min-width: 100%;
+
+  &.is-page {
+    display: grid;
+    grid-template-rows: var(--page-header-height) 1fr var(--page-footer-height);
+  }
+}
+
+.v-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+
+  h2 {
+    color: var(--primary);
+    font-size: var(--font-size-3);
+  }
 }

@@ -16,7 +16,10 @@ const router = createRouter({
     {
       path: '/config',
       name: 'config',
-      component: ConfigView
+      component: ConfigView,
+      meta: {
+        containerClasses: ['is-page']
+      }
     },
     {
       path: '/chat',
@@ -31,7 +34,7 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
-      compoent: NotFoundView
+      component: NotFoundView
     }
   ]
 })
