@@ -1,0 +1,174 @@
+@charset "utf-8";
+
+.chat {
+  padding: 1em;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "status"
+                       "replies"
+                       "form";
+
+  &__status {
+    grid-area: status;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.875em;
+    color: var(--gray-ter);
+  }
+
+  &__status,
+  &__form,
+  &__replies {
+    padding: 0.5em;
+  }
+
+  &__form {
+    grid-area: form;
+  }
+
+  &__replies {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    grid-area: replies;
+    overflow: hidden;
+  }
+
+  &__replies-box {
+    overflow: auto;
+  }
+
+  &__reply {
+    padding: 0.2em;
+    display: inline-block;
+    width: 100%;
+    gap: 0.25em;
+
+    &:not(:last-child) {
+      margin-bottom: 0.2em;
+    }
+
+    > span:not(:last-child) {
+      margin-right: 0.2em;
+    }
+
+    > strong {
+      color: var(--gray);
+    }
+  }
+
+  &__badge {
+    display: inline-flex;
+    padding: 0.1em;
+    background: grey;
+    border-radius: var(--radius);
+  }
+
+  &__input {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "selector input";
+    gap: 0.5em;
+    margin: 0 0 1em;
+
+    input {
+      border-width: 2px;
+    }
+  }
+
+  &__user-selector {
+    grid-area: selector;
+
+    > .button {
+      padding: 0;
+      border-width: 0.15em;
+      border-color: var(--primary);
+      border-radius: var(--radius-rounded);
+      background: none;
+      width: 2.75em;
+      height: 2.75em;
+
+      .avatar {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .selector-popup {
+      position: absolute;
+      bottom: calc(100% + 1em);
+      left: 0;
+      width: 100%;
+      max-width: 20em;
+
+      background: var(--body-background-color);
+      border: 1px solid var(--black-alpha-20);
+      border-radius: var(--radius);
+      box-shadow: 0.1em 0.25em 1em var(--black-alpha-20);
+      overflow: hidden;
+
+      &__header {
+        display: flex;
+        padding: 0.25em 0.5em;
+        box-shadow: 0 0.1em 0.25em var(--black-alpha-20);
+
+        p {
+          margin: 0 0 0.25em;
+        }
+
+        small {
+          display: block;
+          font-size: .65em;
+          line-height: .9em;
+          color: var(--gray)
+        }
+
+        div:last-child {
+          margin-left: auto;
+        }
+      }
+
+      &__body {
+        padding: 0.5em;
+
+        > div {
+          &.is-active {
+            .button {
+              font-weight: var(--font-weight-bold)
+            }
+
+            .icon:last-child {
+              margin-left :auto;
+              color: var(--primary)
+            }
+          }
+
+          &:not(:last-child) {
+            margin-bottom: 0.25em;
+          }
+        }
+
+        .button {
+          width: 100%;
+          font-size: 0.875em;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  &__settings {
+    &,
+    div {
+      display: flex;
+    }
+
+    div {
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+  }
+}

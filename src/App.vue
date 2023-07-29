@@ -1,9 +1,22 @@
 <script setup>
-import ChannelRedemptionFirst from './components/ChannelRedemptionFirst.vue'
+import { watch, ref, getCurrentInstance } from "vue"
 import { useWebsocketStore } from './stores/websocket';
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+watch(route, (to) => {
+  const { name: routeName } = to;
+  const $root = document.getElementById('app');
+  $root.className = `v-${routeName}`;
+}, {
+  flush: 'pre',
+  immediate: true,
+  deep: true
+})
+
 useWebsocketStore();
 </script>
+
 <template>
-  <ChannelRedemptionFirst />
-  <canvas id="confetti-canvas" style="width: 100%;height: 100%;position: fixed; top: 0; left: 0;"></canvas>
+  <router-view/>
 </template>

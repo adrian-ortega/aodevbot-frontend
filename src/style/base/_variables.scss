@@ -1,0 +1,31 @@
+:root {
+  --primary: hsl(352, 55%, 43%);
+  --primary-bis: hwb(352 15% 45%);
+  --primary-alpha-50: hsla(352, 55%, 43%, 50%);
+  --primary-alpha-30: hsla(352, 55%, 43%, 30%);
+  --black: #000000;
+  --black-alpha-20: hsla(0, 0%, 0%, 20%);
+  --gray: #a2aac3;
+  --gray-bis: #8691ac;
+  --gray-ter: #3d4250;
+  --white: #F0FFFF;
+  --white-alpha-10: hsla(0, 0%, 100%, 10%);
+
+  --body-background-color: #202124;
+
+  --font-family-body: 'Roboto', sans-serif;
+  --font-base-size: 16px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  
+  --input-height: 3em;
+
+  --radius: 0.25em;
+  --radius-rounded: 3000em;
+
+  --button-height: 35px;
+  --button-color-fg: var(--white);
+  --button-color-bg: var(--gray);
+  --button-color-hover-fg: var(--white);
+  --button-color-hover-bg: var(--primary);
+}

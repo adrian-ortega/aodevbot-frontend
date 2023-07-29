@@ -1,3 +1,7 @@
+<script setup>
+import BrowserSourceOverlay from '../components/BrowserSourceOverlay.vue';
+</script>
+
 <template>
-  <p>Home View</p>
+  <BrowserSourceOverlay/>  
 </template>
