@@ -7,13 +7,14 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 1em;
+  font-size: 0.875em;
   line-height: 1;
   background: var(--button-color-bg);
   color: var(--button-color-fg);
   height: var(--button-height);
-  padding: 0 0.75em;
+  padding: 0 1em;
   transition: all 0.1s linear;
+  text-decoration: none;
 
   &:hover {
     cursor: pointer;
@@ -29,9 +30,8 @@
     display: inline-flex;
   }
 
-  .text + .avatar,
-  .text + .icon {
-    margin-right: 0.5em;
+  .text + .icon:last-child {
+    margin-right: -0.25em;
   }
 
   .avatar:first-child + .text,

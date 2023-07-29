@@ -11,7 +11,7 @@ import { computed, reactive } from 'vue';
 import { mdiDotsVertical } from '@mdi/js';
 
 const tabs = reactive({
-  account: { label: 'Account', component: ConfigTabAcount, active: true },
+  account: { label: 'Accounts', component: ConfigTabAcount, active: true },
   commands: { label: 'Commands', component: ConfigTabCommands, active: false },
   events: { label: 'Events', component: ConfigTabEvents, active: false },
   redeemables: { label: 'Redeemables', component: ConfigTabRedeemables, active: false }
@@ -23,7 +23,6 @@ const selectTab = (tabId) => {
 }
 const selectedTabComponent = computed((...args) => {
   const keys = Object.keys(tabs);
-  console.log(keys);
   for (let i = 0; i < keys.length; i++) {
     if (tabs[keys[i]].active) {
       return tabs[keys[i]].component;

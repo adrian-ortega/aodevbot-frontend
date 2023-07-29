@@ -1,9 +1,11 @@
 import { defineStore, storeToRefs } from "pinia";
 import { computed, reactive, watch } from "vue";
 import { useWebsocketStore } from './websocket';
+import { useAccountsStore } from "./accounts";
 
 export const useChatStore = defineStore('chat', () => {
   const wsStore = useWebsocketStore();
+  const accountsStore = useAccountsStore();
   const state = reactive({
     status: 'Disconnected',
     chatter: null,
@@ -12,8 +14,7 @@ export const useChatStore = defineStore('chat', () => {
   });
 
   const setBroadcasterAsDefaultChatter = async () => {
-    const response = await fetch('/api/broadcaster');
-    const data = await response.json();
+    const data = await accountsStore.getBroadcaster();
     state.chatter = { ...data };
   }
 

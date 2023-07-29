@@ -3,14 +3,22 @@
   --primary-bis: hwb(352 15% 45%);
   --primary-alpha-50: hsla(352, 55%, 43%, 50%);
   --primary-alpha-30: hsla(352, 55%, 43%, 30%);
+
+  --twitch: hsl(261, 43%, 45%);
+
   --black: #000000;
+  --black-alpha-10: hsla(0, 0%, 0%, 10%);
   --black-alpha-20: hsla(0, 0%, 0%, 20%);
+
   --gray: #a2aac3;
   --gray-bis: #8691ac;
   --gray-ter: #3d4250;
+  
   --white: #F0FFFF;
+  --white-alpha-5: hsla(0, 0%, 100%, 5%);
   --white-alpha-10: hsla(0, 0%, 100%, 10%);
   --white-alpha-30: hsla(0, 0%, 100%, 30%);
+  --white-alpha-80: hsla(0, 0%, 100%, 80%);
 
   --body-background-color: #202124;
 
@@ -31,11 +39,15 @@
 
   --button-height: 35px;
   --button-color-fg: var(--white);
-  --button-color-bg: var(--gray);
+  --button-color-bg: var(--white-alpha-5);
   --button-color-hover-fg: var(--white);
-  --button-color-hover-bg: var(--primary);
+  --button-color-hover-bg: var(--black);
 
   --page-gap: 0.25em;
   --page-header-height: auto;
   --page-footer-height: auto;
+
+  --notification-error: hsl(342, 100%, 35%);
+  --notification-warning: hsl(32, 100%, 62%);
+  --notification-success: hsl(71, 77%, 43%);
 }
