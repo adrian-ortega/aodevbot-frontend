@@ -7,12 +7,14 @@ import { useAccountsStore } from '../stores/accounts';
 import { mdiDotsCircle } from '@mdi/js';
 const accountsStore = useAccountsStore();
 const loading = ref(true);
-let primaryAccount, botAccount;
+let primaryAccount, primaryAccountLoginUrl, botAccount, botAccountLoginUrl;
 
 onMounted(async () => {
   loading.value = true;
   primaryAccount = await accountsStore.getBroadcaster();
-  botAccount = await accountsStore.getBot();
+  primaryAccountLoginUrl = await accountsStore.getAuthUrl(1);
+  botAccount = await accountsStore.getSecondary();
+  botAccountLoginUrl = await accountsStore.getAuthUrl(2);
   loading.value = false;
 });
 </script>
@@ -35,14 +37,14 @@ onMounted(async () => {
       <ConfigTabAccountItem
         title="Primary Twitch Account"
         :account="primaryAccount"
+        :login-url="primaryAccountLoginUrl"
         help-text="Please log in to use this app"
-        :login-url="accountsStore.getAuthUrl('admin')"
       />
       <ConfigTabAccountItem
         title="Bot Twitch Account"
         :account="botAccount"
+        :login-url="botAccountLoginUrl"
         help-text="Bot accounts are optional"
-        :login-url="accountsStore.getAuthUrl('bot')"
       />
     </div>
   </div>

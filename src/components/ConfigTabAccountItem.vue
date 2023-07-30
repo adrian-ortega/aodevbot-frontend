@@ -2,6 +2,9 @@
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiChevronRight, mdiTwitch } from '@mdi/js';
 import { computed } from 'vue';
+import { popupWindowCenter } from '../util';
+
+let loginIframe;
 
 const props = defineProps({
   title: String,
@@ -13,7 +16,17 @@ const props = defineProps({
   }
 });
 
-const loginButtonText = computed(() => props.account  ? 'Change' : 'Login');
+const loginButtonText = computed(() => props.account ? 'Change' : 'Login');
+const openLoginPopup = () => {
+  window.onmessage = (e) => {
+    console.log(e)
+  }
+
+  loginIframe = popupWindowCenter({
+    url: props.loginUrl,
+    title: 'Login with Twitch'
+  });
+}
 
 </script>
 
@@ -32,12 +45,12 @@ const loginButtonText = computed(() => props.account  ? 'Change' : 'Login');
       </div>
     </div>
     <div>
-      <a :href="loginUrl" class="button" target="_blank">
+      <button class="button" @click.prevent="() => openLoginPopup()">
         <span class="text">{{ loginButtonText }}</span>
         <span class="icon">
           <SvgIcon type="mdi" :path="mdiChevronRight"/>
         </span>
-      </a>
+      </button>
     </div>
   </div>
 </template>
