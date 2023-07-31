@@ -1,5 +1,4 @@
 <script setup>
-import SvgIcon from '@jamescoyle/vue-icon';
 import PageHeader from '../components/PageHeader.vue';
 import PageContent from '../components/PageContent.vue';
 import PageFooter from '../components/PageFooter.vue';
@@ -8,7 +7,6 @@ import ConfigTabCommands from '../components/ConfigTabCommands.vue';
 import ConfigTabEvents from '../components/ConfigTabEvents.vue'
 import ConfigTabRedeemables from '../components/ConfigTabRedeemables.vue';
 import { computed, reactive } from 'vue';
-import { mdiDotsVertical } from '@mdi/js';
 
 const tabs = reactive({
   account: { label: 'Accounts', component: ConfigTabAcount, active: true },
@@ -32,16 +30,7 @@ const selectedTabComponent = computed((...args) => {
 </script>
 
 <template>
-  <PageHeader title="Settings">
-    <template v-slot:right>
-      <button class="button button--transparent">
-        <span class="icon">
-          <SvgIcon type="mdi" :path="mdiDotsVertical"/>
-        </span>
-      </button>
-    </template>
-  </PageHeader>
-
+  <PageHeader title="Settings"/>
   <PageContent>
     <nav class="tabs">
       <a

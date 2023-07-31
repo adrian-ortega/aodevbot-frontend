@@ -18,12 +18,10 @@
     justify-content: space-between;
   }
 
-  &__item {
-    flex: 1 1 auto;
-    justify-content: center;
-    // &--left {}
-    // &--right {}
-    // &--center {}
+  &__item--center {
+    flex-grow: 1;
+    padding-left: 1em;
+    justify-content: flex-start;
   }
 }
 
