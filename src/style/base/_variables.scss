@@ -19,12 +19,19 @@
   --white-alpha-10: hsla(0, 0%, 100%, 10%);
   --white-alpha-20: hsla(0, 0%, 100%, 20%);
   --white-alpha-30: hsla(0, 0%, 100%, 30%);
+  --white-alpha-50: hsla(0, 0%, 100%, 50%);
   --white-alpha-80: hsla(0, 0%, 100%, 80%);
+
+  --error: red;
+  --warning: orange;
+  --success: green;
+  --info: lightblue;
 
   --body-background-color: #202124;
 
   --font-family-body: 'Roboto', sans-serif;
   --font-base-size: 16px;
+  --font-size-small: 0.8em;
   --font-size-normal: 1em;
   --font-size-1: 1em;
   --font-size-2: 1.25em;
@@ -52,4 +59,10 @@
   --notification-error: hsl(342, 100%, 35%);
   --notification-warning: hsl(32, 100%, 62%);
   --notification-success: hsl(71, 77%, 43%);
+
+  --notification-color-bg: var(--black);
+
+  --dd-menu-color-bg: #202124;
+  --dd-menu-color-border: var(--black-alpha-20);
+  --dd-menu-min-width: 10em;
 }

@@ -2,6 +2,7 @@
 import PageHeader from '../components/PageHeader.vue';
 import PageContent from '../components/PageContent.vue';
 import PageFooter from '../components/PageFooter.vue';
+import PageNotifications from '../components/PageNotifications.vue';
 import ConfigTabAcount from '../components/ConfigTabAccount.vue';
 import ConfigTabCommands from '../components/ConfigTabCommands.vue';
 import ConfigTabEvents from '../components/ConfigTabEvents.vue'
@@ -51,4 +52,6 @@ const selectedTabComponent = computed((...args) => {
         <span class="text">Save</span>
       </button>
   </PageFooter>
+
+  <PageNotifications/>
 </template>

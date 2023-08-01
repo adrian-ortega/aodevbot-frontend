@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+.page-notifications {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  bottom: auto;
+  z-index: 99;
+}
+
+.notification {
+  background: var(--notification-color-bg);
+  display: grid;
+  grid-template-areas: 'icon content button';
+  grid-template-columns: auto 1fr auto;
+  min-width: 20em;
+
+
+  &__content {
+    padding-top: 0.25em;
+  }
+
+  &__icon {
+    grid-area: icon;
+  }
+
+  &__button {
+    grid-area: button;
+
+    .button {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+  }
+}

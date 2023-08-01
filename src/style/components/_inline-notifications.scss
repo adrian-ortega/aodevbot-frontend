@@ -1,9 +1,13 @@
 @charset "utf-8";
 
 .inline-notification {
-  padding: 1em;
   background: var(--black-alpha-20);
-  margin: 2em 0;
+  margin: 2em 0; 
+}
+
+.notification,
+.inline-notification {
+  padding: 1em;
   border: 1px solid var(--black-alpha-20);
   border-radius: var(--radius);
   box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);

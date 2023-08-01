@@ -1,16 +1,25 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
+import { useNotificationsStore } from "./notifications";
 
 export const useAccountsStore = defineStore('accounts', () => {
   const hasBroadcaster = ref(false);
   const hasSecondary = ref(false);
+  let errorNotificationId;
+  const notify = (message, type = 'info') => {
+    const ns = useNotificationsStore();
+    if (errorNotificationId) ns.dismiss(errorNotificationId);
+    errorNotificationId = ns.append(message, type);
+  }
+
   const getBroadcasterAccount = async (type) => {
     let data;
     try {
       const response = await fetch(`/api/broadcaster${type === 2 ? '/secondary' : ''}`);
       data = await response.json();
     } catch (error) {
-      data = null
+      data = null;
+      notify('Cannot retrieve brodcaster.', 'error')
     }
     return data;
   }
@@ -27,9 +36,11 @@ export const useAccountsStore = defineStore('accounts', () => {
   }
 
   const getAuthUrl = async (type) => {
-    const response = await fetch(`/api/twitch/authenticate?type=${type}`);
-    const { data } = await response.json();
-    return data;
+    try {
+      const response = await fetch(`/api/twitch/authenticate?type=${type}`);
+      const { data } = await response.json();
+      return data;
+    } catch (err) { }
   }
 
   return {

@@ -1,6 +1,8 @@
 <script setup>
+import PageMenu from './PageMenu.vue';
 import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiDotsVertical, mdiRobotHappy } from '@mdi/js';
+import { mdiRobotHappy } from '@mdi/js';
+
 
 defineProps({
   title: String
@@ -25,11 +27,7 @@ defineProps({
       </div>
       <div class="page-header__item page-header__item--right">
         <slot name="right"></slot>
-        <button class="button button--transparent">
-        <span class="icon">
-          <SvgIcon type="mdi" :path="mdiDotsVertical"/>
-        </span>
-      </button>
+        <PageMenu></PageMenu>
       </div>
     </div>
   </div>
