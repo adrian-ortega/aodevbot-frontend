@@ -45,6 +45,7 @@
     border-radius: var(--radius);
     box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);
     min-width: var(--dd-menu-min-width);
+    z-index: 999;
 
     // Default
     transform: translateY(-10%);
