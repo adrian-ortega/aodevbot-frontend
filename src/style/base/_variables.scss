@@ -42,6 +42,9 @@
   --font-weight-black: 900;
   
   --input-height: 3em;
+  --input-checkbox-color-bg: var(--white-alpha-10);
+  --input-checkbox-color-fg: var(--primary);
+  --input-checkbox-color-b: var(--white-alpha-20);
 
   --radius: 0.25em;
   --radius-rounded: 3000em;
@@ -65,4 +68,8 @@
   --dd-menu-color-bg: #202124;
   --dd-menu-color-border: var(--black-alpha-20);
   --dd-menu-min-width: 10em;
+
+  --table-color-bg: var(--black-alpha-10);
+  --table-border-color: var(--black-alpha-20);
+  --table-header-color-bg: var(--black-alpha-10);
 }

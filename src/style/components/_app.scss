@@ -45,7 +45,10 @@ body, html {
 }
 
 .config-view {
-  margin-top: 2em;
+  > .tabs {
+    margin-top: 0;
+  }
+
 }
 
 .v-not-found {

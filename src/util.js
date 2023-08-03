@@ -21,3 +21,10 @@ export const makeId = (function () {
   let i = 0;
   return () => (i++).toString(36) + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36);
 })();
+export const createUrlSearchParams = (query) => {
+  const searchParams = new URLSearchParams();
+  Object.entries(query).forEach(([key, value]) => {
+    searchParams.append(key, value);
+  });
+  return searchParams;
+}

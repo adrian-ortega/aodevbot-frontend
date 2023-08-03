@@ -10,8 +10,8 @@ import ConfigTabRedeemables from '../components/ConfigTabRedeemables.vue';
 import { computed, reactive } from 'vue';
 
 const tabs = reactive({
-  account: { label: 'Accounts', component: ConfigTabAcount, active: true },
-  commands: { label: 'Commands', component: ConfigTabCommands, active: false },
+  account: { label: 'Accounts', component: ConfigTabAcount, active: false },
+  commands: { label: 'Commands', component: ConfigTabCommands, active: true },
   events: { label: 'Events', component: ConfigTabEvents, active: false },
   redeemables: { label: 'Redeemables', component: ConfigTabRedeemables, active: false }
 });
@@ -44,7 +44,9 @@ const selectedTabComponent = computed((...args) => {
         <span v-if="tab.active" class="tabs__trigger-bb"></span>
       </a>
     </nav>
-    <component :is="selectedTabComponent" />
+    <div class="tabs__content">
+      <component :is="selectedTabComponent" />
+    </div>
   </PageContent>
 
   <PageFooter>
