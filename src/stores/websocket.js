@@ -29,7 +29,7 @@ export const useWebsocketStore = defineStore('websockets', () => {
         }
 
         if (!booted.value) {
-          ns.append('Connected', ns.types.success, ONE_SECOND * 3);
+          ns.append('Connected', ns.types.success, ONE_SECOND * 0.5);
           booted.value = true;
         }
 
