@@ -63,7 +63,7 @@
   &--transparent {
     &:focus,
     &:hover {
-      background: var(--white-alpha-10)
+      background: var(--white-alpha-10);
     }
   }
 
@@ -77,9 +77,8 @@
     padding-right: 0.5em;
   }
 
-  &[disabled="true"],
+  &[disabled='true'],
   &.is-disabled {
-    
     &,
     &:hover,
     &:focus {
@@ -88,4 +87,11 @@
       color: var(--white-alpha-30);
     }
   }
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+  margin: 2em 0;
 }

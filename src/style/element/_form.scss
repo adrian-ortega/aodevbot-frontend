@@ -1,12 +1,15 @@
 @charset "utf-8";
 
-input {
+input,
+select,
+textarea {
   appearance: none;
-  width: 100%;
   height: var(--input-height);
+  padding: 0 0.5em;
+
+  width: 100%;
   background: none;
   color: var(--white);
-  padding: 0 0.5em;
   border: 1px solid var(--gray-ter);
   border-radius: var(--radius);
   transition: all 0.1s linear;
@@ -14,17 +17,22 @@ input {
   &:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px var(--body-background-color), 
-                0 0 0 5px var(--primary-alpha-30);
+    box-shadow: 0 0 0 2px var(--body-background-color), 0 0 0 5px var(--primary-alpha-30);
   }
 }
 
-input[type="text"] {
+textarea {
+  padding: 0.75em;
+  min-height: calc(var(--input-height) * 3);
+}
+
+input[type='text'],
+textarea {
   min-width: var(--input-min-width);
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+input[type='radio'],
+input[type='checkbox'] {
   width: 1em;
   height: 1em;
   border: 1px solid var(--input-checkbox-color-b);
@@ -33,7 +41,7 @@ input[type="checkbox"] {
   margin: 0;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   position: relative;
   margin: 0 0.25em;
 
@@ -100,5 +108,13 @@ input[type="checkbox"] {
       display: flex;
       height: auto;
     }
+  }
+
+  &.is-horizontal &__label {
+    flex-basis: 33%;
+  }
+
+  &.is-horizontal &__input {
+    flex-basis: 66%;
   }
 }
