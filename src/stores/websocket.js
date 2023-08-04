@@ -30,6 +30,7 @@ export const useWebsocketStore = defineStore('websockets', () => {
 
         if (!booted.value) {
           ns.append('Connected', ns.types.success, ONE_SECOND * 3);
+          booted.value = true;
         }
 
         connectActions.forEach((action) => action(booted, connected));

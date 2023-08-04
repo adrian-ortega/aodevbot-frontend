@@ -15,6 +15,9 @@
   grid-template-columns: auto 1fr auto;
   min-width: 20em;
 
+  & + .notification {
+    margin-top: 0.5em;
+  }
 
   &__content {
     padding-top: 0.25em;
@@ -28,6 +31,7 @@
     grid-area: button;
 
     .button {
+      height: 100%;
       padding-left: 0.5em;
       padding-right: 0.5em;
     }

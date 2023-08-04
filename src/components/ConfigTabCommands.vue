@@ -4,14 +4,14 @@ import { useCommandsStore } from '../stores/commands';
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiMagnify } from '@mdi/js';
 const cs = useCommandsStore();
-const tab = ref('general')
+const tab = ref('custom')
 const tabs = reactive({
   general: {
-    label: 'General', type: 'general', active: true,
+    label: 'General', type: 'general', active: false,
     description: 'Here you can manage your custom commands.'
   },
   custom: {
-    label: 'Custom', type: 'custom', active: false,
+    label: 'Custom', type: 'custom', active: true,
     description: `
       These commands are made custom and stored within the bot code. 
       You can turn them on/off and manage some settings for each,

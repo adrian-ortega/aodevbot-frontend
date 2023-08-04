@@ -2,6 +2,15 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useNotificationsStore } from "./notifications";
 
+export const BROADCASTER_PRIMARY_ACCOUNT = 1;
+export const BROADCASTER_SECONDARY_ACCOUNT = 2;
+class BroadcasterError extends Error {
+  constructor(message, data) {
+    super(message);
+    this.data = data;
+  }
+}
+
 export const useAccountsStore = defineStore('accounts', () => {
   const hasBroadcaster = ref(false);
   const hasSecondary = ref(false);
@@ -17,20 +26,25 @@ export const useAccountsStore = defineStore('accounts', () => {
     try {
       const response = await fetch(`/api/broadcaster${type === 2 ? '/secondary' : ''}`);
       data = await response.json();
+      if (data.error) {
+        throw new BroadcasterError(data.message, data);
+      }
     } catch (error) {
       data = null;
-      notify('Cannot retrieve brodcaster.', 'error')
+      if (error instanceof BroadcasterError && error.data.type === BROADCASTER_PRIMARY_ACCOUNT) {
+        notify('Cannot retrieve brodcaster.', 'error')
+      }
     }
     return data;
   }
   const getBroadcaster = async () => {
-    const data = await getBroadcasterAccount(1);
+    const data = await getBroadcasterAccount(BROADCASTER_PRIMARY_ACCOUNT);
     hasBroadcaster.value = data !== null;
     return data;
   }
 
   const getSecondary = async () => {
-    const data = await getBroadcasterAccount(2);
+    const data = await getBroadcasterAccount(BROADCASTER_SECONDARY_ACCOUNT);
     hasSecondary.value = data !== null;
     return data;
   }

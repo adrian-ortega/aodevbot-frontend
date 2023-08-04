@@ -3,7 +3,7 @@ import SvgIcon from '@jamescoyle/vue-icon';
 import ConfigTabAccountItem from './ConfigTabAccountItem.vue';
 import InlineNotification from '../components/InlineNotification.vue'
 import { onMounted, ref } from 'vue';
-import { useAccountsStore } from '../stores/accounts';
+import { useAccountsStore, BROADCASTER_PRIMARY_ACCOUNT, BROADCASTER_SECONDARY_ACCOUNT } from '../stores/accounts';
 import { mdiDotsCircle } from '@mdi/js';
 const accountsStore = useAccountsStore();
 const loading = ref(true);
@@ -12,9 +12,9 @@ let primaryAccount, primaryAccountLoginUrl, botAccount, botAccountLoginUrl;
 onMounted(async () => {
   loading.value = true;
   primaryAccount = await accountsStore.getBroadcaster();
-  primaryAccountLoginUrl = await accountsStore.getAuthUrl(1);
+  primaryAccountLoginUrl = await accountsStore.getAuthUrl(BROADCASTER_PRIMARY_ACCOUNT);
   botAccount = await accountsStore.getSecondary();
-  botAccountLoginUrl = await accountsStore.getAuthUrl(2);
+  botAccountLoginUrl = await accountsStore.getAuthUrl(BROADCASTER_SECONDARY_ACCOUNT);
   loading.value = false;
 });
 </script>

@@ -1,33 +1,56 @@
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageContent from '../components/PageContent.vue';
-import PageFooter from '../components/PageFooter.vue';
 import PageNotifications from '../components/PageNotifications.vue';
 import ConfigTabAcount from '../components/ConfigTabAccount.vue';
 import ConfigTabCommands from '../components/ConfigTabCommands.vue';
 import ConfigTabEvents from '../components/ConfigTabEvents.vue'
 import ConfigTabRedeemables from '../components/ConfigTabRedeemables.vue';
-import { computed, reactive } from 'vue';
+import { onMounted, reactive, ref, shallowRef, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+
+const TAB_QS = 'tab';
+const tab = ref('account');
 const tabs = reactive({
-  account: { label: 'Accounts', component: ConfigTabAcount, active: false },
-  commands: { label: 'Commands', component: ConfigTabCommands, active: true },
-  events: { label: 'Events', component: ConfigTabEvents, active: false },
-  redeemables: { label: 'Redeemables', component: ConfigTabRedeemables, active: false }
+  account: {
+    label: 'Accounts', component: shallowRef(ConfigTabAcount)
+  },
+  commands: {
+    label: 'Commands', component: shallowRef(ConfigTabCommands)
+  },
+  events: {
+    label: 'Events', component: shallowRef(ConfigTabEvents)
+  },
+  redeemables: {
+    label: 'Redeemables', component: shallowRef(ConfigTabRedeemables)
+  }
 });
 const selectTab = (tabId) => {
   Object.entries(tabs).forEach(([id]) => {
     tabs[id].active = id === tabId;
+    if (tabs[id].active) {
+      tab.value = id;
+    }
   });  
 }
-const selectedTabComponent = computed((...args) => {
-  const keys = Object.keys(tabs);
-  for (let i = 0; i < keys.length; i++) {
-    if (tabs[keys[i]].active) {
-      return tabs[keys[i]].component;
-    }
+
+const selectTabFromQueryString = () => {
+  let tabKey = route.query[TAB_QS];
+  const tabKeys = Object.keys(tabs);
+  if (!isNaN(tabKey) && isFinite(tabKey)) {
+    tabKey = Math.abs(parseInt(tabKey, 10));
+    tabKey = Object.keys(tabs)[tabKey <= tabKeys.length ? tabKey : 0];
   }
-})
+
+  if (!tabKey || !tabs[tabKey]) {
+    tabKey = tabKeys[0];
+  }
+  selectTab(tabKey)
+}
+
+onMounted(() => selectTabFromQueryString());
 </script>
 
 <template>
@@ -45,15 +68,8 @@ const selectedTabComponent = computed((...args) => {
       </a>
     </nav>
     <div class="tabs__content">
-      <component :is="selectedTabComponent" />
+      <component v-if="tab" :is="tabs[tab].component" />
     </div>
   </PageContent>
-
-  <PageFooter>
-    <button class="button button--primary button--fw is-disabled" disabled>
-        <span class="text">Save</span>
-      </button>
-  </PageFooter>
-
   <PageNotifications/>
 </template>
