@@ -71,6 +71,11 @@
     width: 100%;
   }
 
+  &--icon {
+    font-size: 1.1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
 
   &[disabled="true"],
   &.is-disabled {

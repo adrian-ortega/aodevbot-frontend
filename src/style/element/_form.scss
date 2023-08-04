@@ -19,6 +19,10 @@ input {
   }
 }
 
+input[type="text"] {
+  min-width: var(--input-min-width);
+}
+
 input[type="radio"],
 input[type="checkbox"] {
   width: 1em;
@@ -74,11 +78,27 @@ input[type="checkbox"] {
 }
 
 .field {
-  display: flex;
-  align-items: center;
   margin: 0 0 1em;
 
-  span {
+  &,
+  &__label,
+  &__input,
+  &__post {
+    display: flex;
+  }
 
+  &__label,
+  &__input,
+  &__post {
+    flex: 1 1 auto;
+  }
+
+  &__post {
+    margin-left: 0.25em;
+
+    > .button {
+      display: flex;
+      height: auto;
+    }
   }
 }

@@ -1,8 +1,9 @@
 <script setup>
+import SvgIcon from '@jamescoyle/vue-icon';
+import FormField from './FormField.vue';
 import { onMounted, reactive, ref, watch } from 'vue';
 import { useCommandsStore } from '../stores/commands';
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiMagnify } from '@mdi/js';
+import { mdiMagnify, mdiPlus } from '@mdi/js';
 const cs = useCommandsStore();
 const tab = ref('custom')
 const tabs = reactive({
@@ -56,15 +57,22 @@ onMounted(() => {
       <div class="table-wrapper">
         <div class="table-actions">
           <div class="table-actions__left">
-            <label class="field">
+            <FormField>
               <input type="text" placeholder="Search commands"/>
-              <span>
-                <SvgIcon type="mdi" :path="mdiMagnify"/>
-              </span>
-            </label>
+              <template v-slot:post>
+                <button class="button button--icon">
+                  <span class="icon"><SvgIcon type="mdi" :path="mdiMagnify"/></span>
+                </button>
+              </template>
+            </FormField>
           </div>
           <div class="table-actions__right">
-            Page 1 of 4
+            <button class="button">
+              <span class="text">Create</span>
+              <span class="icon">
+                <SvgIcon type="mdi" :path="mdiPlus"/>
+              </span>
+            </button>
           </div>
         </div>
         <div class="table">
@@ -76,7 +84,12 @@ onMounted(() => {
             </div>
           </div>
           <div class="table__body">
-            <div class="table__row" v-for="row in cs.items" :key="row.id">
+            <div class="table__row" v-if="cs.items.length === 0 && tab === 'custom'">
+              <div class="table__cell table__cell--fw">
+                <p>No commands found ,consider <a href="#">adding one</a></p>
+              </div>
+            </div>
+            <div class="table__row" v-else v-for="row in cs.items" :key="row.id">
               <div class="table__cell cb">
                 <input type="checkbox"/>
               </div>

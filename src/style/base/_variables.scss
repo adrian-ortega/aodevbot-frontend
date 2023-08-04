@@ -40,8 +40,13 @@
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   --font-weight-black: 900;
+
+  --link-color: hsl(200, 18%, 46%);
+  --link-hover-color: hsl(199, 98%, 48%);
+  --link-active-color: var(--primary);
   
   --input-height: 3em;
+  --input-min-width: 20em;
   --input-checkbox-color-bg: var(--white-alpha-10);
   --input-checkbox-color-fg: var(--primary);
   --input-checkbox-color-b: var(--white-alpha-20);

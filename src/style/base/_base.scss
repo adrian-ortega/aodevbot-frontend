@@ -10,3 +10,17 @@ body {
   font-family: var(--font-family-body);
   color: var(--white);
 }
+
+a:not(.button):not(.tabs__trigger) {
+  text-decoration: none;
+  color: var(--link-color);
+
+  &:hover,
+  &:focus {
+    color: var(--link-hover-color);
+  }
+
+  &:active {
+    color: var(--link-active-color);
+  }
+}
