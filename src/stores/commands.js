@@ -43,7 +43,8 @@ export const useCommandsStore = defineStore("commands", () => {
       if (tabs[id].active) {
         tab.value = id
       }
-    })
+    });
+    subTab.value = null;
   }
 
   const subTabs = ['create', 'edit'];
