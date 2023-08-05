@@ -45,7 +45,7 @@ const onTemplateChange = (value) => {
     <FormButtons>
       <button class="button" @click.prevent="reset()">Reset</button>
       <button class="button" @click.prevent="cs.selectSubTab('list')">Close</button>
-      <button class="button button--primary" @click.prevent="cs.create(data.form)">Confirm</button>
+      <button class="button button--primary" @click.prevent="create()">Confirm</button>
     </FormButtons>
   </div>
 </template>

@@ -92,7 +92,24 @@ export const useCommandsStore = defineStore("commands", () => {
     }
     return options;
   });
-  const create = () => { };
+
+  const create = async (data) => {
+    let responseData;
+    try {
+      const response = await fetch('/api/commands', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      responseData = await response.json();
+    } catch (err) {
+      responseData = null;
+      console.log(err);
+    }
+    return responseData;
+  };
 
   watch(tab, () => fetchItems());
 
