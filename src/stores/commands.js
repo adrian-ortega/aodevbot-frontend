@@ -7,6 +7,10 @@ export const useCommandsStore = defineStore("commands", () => {
   const search = ref('');
   const state = reactive({
     items: [],
+    templates: (new Array(21)).fill(0).map((_, i) => ({
+      command_name: `!hug-${i}`,
+      command_reply: `This is a reply for ${i}`
+    })),
     pagination: {
       page: 1,
       limit: 10
@@ -77,7 +81,17 @@ export const useCommandsStore = defineStore("commands", () => {
     }, 100);
   }
 
-  const create = () => { }
+  const commandTemplateOptions = computed(() => {
+    const options = [];
+    for (let i = 0; i < state.templates.length; i++) {
+      options.push({
+        value: i,
+        label: state.templates[i].command_name
+      })
+    }
+    return options;
+  });
+  const create = () => { };
 
   watch(tab, () => fetchItems());
 
@@ -89,6 +103,11 @@ export const useCommandsStore = defineStore("commands", () => {
     fetching,
     items: computed(() => state.items),
     pagination: computed(() => state.pagination),
+    commandTemplateOptions,
+    permissionOptions: [
+      { value: 1, label: 'Everyone' },
+      { value: 2, label: 'Moderators' }
+    ],
     selectTab,
     selectSubTab,
     setSearch,

@@ -22,3 +22,12 @@ export const createUrlSearchParams = (query) => {
   });
   return searchParams;
 }
+
+export const cssClassesFromProps = (props, defaults = {}) => {
+  return () => {
+    return {
+      ...varsToClasses(defaults),
+      ...varsToClasses(props)
+    }
+  }
+}
