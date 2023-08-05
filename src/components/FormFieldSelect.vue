@@ -1,9 +1,10 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, useSlots } from 'vue'
 import FormField from './FormField.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiCheck, mdiMenuDown } from '@mdi/js'
 import { isString, objectHasKey } from '../util'
+const $slots = useSlots()
 const emit = defineEmits(['input'])
 const props = defineProps({
   value: {
@@ -117,5 +118,6 @@ const selectOptionLabel = computed(() => {
         </div>
       </div>
     </div>
+    <template v-slot:post v-if="$slots.post"><slot name="post"></slot></template>
   </FormField>
 </template>

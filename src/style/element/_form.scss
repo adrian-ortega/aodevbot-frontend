@@ -4,7 +4,7 @@ input,
 select,
 textarea {
   appearance: none;
-  height: var(--input-height);
+  height: calc(var(--input-height) + var(--input-height-offset));
   padding: 0 0.5em;
 
   width: 100%;

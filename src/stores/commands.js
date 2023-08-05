@@ -102,6 +102,7 @@ export const useCommandsStore = defineStore("commands", () => {
     currentTab,
     fetching,
     items: computed(() => state.items),
+    templates: computed(() => state.templates),
     pagination: computed(() => state.pagination),
     commandTemplateOptions,
     permissionOptions: [
