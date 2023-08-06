@@ -5,16 +5,14 @@ import { createUrlSearchParams } from '../util';
 export const useCommandsStore = defineStore("commands", () => {
   const fetching = ref(false);
   const search = ref('');
+  const page = ref(1);
+  const pageLimit = ref(10);
   const state = reactive({
     items: [],
     templates: (new Array(21)).fill(0).map((_, i) => ({
       command_name: `!hug-${i}`,
       command_reply: `This is a reply for ${i}`
-    })),
-    pagination: {
-      page: 1,
-      limit: 10
-    }
+    }))
   });
 
   const tab = ref(null);
@@ -64,8 +62,8 @@ export const useCommandsStore = defineStore("commands", () => {
     try {
       const response = await fetch(`/api/commands?${createUrlSearchParams({
         type: tab.value,
-        page: state.pagination.page,
-        limit: state.pagination.limit,
+        page: page.value,
+        limit: pageLimit.value,
         search: search.value
       })}`);
 
@@ -76,7 +74,6 @@ export const useCommandsStore = defineStore("commands", () => {
     }
 
     state.items = [...responseData.data];
-    state.pagination = { ...responseData.pagination };
     setTimeout(() => {
       fetching.value = false;
     }, 100);

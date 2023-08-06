@@ -5,6 +5,7 @@ import FormField from './FormField.vue'
 import { mdiLoading, mdiMagnify, mdiPlus } from '@mdi/js'
 import { computed, ref, watch } from 'vue'
 import { useCommandsStore } from '../stores/commands'
+import MenuActionsDropdown from './MenuActionsDropdown.vue'
 
 const cs = useCommandsStore()
 const search = ref('')
@@ -13,6 +14,32 @@ const hasSearch = computed(() => search.value.length > 0)
 const onSearch = debounce(() => {
   cs.setSearch(search.value)
 }, 500)
+
+const createRowActions = (row) =>
+  computed(() => {
+    const open = ref(false)
+    const closed = ref(false)
+
+    const openContextMenu = () => {}
+    const closeContextMenu = () => {}
+
+    return {
+      enable: {
+        label: 'Enable',
+        action() {
+          openContextMenu()
+        }
+      },
+      edit: {
+        label: 'Edit',
+        action() {}
+      },
+      delete: {
+        label: 'Delete',
+        action() {}
+      }
+    }
+  })
 
 watch(search, onSearch)
 </script>
@@ -84,7 +111,9 @@ watch(search, onSearch)
               <p>{{ row.description }}</p>
             </div>
           </div>
-          <div class="table__cell">...</div>
+          <div class="table__cell">
+            <MenuActionsDropdown :actions="createRowActions(row)" />
+          </div>
         </div>
       </div>
     </div>
