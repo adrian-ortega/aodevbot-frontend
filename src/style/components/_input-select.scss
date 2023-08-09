@@ -40,7 +40,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--base-bg-bis);
+    background-color: var(--base-color-bg);
     opacity: 0;
     visibility: hidden;
     border: 1px solid var(--black-alpha-30);
@@ -64,7 +64,7 @@
   }
 
   &__o {
-    padding: 1em;
+    padding: 0.25em;
     max-height: 10em;
     overflow: auto;
   }

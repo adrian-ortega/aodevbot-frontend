@@ -1,6 +1,7 @@
 <script setup>
 import ConfigTabCommandsList from './ConfigTabCommandsList.vue'
 import ConfigTabCommandsCreate from './ConfigTabCommandsCreate.vue'
+import ConfigTabCommandsEdit from './ConfigTabCommandsEdit.vue'
 import { onMounted } from 'vue'
 import { useCommandsStore } from '../stores/commands'
 import { useRoute } from 'vue-router'
@@ -42,8 +43,9 @@ onMounted(() => {
     </nav>
     <div class="tabs__content">
       <p v-if="!cs.subTab || cs.subTab === 'list'" v-html="cs.currentTab.description"></p>
-      <ConfigTabCommandsCreate />
-      <ConfigTabCommandsList />
+      <ConfigTabCommandsCreate v-if="cs.subTab === 'create'" />
+      <ConfigTabCommandsEdit v-if="cs.subTab === 'edit'" />
+      <ConfigTabCommandsList v-if="!cs.subTab || cs.subTab === 'list'" />
     </div>
   </div>
 </template>

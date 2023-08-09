@@ -8,7 +8,7 @@
   margin: 1em 0 2em;
 }
 
-@media screen  and (min-width: 700px) {
+@media screen and (min-width: 700px) {
   .table-actions {
     display: flex;
     margin: 0;
@@ -48,6 +48,11 @@
     &.cb {
       max-width: 2em;
     }
+
+    &.actions {
+      min-width: 9em;
+      flex: 0 1 auto;
+    }
   }
 
   &__row {
@@ -64,8 +69,17 @@
   }
 
   &__cell-content {
+    .title,
     p {
       margin-bottom: 0.75em;
+    }
+
+    .title {
+      font-size: var(--font-size-2);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .description {
     }
   }
 }

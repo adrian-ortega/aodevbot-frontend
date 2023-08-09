@@ -5,10 +5,10 @@ html {
 }
 
 body {
-  background-color: var(--body-background-color);
+  background-color: var(--base-color-bg);
   font-size: 100%;
   font-family: var(--font-family-body);
-  color: var(--white);
+  color: var(--base-color-fg);
 }
 
 a:not(.button):not(.tabs__trigger) {

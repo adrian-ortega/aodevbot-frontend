@@ -5,9 +5,10 @@
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: "status"
-                       "replies"
-                       "form";
+  grid-template-areas:
+    'status'
+    'replies'
+    'form';
 
   &__status {
     grid-area: status;
@@ -69,7 +70,7 @@
     position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-areas: "selector input";
+    grid-template-areas: 'selector input';
     gap: 0.5em;
     margin: 0 0 1em;
 
@@ -103,7 +104,7 @@
       width: 100%;
       max-width: 20em;
 
-      background: var(--body-background-color);
+      background: var(--body-color-bg);
       border: 1px solid var(--black-alpha-20);
       border-radius: var(--radius);
       box-shadow: 0.1em 0.25em 1em var(--black-alpha-20);
@@ -120,9 +121,9 @@
 
         small {
           display: block;
-          font-size: .65em;
-          line-height: .9em;
-          color: var(--gray)
+          font-size: 0.65em;
+          line-height: 0.9em;
+          color: var(--gray);
         }
 
         div:last-child {
@@ -136,12 +137,12 @@
         > div {
           &.is-active {
             .button {
-              font-weight: var(--font-weight-bold)
+              font-weight: var(--font-weight-bold);
             }
 
             .icon:last-child {
-              margin-left :auto;
-              color: var(--primary)
+              margin-left: auto;
+              color: var(--primary);
             }
           }
 

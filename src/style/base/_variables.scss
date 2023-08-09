@@ -11,7 +11,7 @@
   --black-alpha-20: hsla(0, 0%, 0%, 20%);
   --black-alpha-30: hsla(0, 0%, 0%, 30%);
 
-  --gray: #a2aac3;
+  --gray: #aeb2c1;
   --gray-bis: #8691ac;
   --gray-ter: #3d4250;
 
@@ -28,15 +28,15 @@
   --success: green;
   --info: lightblue;
 
-  --base-bg: hsl(225, 6%, 13%);
-  --base-bg-bis: hsl(223, 7%, 20%);
-  --body-background-color: var(--base-bg);
+  --base-color-bg: hsl(225, 6%, 13%);
+  --base-color-bg-bis: hsl(223, 7%, 20%);
+  --base-color-fg: var(--gray);
 
   --font-family-body: 'Roboto', sans-serif;
   --font-base-size: 16px;
   --font-size-small: 0.8em;
   --font-size-normal: 1em;
-  --font-size-1: 1em;
+  --font-size-1: var(--font-size-normal);
   --font-size-2: 1.25em;
   --font-size-3: 2.2em;
 
@@ -55,6 +55,11 @@
   --input-checkbox-color-fg: var(--primary);
   --input-checkbox-color-b: var(--white-alpha-20);
 
+  --code-color-bg: hsl(261, 18%, 16%);
+  --code-color-fg: hsl(261, 43%, 45%);
+  --code-color-border: var(--white-alpha-5);
+
+  --radius-small: 0.1em;
   --radius: 0.25em;
   --radius-rounded: 3000em;
 

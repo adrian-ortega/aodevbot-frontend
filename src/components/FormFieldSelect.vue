@@ -8,7 +8,7 @@ const $slots = useSlots()
 const emit = defineEmits(['input'])
 const props = defineProps({
   value: {
-    type: [String, Array]
+    type: [String, Number, Array]
   },
   label: {
     type: String
@@ -20,7 +20,8 @@ const props = defineProps({
     type: Boolean
   },
   horizontal: {
-    type: Boolean
+    type: Boolean,
+    default: true
   },
   options: {
     type: Array

@@ -1,0 +1,57 @@
+@charset 'utf-8';
+
+.field--input-aliases {
+  display: grid;
+  grid-template-columns: 33.333333% 66.666666%;
+  grid-template-areas:
+    'label list'
+    'label input';
+
+  .field__label {
+    grid-area: label;
+  }
+
+  .field__input {
+    grid-area: list;
+    margin-bottom: 1em;
+    border: 1px solid;
+    padding: calc(var(--page-gap) * 2);
+    border: 1px solid var(--gray-ter);
+    border-radius: var(--radius);
+  }
+
+  .field__post {
+    grid-area: input;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25em;
+    margin: 0;
+
+    input {
+      width: auto;
+      min-width: auto;
+    }
+
+    input,
+    button {
+      flex: 0 1 auto;
+    }
+  }
+
+  .aliases {
+    position: relative;
+    display: flex;
+    gap: 0.25em;
+    flex-wrap: wrap;
+
+    .button {
+      .icon {
+        opacity: 0.1;
+      }
+
+      &:hover .icon {
+        opacity: 1;
+      }
+    }
+  }
+}

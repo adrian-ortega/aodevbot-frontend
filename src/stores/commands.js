@@ -2,19 +2,22 @@ import { defineStore } from "pinia";
 import { computed, ref, reactive, watch } from "vue";
 import { createUrlSearchParams } from '../util';
 
+const COMMAND_STUB = { template: null, permission: 1, name: null, response: null, aliases: [] }
+
 export const useCommandsStore = defineStore("commands", () => {
   const fetching = ref(false);
   const search = ref('');
   const page = ref(1);
   const pageLimit = ref(10);
+  const editId = ref(null);
   const state = reactive({
     items: [],
     templates: (new Array(21)).fill(0).map((_, i) => ({
-      command_name: `!hug-${i}`,
-      command_reply: `This is a reply for ${i}`
+      permission: 1,
+      name: `!hug-${i}`,
+      response: `This is a reply for ${i}`
     }))
   });
-
   const tab = ref(null);
   const subTab = ref(null);
   const tabs = reactive({
@@ -31,9 +34,7 @@ export const useCommandsStore = defineStore("commands", () => {
       description: `These commands are made custom and stored within the bot code. You can turn them on/off and manage some settings for each, if available.`
     }
   });
-  const currentTab = computed(() => {
-    return tab.value ? tabs[tab.value] : tabs.general;
-  });
+  const currentTab = computed(() => tab.value ? tabs[tab.value] : tabs.general);
 
   const selectTab = (tabId) => {
     Object.entries(tabs).forEach(([id]) => {
@@ -84,13 +85,15 @@ export const useCommandsStore = defineStore("commands", () => {
     for (let i = 0; i < state.templates.length; i++) {
       options.push({
         value: i,
-        label: state.templates[i].command_name
+        label: state.templates[i].name
       })
     }
     return options;
   });
 
-  const create = async (data) => {
+  watch(tab, () => fetchItems());
+
+  const createCommand = async (data) => {
     let responseData;
     try {
       const response = await fetch('/api/commands', {
@@ -108,7 +111,24 @@ export const useCommandsStore = defineStore("commands", () => {
     return responseData;
   };
 
-  watch(tab, () => fetchItems());
+
+  // Individial command actions
+  const enableCommand = (command) => {
+
+  }
+
+  const editCommand = (command) => {
+    selectSubTab('edit')
+    editId.value = command.id;
+  }
+
+  const deleteCommand = (command) => {
+    console.log(command);
+    if (!confirm('Are you sure you want to delete this Command?')) {
+      return;
+    }
+
+  }
 
   return {
     tab,
@@ -117,17 +137,28 @@ export const useCommandsStore = defineStore("commands", () => {
     currentTab,
     fetching,
     items: computed(() => state.items),
+    editId,
     templates: computed(() => state.templates),
     pagination: computed(() => state.pagination),
     commandTemplateOptions,
     permissionOptions: [
       { value: 1, label: 'Everyone' },
-      { value: 2, label: 'Moderators' }
+      { value: 2, label: 'Moderators' },
+      { value: 3, label: 'Broadcaster' }
     ],
     selectTab,
     selectSubTab,
     setSearch,
     fetchItems,
-    create
+
+    STUB: computed(() => ({ ...COMMAND_STUB })),
+    getCommand: (id) => {
+      const cmd = state.items.find(a => a.id === id);
+      return cmd ? { ...cmd } : null
+    },
+    createCommand,
+    editCommand,
+    deleteCommand,
+    enableCommand
   }
 });
