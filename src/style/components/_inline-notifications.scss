@@ -2,7 +2,7 @@
 
 .inline-notification {
   background: var(--black-alpha-20);
-  margin: 2em 0; 
+  margin: 2em 0;
 }
 
 .notification,
@@ -36,6 +36,9 @@
   }
   &.is-success &__icon {
     background-color: var(--notification-success);
+  }
+  &.is-info &__icon {
+    background-color: var(--notification-info);
   }
 
   &__content {

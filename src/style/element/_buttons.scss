@@ -49,14 +49,14 @@
     }
   }
 
+  &--transparent {
+    background: transparent;
+  }
+
   &--close {
     height: auto;
     background: none;
     padding: 0.1em;
-  }
-
-  &--transparent {
-    background: transparent;
   }
 
   &--close,
@@ -64,6 +64,30 @@
     &:focus,
     &:hover {
       background: var(--white-alpha-10);
+    }
+  }
+
+  &--danger {
+    &:hover,
+    &:focus {
+      background: var(--danger);
+      color: var(--white-alpha-80);
+    }
+  }
+
+  &--warning {
+    &:hover,
+    &:focus {
+      background: var(--warning);
+      color: var(--white-alpha-80);
+    }
+  }
+
+  &--success {
+    &:hover,
+    &:focus {
+      background: var(--success);
+      color: var(--white-alpha-80);
     }
   }
 
@@ -97,5 +121,14 @@
 
   .button--right {
     margin-left: auto;
+  }
+
+  &--inline {
+    margin: 0;
+    gap: 0.25em;
+  }
+
+  &--right {
+    justify-content: flex-end;
   }
 }

@@ -10,59 +10,20 @@ export const useCommandsStore = defineStore("commands", () => {
   const page = ref(1);
   const pageLimit = ref(10);
   const editId = ref(null);
-  const state = reactive({
-    items: [],
-    templates: (new Array(21)).fill(0).map((_, i) => ({
-      permission: 1,
-      name: `!hug-${i}`,
-      response: `This is a reply for ${i}`
-    }))
-  });
-  const tab = ref(null);
-  const subTab = ref(null);
-  const tabs = reactive({
-    general: {
-      label: 'General',
-      type: 'general',
-      active: false,
-      description: 'Here you can manage your custom commands.'
-    },
-    custom: {
-      label: 'Custom',
-      type: 'custom',
-      active: false,
-      description: `These commands are made custom and stored within the bot code. You can turn them on/off and manage some settings for each, if available.`
-    }
-  });
-  const currentTab = computed(() => tab.value ? tabs[tab.value] : tabs.general);
-
-  const selectTab = (tabId) => {
-    Object.entries(tabs).forEach(([id]) => {
-      tabs[id].active = id === tabId
-      if (tabs[id].active) {
-        tab.value = id
-      }
-    });
-    subTab.value = null;
-  }
-
-  const subTabs = ['create', 'edit'];
-  const selectSubTab = (id) => {
-    subTab.value = subTabs.includes(id) ? id : null;
-  }
+  const templates = ref([])
+  const state = reactive({ items: [] });
 
   const setSearch = (s) => {
     search.value = s;
   }
 
-  const fetchItems = async () => {
-    if (!tab) return;
-
+  const fetchItems = async (type = 'general') => {
+    console.log('fetching items');
     fetching.value = true;
     let responseData;
     try {
       const response = await fetch(`/api/commands?${createUrlSearchParams({
-        type: tab.value,
+        type,
         page: page.value,
         limit: pageLimit.value,
         search: search.value
@@ -79,19 +40,6 @@ export const useCommandsStore = defineStore("commands", () => {
       fetching.value = false;
     }, 100);
   }
-
-  const commandTemplateOptions = computed(() => {
-    const options = [];
-    for (let i = 0; i < state.templates.length; i++) {
-      options.push({
-        value: i,
-        label: state.templates[i].name
-      })
-    }
-    return options;
-  });
-
-  watch(tab, () => fetchItems());
 
   const createCommand = async (data) => {
     let responseData;
@@ -118,12 +66,10 @@ export const useCommandsStore = defineStore("commands", () => {
   }
 
   const editCommand = (command) => {
-    selectSubTab('edit')
     editId.value = command.id;
   }
 
   const deleteCommand = (command) => {
-    console.log(command);
     if (!confirm('Are you sure you want to delete this Command?')) {
       return;
     }
@@ -131,34 +77,19 @@ export const useCommandsStore = defineStore("commands", () => {
   }
 
   return {
-    tab,
-    subTab,
-    tabs,
-    currentTab,
-    fetching,
-    items: computed(() => state.items),
-    editId,
-    templates: computed(() => state.templates),
-    pagination: computed(() => state.pagination),
-    commandTemplateOptions,
-    permissionOptions: [
-      { value: 1, label: 'Everyone' },
-      { value: 2, label: 'Moderators' },
-      { value: 3, label: 'Broadcaster' }
-    ],
-    selectTab,
-    selectSubTab,
+    search,
     setSearch,
+    hasSearch: computed(() => search.value.length > 0),
+
+    items: computed(() => state.items),
+    hasItems: computed(() => state.items.length > 0),
+    fetching,
     fetchItems,
 
-    STUB: computed(() => ({ ...COMMAND_STUB })),
-    getCommand: (id) => {
-      const cmd = state.items.find(a => a.id === id);
-      return cmd ? { ...cmd } : null
-    },
+    // individual actions for a command,
     createCommand,
+    enableCommand,
     editCommand,
-    deleteCommand,
-    enableCommand
+    deleteCommand
   }
 });

@@ -3,7 +3,7 @@
 .tabs {
   display: flex;
   gap: 0.5em;
-  margin: 1em 0;
+  margin: 1em 0 0;
   padding: 0 1em;
   border-bottom: 1px solid var(--white-alpha-10);
 
@@ -11,6 +11,8 @@
     display: inline-flex;
     padding: 0.25em 0.5em 0.5em;
     position: relative;
+    color: var(--link-color);
+    text-decoration: none;
 
     &:hover {
       cursor: pointer;
@@ -23,7 +25,9 @@
     }
 
     &-bb {
-      display: block;
+      display: none;
+      visibility: hidden;
+      opacity: 0;
       width: 100%;
       height: 0.25em;
       background: var(--gray-ter);
@@ -32,10 +36,19 @@
       bottom: -0.125em;
       border-radius: var(--radius);
     }
+
+    &.is-active &-bb {
+      display: block;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &.is-current &-bb {
+      background: var(--secondary-ter);
+    }
   }
 
   &__content {
-    margin: 0.5em 0;
     padding: 1em;
   }
 

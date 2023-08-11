@@ -32,6 +32,7 @@
 
 .table {
   border: 1px solid var(--table-border-color);
+  margin: 1em 0;
 
   &__header {
     background: var(--table-header-color-bg);
@@ -52,6 +53,10 @@
     &.actions {
       min-width: 9em;
       flex: 0 1 auto;
+    }
+
+    &.right {
+      text-align: right;
     }
   }
 
