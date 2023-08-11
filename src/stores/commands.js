@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, ref, reactive, watch } from "vue";
-import { createUrlSearchParams } from '../util';
+import { createUrlSearchParams, objectHasKey } from '../util';
 
 const COMMAND_STUB = { template: null, permission: 1, name: null, response: null, aliases: [] }
 
@@ -11,14 +11,25 @@ export const useCommandsStore = defineStore("commands", () => {
   const pageLimit = ref(10);
   const editId = ref(null);
   const templates = ref([])
-  const state = reactive({ items: [] });
+  const state = reactive({
+    items: [],
+    filters: {
+      limit: 10,
+      status: -1
+    }
+  });
 
   const setSearch = (s) => {
     search.value = s;
   }
 
+  const updateFilter = (key, value) => {
+    if (objectHasKey(state.filters, key)) {
+      state.filters[key] = value;
+    }
+  }
+
   const fetchItems = async (type = 'general') => {
-    console.log('fetching items');
     fetching.value = true;
     let responseData;
     try {
@@ -85,6 +96,8 @@ export const useCommandsStore = defineStore("commands", () => {
     hasItems: computed(() => state.items.length > 0),
     fetching,
     fetchItems,
+    filters: computed(() => state.filters),
+    updateFilter,
 
     // individual actions for a command,
     createCommand,

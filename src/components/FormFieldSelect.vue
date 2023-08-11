@@ -2,8 +2,8 @@
 import { ref, computed, useSlots } from 'vue'
 import FormField from './FormField.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiCheck, mdiMenuDown } from '@mdi/js'
-import { isString, objectHasKey } from '../util'
+import { mdiCheck, mdiChevronDown, mdiChevronUp } from '@mdi/js'
+import { isString, isNumeric, objectHasKey } from '../util'
 const $slots = useSlots()
 const emit = defineEmits(['input'])
 const props = defineProps({
@@ -22,6 +22,10 @@ const props = defineProps({
   horizontal: {
     type: Boolean,
     default: true
+  },
+  vertical: {
+    type: Boolean,
+    default: false
   },
   options: {
     type: Array
@@ -62,13 +66,16 @@ const parsedOptions = computed(() => {
   if (Array.isArray(props.options)) {
     for (let i = 0; i < props.options.length; i++) {
       const opt = props.options[i]
-      if (isString(opt)) {
-        opts.push({ value: opt, label: opt })
+      let parsedOpt
+
+      if (isString(opt) || isNumeric(opt)) {
+        parsedOpt = { value: opt, label: opt }
       } else if (Array.isArray(opt)) {
-        opts.push({ value: opt[0], label: opt[1] })
+        parsedOpt = { value: opt[0], label: opt[1] }
       } else if (objectHasKey(opt, 'value') && objectHasKey(opt, 'label')) {
-        opts.push({ value: opt.value, label: opt.label })
+        parsedOpt = { value: opt.value, label: opt.label }
       }
+      opts.push(parsedOpt)
     }
   }
   return opts
@@ -87,6 +94,7 @@ const selectOptionLabel = computed(() => {
   <FormField
     :label="props.label"
     :horizontal="props.horizontal"
+    :vertical="props.vertical"
     class="field--input-select"
     :data-selected="props.value"
   >
@@ -95,7 +103,7 @@ const selectOptionLabel = computed(() => {
         <div class="input-select__vv">{{ selectOptionLabel }}</div>
         <div class="input-select__cd">
           <span class="icon">
-            <SvgIcon type="mdi" :path="mdiMenuDown" />
+            <SvgIcon type="mdi" :path="isOpen ? mdiChevronUp : mdiChevronDown" />
           </span>
         </div>
       </div>

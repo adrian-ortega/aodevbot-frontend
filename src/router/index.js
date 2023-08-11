@@ -56,7 +56,7 @@ const router = createRouter({
               }
             },
             {
-              path: 'edit',
+              path: ':id/edit',
               component: ConfigTabCommandsEdit,
               name: 'config.commands.edit',
               meta: {

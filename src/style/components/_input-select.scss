@@ -27,6 +27,7 @@
 .input-select {
   position: relative;
   width: 100%;
+  min-width: 5em;
 
   &__v,
   &__dd {
@@ -37,7 +38,7 @@
 
   &__dd {
     position: absolute;
-    top: 0;
+    top: calc(100% + var(--page-gap));
     left: 0;
     width: 100%;
     background-color: var(--base-color-bg);
@@ -95,7 +96,7 @@
     &.is-active {
       .input-select__vv {
         font-weight: var(--font-weight-bold);
-        color: var(--gray);
+        color: var(--secondary);
       }
     }
   }
@@ -109,12 +110,16 @@
     align-items: center;
     justify-content: space-between;
     border-color: var(--gray-ter);
-    height: var(--input-height);
+    height: calc(var(--input-height) - 0.2em);
     padding: 0 0.5em;
   }
 
   &__cd {
     font-size: var(--font-size-2);
+  }
+
+  &.is-open &__v {
+    border-color: var(--primary);
   }
 
   &.is-open &__dd {

@@ -9,6 +9,7 @@ export const isFunction = (a) => {
 };
 export const objectHasKey = (a, k) => isObject(a) && Object.prototype.hasOwnProperty.call(a, k);
 export const isString = (a) => Object.prototype.toString.call(a) === '[object String]';
+export const isNumeric = (a) => Object.prototype.toString.call(a) === '[object Number]' && !isNaN(a) && isFinite(1);
 export const randomFromArray = items => items[Math.floor(Math.random() * items.length)];
 export const popupWindowCenter = ({ url, title, w = 480, h = 640 }) => {
   const left = (window.screen.width - w) / 2;

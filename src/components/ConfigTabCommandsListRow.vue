@@ -1,14 +1,19 @@
 <script setup>
+import FormButtons from './FormButtons.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
+import { ref } from 'vue'
+import { useCommandsStore } from '../stores/commands'
 import {
-  mdiBookEdit,
   mdiCheckboxBlankCircle,
   mdiCheckboxBlankCircleOutline,
   mdiDeleteOutline,
   mdiPencil
 } from '@mdi/js'
-import FormButtons from './FormButtons.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+const cs = useCommandsStore()
+const hover = ref(false)
 const props = defineProps({
   row: {
     type: Object,
@@ -18,17 +23,23 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="table__row">
+  <div
+    class="table__row"
+    :class="{ 'table__row--hovered': hover }"
+    @click.prevent="() => router.go({ name: 'config.commands.edit', params: { id: props.row.id } })"
+    @mouseover="hover = true"
+    @mouseleave="hover = false"
+  >
     <div class="table__cell cb">
       <input type="checkbox" :name="`cb-${props.row.id}`" />
     </div>
     <div class="table__cell">
       <div class="table__cell-content">
         <h4 class="title">
-          <a href="#" @click.prevent="cs.editCommand(props.row)">
+          <router-link :to="{ name: 'config.commands.edit', params: { id: props.row.id } }">
             <span>{{ props.row.formatted_name }}</span>
             <code>{{ props.row.name }}</code>
-          </a>
+          </router-link>
         </h4>
         <p class="description">{{ props.row.description }}</p>
       </div>
@@ -54,11 +65,15 @@ const props = defineProps({
             />
           </span>
         </button>
-        <button class="button button--transparent button--icon" title="Edit">
+        <router-link
+          :to="{ name: 'config.commands.edit', params: { id: props.row.id } }"
+          class="button button--transparent button--icon"
+          title="Edit"
+        >
           <span class="icon">
             <SvgIcon type="mdi" :path="mdiPencil" />
           </span>
-        </button>
+        </router-link>
         <button class="button button--danger button--transparent button--icon" title="Delete">
           <span class="icon">
             <SvgIcon type="mdi" :path="mdiDeleteOutline" />

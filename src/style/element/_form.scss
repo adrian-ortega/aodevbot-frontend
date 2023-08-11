@@ -84,37 +84,3 @@ input[type='checkbox'] {
     }
   }
 }
-
-.field {
-  margin: 0 0 1em;
-
-  &,
-  &__label,
-  &__input,
-  &__post {
-    display: flex;
-  }
-
-  &__label,
-  &__input,
-  &__post {
-    flex: 1 1 auto;
-  }
-
-  &__post {
-    margin-left: 0.25em;
-
-    > .button {
-      display: flex;
-      height: auto;
-    }
-  }
-
-  &.is-horizontal &__label {
-    flex-basis: 33%;
-  }
-
-  &.is-horizontal &__input {
-    flex-basis: 66%;
-  }
-}
