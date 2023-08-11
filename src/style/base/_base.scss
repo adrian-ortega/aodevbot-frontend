@@ -24,3 +24,10 @@ a:not(.button):not(.tabs__trigger) {
     color: var(--link-active-color);
   }
 }
+
+hr {
+  border: none;
+  margin: 1em 0 2em;
+  height: 0.2em;
+  background: var(--gray-ter);
+}

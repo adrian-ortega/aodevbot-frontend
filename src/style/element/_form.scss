@@ -10,7 +10,7 @@ textarea {
   width: 100%;
   background: none;
   color: var(--white);
-  border: 1px solid var(--gray-ter);
+  border: 1px solid var(--input-color-b);
   border-radius: var(--radius);
   transition: all 0.1s linear;
 
@@ -82,5 +82,25 @@ input[type='checkbox'] {
     &:after {
       transform: rotate(45deg) scale(1) translateY(0);
     }
+  }
+}
+
+.edit-form {
+  width: 100%;
+  margin: 1em auto;
+  max-width: 40em;
+
+  &__header {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  &__title {
+    flex-grow: 1;
+  }
+  h2 {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-bold);
   }
 }

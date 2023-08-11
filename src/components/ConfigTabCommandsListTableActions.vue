@@ -42,12 +42,12 @@ const cs = useCommandsStore()
     </div>
     <div class="table-actions__right">
       <FormField>
-        <button class="button button--primary" @click.prevent="() => cs.selectSubTab('create')">
+        <RouterLink class="button button--primary" :to="{ name: 'config.commands.create' }">
           <span class="text">Create</span>
           <span class="icon">
             <SvgIcon type="mdi" :path="mdiPlus" />
           </span>
-        </button>
+        </RouterLink>
       </FormField>
     </div>
   </div>

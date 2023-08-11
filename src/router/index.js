@@ -4,7 +4,6 @@ import ChatView from '../views/ChatView.vue'
 import DebugView from '../views/DebugView.vue'
 import ConfigView from '../views/ConfigView.vue'
 import ConfigTabAccount from '../components/ConfigTabAccount.vue'
-import ConfigTabCommandsCreate from '../components/ConfigTabCommandsCreate.vue'
 import ConfigTabCommandsEdit from '../components/ConfigTabCommandsEdit.vue'
 import ConfigTabCommandsList from '../components/ConfigTabCommandsList.vue'
 import ConfigTabCommands from '../components/ConfigTabCommands.vue'
@@ -48,7 +47,7 @@ const router = createRouter({
           children: [
             {
               path: 'create',
-              component: ConfigTabCommandsCreate,
+              component: ConfigTabCommandsEdit,
               name: 'config.commands.create',
               meta: {
                 ignoreTab: true,

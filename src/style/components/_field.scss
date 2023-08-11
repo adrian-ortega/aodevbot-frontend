@@ -34,11 +34,11 @@
     }
   }
 
-  &.is-horizontal &__content {
+  &.is-horizontal {
     .field__label {
       flex-basis: 33%;
     }
-    .field__input {
+    .field__content {
       flex-basis: 66%;
     }
   }

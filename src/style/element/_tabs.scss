@@ -51,15 +51,4 @@
   &__content {
     padding: 1em;
   }
-
-  &__edit-form,
-  &__create-form {
-    width: 100%;
-    max-width: 40em;
-    h2 {
-      font-size: var(--font-size-2);
-      font-weight: var(--font-weight-bold);
-      margin-bottom: 1.1em;
-    }
-  }
 }

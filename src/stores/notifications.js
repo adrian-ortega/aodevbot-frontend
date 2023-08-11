@@ -2,14 +2,14 @@ import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import { ONE_SECOND, isString, makeId, objectHasKey } from "../util";
 
-const NOTIFICATION_INFO = 0;
-const NOTIFICATION_LABEL_INFO = 'info';
-const NOTIFICATION_SUCCESS = 1;
-const NOTIFICATION_LABEL_SUCCESS = 'success';
-const NOTIFICATION_WARNING = 2;
-const NOTIFICATION_LABEL_WARNING = 'warning';
-const NOTIFICATION_ERROR = 3;
-const NOTIFICATION_LABEL_ERROR = 'error';
+export const NOTIFICATION_INFO = 0;
+export const NOTIFICATION_LABEL_INFO = 'info';
+export const NOTIFICATION_SUCCESS = 1;
+export const NOTIFICATION_LABEL_SUCCESS = 'success';
+export const NOTIFICATION_WARNING = 2;
+export const NOTIFICATION_LABEL_WARNING = 'warning';
+export const NOTIFICATION_ERROR = 3;
+export const NOTIFICATION_LABEL_ERROR = 'error';
 
 export const useNotificationsStore = defineStore('notifications', () => {
   const state = reactive({

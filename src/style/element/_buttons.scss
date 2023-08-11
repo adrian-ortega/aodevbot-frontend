@@ -95,6 +95,28 @@
     width: 100%;
   }
 
+  &--tag {
+    font-family: var(--font-family-mono);
+    height: inherit;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25em;
+
+    .icon,
+    .text {
+      padding: 0.35em;
+    }
+
+    // Needs to be specific because of the above
+    // "magic" trick for icons
+    //
+    .text + .icon:last-child {
+      margin: 0;
+      padding-left: 0;
+    }
+  }
+
   &--icon {
     font-size: 1.1em;
     padding-left: 0.5em;

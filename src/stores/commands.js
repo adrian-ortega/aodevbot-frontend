@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { computed, ref, reactive, watch } from "vue";
-import { createUrlSearchParams, objectHasKey } from '../util';
+import { computed, ref, reactive } from "vue";
+import { createUrlSearchParams, isEmpty, objectHasKey } from '../util';
 
 const COMMAND_STUB = { template: null, permission: 1, name: null, response: null, aliases: [] }
 
@@ -10,14 +10,45 @@ export const useCommandsStore = defineStore("commands", () => {
   const page = ref(1);
   const pageLimit = ref(10);
   const editId = ref(null);
-  const templates = ref([])
   const state = reactive({
     items: [],
+    templates: [],
     filters: {
       limit: 10,
       status: -1
     }
   });
+
+  const isFetching = () => {
+    fetching.value = true
+  };
+  const doneFetching = (() => {
+    let id;
+    return () => {
+      clearTimeout(id);
+      id = setTimeout(() => {
+        fetching.value = false;
+      }, 10)
+    }
+  })()
+
+  const fetchTemplates = async () => {
+    if (state.templates.length > 0) {
+      return state.templates;
+    }
+
+    let responseData;
+    isFetching()
+    try {
+      const response = await fetch('/api/commands/templates');
+      responseData = await response.json();
+    } catch (err) {
+      responseData = { data: [] };
+      console.log(err);
+    }
+    doneFetching()
+    state.templates = [...responseData.data]
+  }
 
   const setSearch = (s) => {
     search.value = s;
@@ -30,7 +61,7 @@ export const useCommandsStore = defineStore("commands", () => {
   }
 
   const fetchItems = async (type = 'general') => {
-    fetching.value = true;
+    isFetching()
     let responseData;
     try {
       const response = await fetch(`/api/commands?${createUrlSearchParams({
@@ -45,15 +76,29 @@ export const useCommandsStore = defineStore("commands", () => {
       responseData = { data: [], pagination: { page: 1, limit: 10 } };
       console.log(err);
     }
-
+    doneFetching()
     state.items = [...responseData.data];
-    setTimeout(() => {
-      fetching.value = false;
-    }, 100);
+
+  }
+
+  const getCommand = async (id) => {
+    if (isEmpty(id)) return null;
+    isFetching()
+    let data;
+    try {
+      const response = await fetch(`/api/commands/${id}`)
+      const responseData = await response.json();
+      data = responseData.data
+    } catch (err) {
+      data = null;
+    }
+    doneFetching()
+    return data;
   }
 
   const createCommand = async (data) => {
     let responseData;
+    isFetching()
     try {
       const response = await fetch('/api/commands', {
         method: 'POST',
@@ -67,6 +112,7 @@ export const useCommandsStore = defineStore("commands", () => {
       responseData = null;
       console.log(err);
     }
+    doneFetching();
     return responseData;
   };
 
@@ -99,7 +145,11 @@ export const useCommandsStore = defineStore("commands", () => {
     filters: computed(() => state.filters),
     updateFilter,
 
+    fetchTemplates,
+    templates: computed(() => state.templates),
+
     // individual actions for a command,
+    getCommand,
     createCommand,
     enableCommand,
     editCommand,
