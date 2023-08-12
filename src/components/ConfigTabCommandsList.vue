@@ -2,9 +2,11 @@
 import ConfigTabCommandsListTableActions from './ConfigTabCommandsListTableActions.vue'
 import ConfigTabCommandsListNotFound from './ConfigTabCommandsListNotFound.vue'
 import ConfigTabCommandsListRow from './ConfigTabCommandsListRow.vue'
+import ConfigTabCommandsListPagination from './ConfigTabCommandsListPagination.vue'
 import { useCommandsStore } from '../stores/commands'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
+
 const cs = useCommandsStore()
 const route = useRoute()
 const refresh = async () => await cs.fetchItems(route.meta?.listType)
@@ -13,7 +15,7 @@ watch(() => route.name, refresh)
 </script>
 <template>
   <div class="table-wrapper">
-    <ConfigTabCommandsListTableActions />
+    <ConfigTabCommandsListTableActions :type="route.meta?.listType" />
     <div class="table">
       <div class="table__header">
         <div class="table__row">
@@ -28,7 +30,6 @@ watch(() => route.name, refresh)
         <ConfigTabCommandsListRow v-else v-for="row in cs.items" :key="row.id" :row="row" />
       </div>
     </div>
-
-    <div class="table-actions"></div>
+    <ConfigTabCommandsListPagination />
   </div>
 </template>

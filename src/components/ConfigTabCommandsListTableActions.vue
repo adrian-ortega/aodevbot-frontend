@@ -5,12 +5,23 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiLoading, mdiPlus, mdiChevronRight } from '@mdi/js'
 import { useCommandsStore } from '../stores/commands'
 const cs = useCommandsStore()
+const props = defineProps({
+  type: String,
+  default() {
+    return 'general'
+  }
+})
 </script>
 <template>
   <div class="table-actions">
     <div class="table-actions__left">
       <FormField label="Search for a command" vertical>
-        <input type="text" placeholder="Search commands" v-model="cs.search" />
+        <input
+          type="search"
+          placeholder="Search commands"
+          v-model="cs.search"
+          @keyup.enter="() => cs.filterSearch(props.type)"
+        />
       </FormField>
       <FormFieldSelect
         label="Filter Status"
@@ -32,7 +43,12 @@ const cs = useCommandsStore()
       >
       </FormFieldSelect>
       <FormField vertical>
-        <button class="button" :class="{ 'is-disabled': cs.fetching }" :disabled="cs.fetching">
+        <button
+          class="button"
+          :class="{ 'is-disabled': cs.fetching }"
+          :disabled="cs.fetching"
+          @click.prevent="cs.filterSearch(props.type)"
+        >
           <span class="text">Filter</span>
           <span class="icon" :class="{ 'is-spinner': cs.fetching }">
             <SvgIcon type="mdi" :path="cs.fetching ? mdiLoading : mdiChevronRight" />

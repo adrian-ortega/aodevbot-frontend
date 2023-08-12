@@ -26,7 +26,7 @@ const props = defineProps({
   <div
     class="table__row"
     :class="{ 'table__row--hovered': hover }"
-    @click.prevent="() => router.go({ name: 'config.commands.edit', params: { id: props.row.id } })"
+    @click.prevent="router.push({ name: 'config.commands.edit', params: { id: props.row.id } })"
     @mouseover="hover = true"
     @mouseleave="hover = false"
   >

@@ -21,11 +21,13 @@
 @media screen and (min-width: 700px) {
   .table-actions {
     display: flex;
+    align-items: center;
     margin: 0;
 
     &,
     &__left,
-    &__right {
+    &__right,
+    &__center {
       display: flex;
       gap: 0.5em;
     }

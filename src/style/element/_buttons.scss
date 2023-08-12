@@ -61,6 +61,11 @@
 
   &--close,
   &--transparent {
+    &[disbaled],
+    &.is-disabled {
+      background: red;
+    }
+
     &:focus,
     &:hover {
       background: var(--white-alpha-10);
@@ -123,8 +128,10 @@
     padding-right: 0.5em;
   }
 
-  &[disabled='true'],
+  &[disabled],
   &.is-disabled {
+    opacity: 0.5;
+
     &,
     &:hover,
     &:focus {
