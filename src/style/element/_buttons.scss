@@ -1,0 +1,163 @@
+@charset "utf-8";
+
+.button {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.875em;
+  line-height: 1;
+  background: var(--button-color-bg);
+  color: var(--button-color-fg);
+  height: var(--button-height);
+  padding: 0 1em;
+  transition: all 0.1s linear;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover,
+  &:focus {
+    background: var(--button-color-hover-bg);
+    color: var(--button-color-hover-fg);
+  }
+
+  > span {
+    display: inline-flex;
+  }
+
+  .text + .icon:last-child {
+    margin-right: -0.25em;
+  }
+
+  .avatar:first-child + .text,
+  .icon:first-child + .text,
+  .text + .icon:last-child {
+    margin-left: 0.5em;
+  }
+
+  &--primary {
+    background: var(--primary);
+
+    &:hover,
+    &:focus {
+      background: var(--primary-bis);
+    }
+  }
+
+  &--transparent {
+    background: transparent;
+  }
+
+  &--close {
+    height: auto;
+    background: none;
+    padding: 0.1em;
+  }
+
+  &--close,
+  &--transparent {
+    &[disbaled],
+    &.is-disabled {
+      background: red;
+    }
+
+    &:focus,
+    &:hover {
+      background: var(--white-alpha-10);
+    }
+  }
+
+  &--danger {
+    &:hover,
+    &:focus {
+      background: var(--danger);
+      color: var(--white-alpha-80);
+    }
+  }
+
+  &--warning {
+    &:hover,
+    &:focus {
+      background: var(--warning);
+      color: var(--white-alpha-80);
+    }
+  }
+
+  &--success {
+    &:hover,
+    &:focus {
+      background: var(--success);
+      color: var(--white-alpha-80);
+    }
+  }
+
+  &--fw {
+    width: 100%;
+  }
+
+  &--tag {
+    font-family: var(--font-family-mono);
+    height: inherit;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25em;
+
+    .icon,
+    .text {
+      padding: 0.35em;
+    }
+
+    // Needs to be specific because of the above
+    // "magic" trick for icons
+    //
+    .text + .icon:last-child {
+      margin: 0;
+      padding-left: 0;
+    }
+  }
+
+  &--icon {
+    font-size: 1.1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  &[disabled],
+  &.is-disabled {
+    opacity: 0.5;
+
+    &,
+    &:hover,
+    &:focus {
+      cursor: default;
+      background: var(--white-alpha-10);
+      color: var(--white-alpha-30);
+    }
+  }
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+  margin: 2em 0;
+
+  .button--right {
+    margin-left: auto;
+  }
+
+  &--inline {
+    margin: 0;
+    gap: 0.25em;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+}

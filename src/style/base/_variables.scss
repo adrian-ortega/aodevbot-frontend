@@ -1,0 +1,102 @@
+:root {
+  --primary: hsl(352, 55%, 43%);
+  --primary-bis: hwb(352 15% 45%);
+  --primary-alpha-50: hsla(352, 55%, 43%, 50%);
+  --primary-alpha-30: hsla(352, 55%, 43%, 30%);
+
+  --secondary: hsl(231, 100%, 64%);
+  --secondary-ter: hsl(231, 45%, 45%);
+
+  --twitch: hsl(261, 43%, 45%);
+
+  --black: hsl(0, 0%, 0%);
+  --black-alpha-10: hsla(0, 0%, 0%, 10%);
+  --black-alpha-20: hsla(0, 0%, 0%, 20%);
+  --black-alpha-30: hsla(0, 0%, 0%, 30%);
+
+  --gray: hsl(227, 13%, 72%);
+  --gray-bis: hsl(223, 19%, 60%);
+  --gray-ter: hsl(224, 13%, 28%);
+
+  --white: hsl(180, 100%, 97%);
+  --white-alpha-2: hsla(0, 0%, 100%, 2%);
+  --white-alpha-5: hsla(0, 0%, 100%, 5%);
+  --white-alpha-10: hsla(0, 0%, 100%, 10%);
+  --white-alpha-20: hwb(0 100% 0% / 0.2);
+  --white-alpha-30: hsla(0, 0%, 100%, 30%);
+  --white-alpha-50: hsla(0, 0%, 100%, 50%);
+  --white-alpha-80: hsla(0, 0%, 100%, 80%);
+
+  --danger: hsl(0, 100%, 50%);
+  --warning: orange;
+  --success: hsl(122, 39%, 49%);
+  --info: hsl(214, 35%, 45%);
+
+  --base-color-bg: hsl(225, 6%, 13%);
+  --base-color-bg-bis: hsl(223, 7%, 20%);
+  --base-color-fg: var(--gray);
+
+  --font-family-body: 'Roboto', sans-serif;
+  --font-family-mono: 'Monaco', 'Consolas', mono;
+  --font-base-size: 16px;
+  --font-size-small: 0.8em;
+  --font-size-normal: 1em;
+  --font-size-1: var(--font-size-normal);
+  --font-size-2: 1.25em;
+  --font-size-3: 2.2em;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --link-color: hsl(231, 51%, 80%);
+  --link-hover-color: hsl(199, 98%, 48%);
+  --link-active-color: var(--primary);
+
+  --input-height: 3em;
+  --input-height-offset: 0.37em;
+  --input-min-width: 20em;
+  --input-color-b: var(--gray-ter);
+  --input-checkbox-color-bg: var(--white-alpha-10);
+  --input-checkbox-color-fg: var(--primary);
+  --input-checkbox-color-b: var(--white-alpha-20);
+
+  --code-color-bg: hsl(261, 18%, 16%);
+  --code-color-fg: hsl(261, 43%, 45%);
+  --code-color-border: var(--white-alpha-5);
+
+  --radius-small: 0.1em;
+  --radius: 0.25em;
+  --radius-rounded: 3000em;
+
+  --button-height: 35px;
+  --button-color-fg: var(--white);
+  --button-color-bg: var(--white-alpha-5);
+  --button-color-hover-fg: var(--white);
+  --button-color-hover-bg: var(--black);
+
+  --page-gap: 0.25em;
+  --page-header-height: auto;
+  --page-footer-height: auto;
+
+  --notification-error: hsl(342, 100%, 35%);
+  --notification-warning: hsl(32, 100%, 62%);
+  --notification-success: hsl(71, 77%, 43%);
+  --notification-info: var(--info);
+
+  --notification-color-bg: var(--black);
+
+  --dd-menu-color-bg: #202124;
+  --dd-menu-color-border: var(--black-alpha-20);
+  --dd-menu-min-width: 10em;
+
+  --table-color-bg: var(--black-alpha-10);
+  --table-border-color: var(--black-alpha-20);
+  --table-header-color-bg: var(--black-alpha-10);
+
+  --loader-size: 2em;
+  --loader-stroke-width: calc(var(--loader-size) / 6);
+  --loader-color-fg: var(--primary);
+  --loader-animation-timing-func: linear;
+  --loader-animation-duration: 0.75s;
+}

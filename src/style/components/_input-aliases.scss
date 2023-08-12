@@ -1,0 +1,26 @@
+@charset 'utf-8';
+
+.field--input-aliases {
+  .field__input {
+    flex-direction: column;
+
+    > .field {
+      .field__content {
+        flex-basis: 100%;
+      }
+      .field__post {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .aliases {
+    position: relative;
+    display: flex;
+    gap: 0.25em;
+    flex-wrap: wrap;
+    border: 1px solid var(--input-color-b);
+    border-radius: var(--radius);
+    padding: 0.25em;
+  }
+}

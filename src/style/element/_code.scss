@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+.code,
+code {
+  display: inline-flex;
+  background: var(--code-color-bg);
+  border: 1px solid var(--code-color-border);
+  border-radius: var(--radius-small);
+  padding: 0.1em 0.2em;
+  margin: 0 0.25em;
+  letter-spacing: -0.025em;
+  font-size: 0.875em;
+  font-weight: var(--font-weight-normal);
+  color: var(--code-color-fg);
+}

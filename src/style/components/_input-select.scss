@@ -1,0 +1,132 @@
+@charset "utf-8";
+@keyframes inputDdOpen {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10%);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+@keyframes inputDdClose {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10%);
+  }
+}
+
+.input-select {
+  position: relative;
+  width: 100%;
+  min-width: 5em;
+
+  &__v,
+  &__dd {
+    border-radius: var(--radius);
+    width: 100%;
+    transition: all 0.1s linear;
+  }
+
+  &__dd {
+    position: absolute;
+    top: calc(100% + var(--page-gap));
+    left: 0;
+    width: 100%;
+    background-color: var(--base-color-bg);
+    opacity: 0;
+    visibility: hidden;
+    border: 1px solid var(--black-alpha-30);
+    box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);
+  }
+
+  &__s {
+    padding: 0.75em 1em;
+
+    input {
+      background: var(--black-alpha-20);
+    }
+  }
+
+  &__cb,
+  &__oi,
+  &__v {
+    display: flex;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+  }
+
+  &__o {
+    padding: 0.25em;
+    max-height: 10em;
+    overflow: auto;
+  }
+
+  &__cb {
+    width: 1.5em;
+    height: 1.5em;
+    background: transparent;
+    border-color: var(--gray-ter);
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__oi {
+    gap: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      background: var(--gray-ter);
+
+      .input-select__cb {
+        border-color: var(--black-alpha-10);
+      }
+    }
+
+    &.is-active {
+      .input-select__vv {
+        font-weight: var(--font-weight-bold);
+        color: var(--secondary);
+      }
+    }
+  }
+
+  &__oi + &__oi {
+    margin-top: 0.25em;
+  }
+
+  &__v {
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    border-color: var(--gray-ter);
+    height: calc(var(--input-height) - 0.2em);
+    padding: 0 0.5em;
+  }
+
+  &__cd {
+    font-size: var(--font-size-2);
+  }
+
+  &.is-open &__v {
+    border-color: var(--primary);
+  }
+
+  &.is-open &__dd {
+    animation: inputDdOpen 300ms forwards cubic-bezier(0, 1.13, 0.54, 1.35);
+  }
+
+  &.is-closed &__dd {
+    animation: inputDdClose 300ms forwards cubic-bezier(0, 1.13, 0.54, 1.35);
+  }
+}

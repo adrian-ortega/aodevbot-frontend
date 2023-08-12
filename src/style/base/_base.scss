@@ -1,1 +1,33 @@
 @charset "utf-8";
+
+html {
+  font-size: var(--font-base-size);
+}
+
+body {
+  background-color: var(--base-color-bg);
+  font-size: 100%;
+  font-family: var(--font-family-body);
+  color: var(--base-color-fg);
+}
+
+a:not(.button):not(.tabs__trigger) {
+  text-decoration: none;
+  color: var(--link-color);
+
+  &:hover,
+  &:focus {
+    color: var(--link-hover-color);
+  }
+
+  &:active {
+    color: var(--link-active-color);
+  }
+}
+
+hr {
+  border: none;
+  margin: 1em 0 2em;
+  height: 0.2em;
+  background: var(--gray-ter);
+}

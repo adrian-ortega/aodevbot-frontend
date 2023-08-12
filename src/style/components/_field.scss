@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+.field {
+  margin: 0 0 1em;
+
+  &,
+  &__label,
+  &__content,
+  &__input,
+  &__post {
+    display: flex;
+  }
+
+  &__label,
+  &__input,
+  &__post {
+    flex: 1 1 auto;
+  }
+
+  &__post {
+    margin-left: 0.25em;
+
+    > .button {
+      display: flex;
+      height: auto;
+    }
+  }
+
+  &.is-vertical {
+    flex-direction: column;
+
+    .field__label {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  &.is-horizontal {
+    .field__label {
+      flex-basis: 33%;
+    }
+    .field__content {
+      flex-basis: 66%;
+    }
+  }
+}

@@ -1,15 +1,14 @@
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
-
-const ONE_SECOND = 1000
-const ONE_MINUTE = ONE_SECOND * 60;
+import { useNotificationsStore } from './notifications';
+import { ONE_SECOND } from "../util";
 
 export const useWebsocketStore = defineStore('websockets', () => {
   const connected = ref(false);
   const booted = ref(false);
   const connectActions = reactive([]);
   const messageActions = reactive([]);
-  let ws;
+  let ws, errorNotificationId;
 
   const getConnectUrl = () => {
     // @TODO Adrian Ortega
@@ -20,36 +19,51 @@ export const useWebsocketStore = defineStore('websockets', () => {
   }
 
   const connect = () => {
-    ws = new WebSocket(getConnectUrl());
-    ws.onopen = () => {
-      connected.value = true;
+    try {
+      ws = new WebSocket(getConnectUrl());
+      ws.onopen = () => {
+        connected.value = true;
+        const ns = useNotificationsStore();
+        if (errorNotificationId) {
+          ns.dismiss(errorNotificationId);
+        }
 
-      if (!booted.value) {
-        // @TODO Adrian Ortega - Implement brooooooo
-      }
+        if (!booted.value) {
+          ns.append('Connected', ns.types.success, ONE_SECOND * 0.5);
+          booted.value = true;
+        }
 
-      connectActions.forEach((action) => action(booted, connected));
-    };
-    ws.onmessage = ({ data }) => {
-      try {
-        data = JSON.parse(data);
-      } catch (err) {
-        // @TODO AO - Implement logging to the server?
-      }
+        connectActions.forEach((action) => action(booted, connected));
+      };
+      ws.onmessage = ({ data }) => {
+        try {
+          data = JSON.parse(data);
+        } catch (err) {
+          // @TODO AO - Implement logging to the server?
+        }
 
-      messageActions.forEach((action) => action(data));
-    };
-    ws.onclose = () => {
-      connected.value = false;
-      setTimeout(() => {
-        // @TODO AO - Implement reconnect/retries, for not just connect again
-        connect();
-      }, ONE_MINUTE)
-    };
-    ws.onerror = () => {
-      // @TODO
-      ws.close();
-    };
+        messageActions.forEach((action) => action(data));
+      };
+      ws.onclose = () => {
+        connected.value = false;
+        setTimeout(() => {
+          connect();
+        }, ONE_SECOND * 5)
+      };
+      ws.onerror = (err) => {
+        if (err.type === 'error') {
+          const ns = useNotificationsStore();
+          if (errorNotificationId) {
+            ns.dismiss(errorNotificationId);
+          }
+          errorNotificationId = ns.append('Cannot connect', ns.types.error);
+        }
+        ws.close();
+      };
+    } catch (err) {
+      const ns = useNotificationsStore();
+      ns.append(err.message, ns.types.error);
+    }
   };
 
   const onConnect = (action) => {
@@ -70,10 +84,15 @@ export const useWebsocketStore = defineStore('websockets', () => {
     delete messageActions[id];
   }
 
+  const send = (event, payload) => ws.send(JSON.stringify({
+    event, payload
+  }));
+
   connect();
   return {
     connected,
     onConnect,
-    onMessage
+    onMessage,
+    send
   }
 });

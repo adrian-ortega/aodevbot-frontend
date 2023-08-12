@@ -1,0 +1,106 @@
+@charset "utf-8";
+
+input,
+select,
+textarea {
+  appearance: none;
+  height: calc(var(--input-height) + var(--input-height-offset));
+  padding: 0 0.5em;
+
+  width: 100%;
+  background: none;
+  color: var(--white);
+  border: 1px solid var(--input-color-b);
+  border-radius: var(--radius);
+  transition: all 0.1s linear;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--body-color-bg), 0 0 0 5px var(--primary-alpha-30);
+  }
+}
+
+textarea {
+  padding: 0.75em;
+  min-height: calc(var(--input-height) * 3);
+}
+
+input[type='text'],
+textarea {
+  min-width: var(--input-min-width);
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  width: 1em;
+  height: 1em;
+  border: 1px solid var(--input-checkbox-color-b);
+  background: var(--input-checkbox-color-bg);
+  padding: 0;
+  margin: 0;
+}
+
+input[type='checkbox'] {
+  position: relative;
+  margin: 0 0.25em;
+
+  &:before,
+  &:after {
+    content: ' ';
+    background: var(--input-checkbox-color-fg);
+    display: block;
+    position: absolute;
+    transform: scale(0);
+    transition: all 0.1s ease;
+  }
+
+  &:before {
+    width: 0.625em;
+    height: 0.1875em;
+    top: 0.375em;
+    left: 0.1875em;
+    transform: rotate(-45deg) scale(0) translateY(-50%);
+    border-top-right-radius: 0.1875em;
+    border-bottom-right-radius: 0.1875em;
+  }
+
+  &:after {
+    width: 0.25em;
+    height: 0.1875em;
+    top: 0.4735em;
+    left: 0.125em;
+    border-top-left-radius: 0.1875;
+    border-bottom-left-radius: 0.1875;
+    transform: rotate(45deg) scale(0) translateY(-50%);
+  }
+
+  &:checked {
+    &:before {
+      transform: rotate(-45deg) scale(1) translateY(0);
+    }
+    &:after {
+      transform: rotate(45deg) scale(1) translateY(0);
+    }
+  }
+}
+
+.edit-form {
+  width: 100%;
+  margin: 1em auto;
+  max-width: 40em;
+
+  &__header {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  &__title {
+    flex-grow: 1;
+  }
+  h2 {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-bold);
+  }
+}

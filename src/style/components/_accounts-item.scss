@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+.accounts__item {
+  display: grid;
+  grid-template-columns: 3em 1fr auto;
+  background: var(--black-alpha-20);
+  border: 1px solid var(--black-alpha-20);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);
+  padding: 1em;
+  margin: 1em 0;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    > .icon {
+      font-size: 2em;
+      padding: 0.15em;
+      color: var(--twitch)
+    }
+  }
+
+  h3 {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .linked-account {
+    margin-top: 0.25em;
+    font-size: 0.875em;
+    color: var(--gray-bis);
+  }
+}

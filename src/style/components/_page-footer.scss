@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+.page-footer {
+  padding: calc(var(--page-gap) * 3);
+  padding-bottom: calc(var(--page-gap) * 5);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
