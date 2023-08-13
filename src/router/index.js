@@ -104,12 +104,18 @@ const router = createRouter({
     {
       path: '/chat',
       name: 'chat',
-      component: ChatView
+      component: ChatView,
+      meta: {
+        containerClasses: ['is-chat']
+      }
     },
     {
       path: '/debug',
       name: 'debug',
-      component: DebugView
+      component: DebugView,
+      meta: {
+        containerClasses: ['is-debug']
+      }
     },
     {
       path: '/:pathMatch(.*)*',

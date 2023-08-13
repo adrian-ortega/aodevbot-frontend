@@ -2,6 +2,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiDotsVertical } from '@mdi/js'
 import { ref, computed } from 'vue'
+import { isFunction } from '../util'
 
 const dd = ref(null)
 const isOpen = ref(false)
@@ -14,7 +15,7 @@ const outsideClickEventHandler = (event) => {
     return false
   }
   const $el = dd.value
-  if (event.target !== $el && !$el.contains(event.target)) {
+  if (!$el || (event.target !== $el && !$el.contains(event.target))) {
     closeMenu()
   }
 }
@@ -27,17 +28,13 @@ const openMenu = () => {
 const closeMenu = () => {
   isOpen.value = false
   isClosed.value = true
-  document.removeEventListener('keyup', escapeKeyHandler)
-  document.removeEventListener('click', outsideClickEventHandler)
+  document.removeEventListener('keyup', escapeKeyHandler, false)
+  document.removeEventListener('click', outsideClickEventHandler, false)
 }
 
 const props = defineProps({
   triggerHandler: {
-    type: Function,
-    required: false,
-    default() {
-      return false
-    }
+    type: Function
   },
   triggerLabel: {
     type: String,
@@ -50,7 +47,7 @@ const props = defineProps({
 })
 
 const hasTriggerAction = computed(() => {
-  return true
+  return isFunction(props.triggerHandler)
 })
 </script>
 

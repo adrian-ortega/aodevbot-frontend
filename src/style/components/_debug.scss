@@ -1,7 +1,6 @@
 @charset "utf-8";
 
 .v-debug {
-
   .container {
     height: 100%;
     min-height: 100%;
@@ -9,8 +8,9 @@
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr minmax(33vw, 360px);
-    grid-template-areas: "header header"
-                        "content sidebar";
+    grid-template-areas:
+      'header header'
+      'content sidebar';
     .content {
       grid-area: content;
     }
@@ -19,5 +19,8 @@
       grid-area: sidebar;
       border-left: 1px solid var(--gray-ter);
     }
+  }
+
+  @media screen and (min-width: 768px) {
   }
 }

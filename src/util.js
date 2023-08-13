@@ -2,7 +2,6 @@ export const ONE_SECOND = 1000
 export const ONE_MINUTE = ONE_SECOND * 60;
 export const isObject = a => typeof a === 'object' && a !== null;
 export const isFunction = (a) => {
-  console.log('isFunction', a);
   if (!a) { return false };
   const t = {}.toString.call(a);
   return t === '[object Function]' || t === '[object AsyncFunction]';

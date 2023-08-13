@@ -14,6 +14,12 @@ html {
     display: grid;
     grid-template-rows: var(--page-header-height) 1fr var(--page-footer-height);
   }
+
+  &.is-debug,
+  &.is-chat {
+    display: grid;
+    grid-template-rows: var(--page-header-height) 1fr;
+  }
 }
 
 .logo {
