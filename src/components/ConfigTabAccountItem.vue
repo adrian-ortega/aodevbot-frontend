@@ -1,22 +1,24 @@
 <script setup>
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiChevronRight, mdiTwitch } from '@mdi/js';
-import { computed } from 'vue';
-import { popupWindowCenter } from '../util';
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiChevronRight } from '@mdi/js'
+import { computed } from 'vue'
+import { popupWindowCenter } from '../util'
 
-let loginIframe;
+let loginIframe
 
 const props = defineProps({
   title: String,
+  icon: String,
   loginUrl: String,
   helpText: String,
+  disabled: Boolean,
   account: {
     type: Object,
     required: false
   }
-});
+})
 
-const loginButtonText = computed(() => props.account ? 'Change' : 'Login');
+const loginButtonText = computed(() => (props.account ? 'Change' : 'Login'))
 const openLoginPopup = () => {
   window.onmessage = (e) => {
     console.log(e)
@@ -25,16 +27,15 @@ const openLoginPopup = () => {
   loginIframe = popupWindowCenter({
     url: props.loginUrl,
     title: 'Login with Twitch'
-  });
+  })
 }
-
 </script>
 
 <template>
-  <div class="accounts__item">
+  <div class="accounts__item" :class="{ 'accounts__item--disabled': disabled }">
     <div>
       <span class="icon">
-        <SvgIcon type="mdi" :path="mdiTwitch"/>
+        <SvgIcon type="mdi" :path="icon" />
       </span>
     </div>
     <div>
@@ -45,10 +46,10 @@ const openLoginPopup = () => {
       </div>
     </div>
     <div>
-      <button class="button" @click.prevent="() => openLoginPopup()">
+      <button class="button" @click.prevent="() => openLoginPopup()" :disabled="disabled">
         <span class="text">{{ loginButtonText }}</span>
         <span class="icon">
-          <SvgIcon type="mdi" :path="mdiChevronRight"/>
+          <SvgIcon type="mdi" :path="mdiChevronRight" />
         </span>
       </button>
     </div>

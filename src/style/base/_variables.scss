@@ -8,6 +8,7 @@
   --secondary-ter: hsl(231, 45%, 45%);
 
   --twitch: hsl(261, 43%, 45%);
+  --spotify: hsl(141, 73%, 42%);
 
   --black: hsl(0, 0%, 0%);
   --black-alpha-10: hsla(0, 0%, 0%, 10%);
@@ -80,9 +81,13 @@
   --page-footer-height: auto;
 
   --notification-error: hsl(342, 100%, 35%);
+  --notification-error-bg: hsl(342, 92.54%, 10.3%);
   --notification-warning: hsl(32, 100%, 62%);
+  --notification-warning-bg: hsl(45, 19%, 13%);
   --notification-success: hsl(71, 77%, 43%);
+  --notification-success-bg: hsl(72, 74%, 11%);
   --notification-info: var(--info);
+  --notification-info-bg: hsl(214, 46.22%, 13.46%);
 
   --notification-color-bg: var(--black);
 

@@ -11,7 +11,6 @@ const props = defineProps({
 })
 const router = useRouter()
 const routes = router.getRoutes()
-const currentRoute = useRoute()
 const routeTabs = computed(() => {
   const matchedRoute = routes.find((r) => r.name === props.baseRoute)
   return matchedRoute?.children

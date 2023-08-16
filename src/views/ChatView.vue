@@ -6,4 +6,5 @@ import Chat from '../components/Chat.vue'
 <template>
   <PageHeader title="Chat" />
   <Chat />
+  <PageNotifications />
 </template>

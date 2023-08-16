@@ -11,6 +11,7 @@
   border: 1px solid var(--black-alpha-20);
   border-radius: var(--radius);
   box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);
+  gap: 1em;
 
   &,
   &__icon {
@@ -18,24 +19,40 @@
   }
 
   &__icon {
+    flex-shrink: 0;
     border-radius: var(--radius-rounded);
     width: 1.5em;
     height: 1.5em;
-    margin-right: 1em;
     align-items: center;
     justify-content: center;
     color: var(--white-alpha-80);
     border: 2px solid var(--black-alpha-20);
   }
 
+  &.is-error {
+    background: var(--notification-error-bg);
+  }
   &.is-error &__icon {
     background-color: var(--notification-error);
   }
+
+  &.is-warning {
+    background: var(--notification-warning-bg);
+  }
+
   &.is-warning &__icon {
     background-color: var(--notification-warning);
   }
+
+  &.is-success {
+    background: var(--notification-success-bg);
+  }
   &.is-success &__icon {
     background-color: var(--notification-success);
+  }
+
+  &.is-info {
+    background: var(--notification-info-bg);
   }
   &.is-info &__icon {
     background-color: var(--notification-info);
