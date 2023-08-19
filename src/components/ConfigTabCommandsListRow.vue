@@ -2,7 +2,6 @@
 import FormButtons from './FormButtons.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { ref } from 'vue'
-import { useCommandsStore } from '../stores/commands'
 import {
   mdiCheckboxBlankCircle,
   mdiCheckboxBlankCircleOutline,
@@ -12,7 +11,6 @@ import {
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const cs = useCommandsStore()
 const hover = ref(false)
 const props = defineProps({
   row: {

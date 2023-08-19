@@ -2,6 +2,7 @@ import { computed, reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { useNotificationsStore } from "./notifications";
 
+
 export const BROADCASTER_PRIMARY_ACCOUNT = 1;
 export const BROADCASTER_SECONDARY_ACCOUNT = 2;
 export const BROADCASTER_SPOTIFY_ACCOUNT = 3;
@@ -32,7 +33,7 @@ export const useAccountsStore = defineStore('accounts', () => {
   })
 
   let errorNotificationId;
-  const notify = (message, type = 'info') => {
+  const notify = (message, type = 'info', { redirect }) => {
     const ns = useNotificationsStore();
     if (errorNotificationId) ns.dismiss(errorNotificationId);
     errorNotificationId = ns.append(message, type);
@@ -61,7 +62,7 @@ export const useAccountsStore = defineStore('accounts', () => {
     } catch (error) {
       data = null;
       if (error instanceof BroadcasterError && error.data.type === BROADCASTER_PRIMARY_ACCOUNT) {
-        notify('Cannot retrieve brodcaster.', 'error')
+        notify('Cannot retrieve brodcaster. <a href="/config/accounts" class="button">Fix this</a>', 'error', { redirect: { name: 'config.accounts' } })
       }
     }
     return data;

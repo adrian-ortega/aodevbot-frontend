@@ -9,6 +9,7 @@ import ConfigTabCommandsList from '../components/ConfigTabCommandsList.vue'
 import ConfigTabCommands from '../components/ConfigTabCommands.vue'
 import ConfigTabEvents from '../components/ConfigTabEvents.vue'
 import ConfigTabRedeemables from '../components/ConfigTabRedeemables.vue'
+import ConfigTabUsers from '../components/ConfigTabUsers.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
 const router = createRouter({
@@ -97,6 +98,14 @@ const router = createRouter({
           name: 'config.redeemables',
           meta: {
             label: 'Redeemables'
+          }
+        },
+        {
+          path: 'users',
+          component: ConfigTabUsers,
+          name: 'config.users',
+          meta: {
+            label: 'Users'
           }
         }
       ]

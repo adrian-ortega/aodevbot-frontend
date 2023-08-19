@@ -1,11 +1,11 @@
 <script setup>
 import Chat from '../components/Chat.vue'
 import BrowserSourceOverlay from '../components/BrowserSourceOverlay.vue'
-import Pageheader from '../components/pageheader.vue'
+import PageHeader from '../components/PageHeader.vue'
 </script>
 
 <template>
-  <Pageheader title="Debug" />
+  <PageHeader title="Debug" />
   <div class="container">
     <div class="content">
       <BrowserSourceOverlay />

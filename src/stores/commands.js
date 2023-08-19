@@ -76,7 +76,7 @@ export const useCommandsStore = defineStore('commands', () => {
       )
       responseData = await response.json()
     } catch (err) {
-      responseData = { data: [], pagination: { page: 1, limit: 10 } }
+      responseData = { data: [], pagination: { page: page.value, limit: pageLimit.value } }
       console.log(err)
     }
     doneFetching()
