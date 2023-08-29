@@ -130,7 +130,7 @@
     padding-right: 0.5em;
   }
 
-  &[disabled],
+  &[disabled='true'],
   &.is-disabled {
     opacity: 0.5;
 

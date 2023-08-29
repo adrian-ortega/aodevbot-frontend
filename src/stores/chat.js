@@ -2,6 +2,7 @@ import { defineStore, storeToRefs } from "pinia";
 import { computed, reactive, watch } from "vue";
 import { useWebsocketStore } from './websocket';
 import { useAccountsStore } from "./accounts";
+import { createUrlSearchParams } from "../util";
 
 export const useChatStore = defineStore('chat', () => {
   const wsStore = useWebsocketStore();
@@ -14,13 +15,19 @@ export const useChatStore = defineStore('chat', () => {
   });
 
   const setBroadcasterAsDefaultChatter = async () => {
-    const data = await accountsStore.getBroadcaster();
-    state.chatter = { ...data };
+    if (!accountsStore.broadcaster) {
+      setTimeout(setBroadcasterAsDefaultChatter, 10);
+      return;
+    }
+    state.chatter = { ...accountsStore.broadcaster };
   }
 
-  const fetchChatters = async () => {
-    const response = await fetch('/api/chatters');
-    const data = await response.json();
+  const fetchChatters = async ({ search = '' }) => {
+    const response = await fetch(`/api/chatters?${createUrlSearchParams({
+      page: 1, limit: 10, search
+    })}`);
+
+    const { data } = await response.json();
 
     state.chatters = [...data];
   }

@@ -25,7 +25,9 @@
   }
 
   &__form {
+    position: relative;
     grid-area: form;
+    z-index: 3;
   }
 
   &__replies {
@@ -34,6 +36,7 @@
     justify-content: flex-end;
     grid-area: replies;
     overflow: hidden;
+    z-index: 2;
   }
 
   &__replies-box {
@@ -103,31 +106,40 @@
       left: 0;
       width: 100%;
       max-width: 20em;
-
-      background: var(--body-color-bg);
+      z-index: 99;
+      background: var(--base-color-bg);
       border: 1px solid var(--black-alpha-20);
       border-radius: var(--radius);
       box-shadow: 0.1em 0.25em 1em var(--black-alpha-20);
       overflow: hidden;
 
       &__header {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+          'title close'
+          'search search';
         padding: 0.25em 0.5em;
         box-shadow: 0 0.1em 0.25em var(--black-alpha-20);
 
-        p {
+        .button--close {
+          grid-area: close;
+          width: 2.5em;
+          height: 2.5em;
+          padding: 0;
+        }
+
+        h4 {
+          grid-area: title;
+          display: flex;
+          align-items: center;
+          font-weight: var(--font-weight-bold);
+        }
+
+        .field {
+          grid-area: search;
           margin: 0 0 0.25em;
-        }
-
-        small {
-          display: block;
-          font-size: 0.65em;
-          line-height: 0.9em;
-          color: var(--gray);
-        }
-
-        div:last-child {
-          margin-left: auto;
         }
       }
 
@@ -135,10 +147,14 @@
         padding: 0.5em;
 
         > div {
+          max-height: 15em;
+          overflow: auto;
+        }
+
+        > div > div {
+          justify-content: flex-start;
           &.is-active {
-            .button {
-              font-weight: var(--font-weight-bold);
-            }
+            font-weight: var(--font-weight-bold);
 
             .icon:last-child {
               margin-left: auto;
