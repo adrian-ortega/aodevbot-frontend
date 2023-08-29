@@ -1,15 +1,23 @@
 @charset "utf-8";
 
 .code,
+.is-id,
 code {
+  letter-spacing: -0.025em;
   display: inline-flex;
+  font-size: 0.875em;
+  font-family: var(--font-family-code);
+  font-weight: var(--font-weight-normal);
+  padding: 0.1em 0;
+}
+
+.code,
+code {
+  color: var(--code-color-fg);
   background: var(--code-color-bg);
   border: 1px solid var(--code-color-border);
   border-radius: var(--radius-small);
-  padding: 0.1em 0.2em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
   margin: 0 0.25em;
-  letter-spacing: -0.025em;
-  font-size: 0.875em;
-  font-weight: var(--font-weight-normal);
-  color: var(--code-color-fg);
 }

@@ -1,8 +1,10 @@
 <script setup>
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useWebsocketStore } from './stores/websocket'
 import { useRoute } from 'vue-router'
+import { useAccountsStore } from './stores/accounts'
 
+const accounts = useAccountsStore()
 const route = useRoute()
 const addCssClassToRoute = (to) => {
   const { name: routeName, meta } = to
@@ -26,6 +28,8 @@ watch(route, addCssClassToRoute, {
 })
 
 useWebsocketStore()
+
+onMounted(() => accounts.fetchAccounts())
 </script>
 
 <template>

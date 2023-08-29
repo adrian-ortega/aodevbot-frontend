@@ -1,6 +1,7 @@
 <script setup>
 import ConfigTabUsersListRow from './ConfigTabUsersListRow.vue'
 import ConfigTabUsersListTableActions from './ConfigTabUsersListTableActions.vue'
+import ConfigTabUsersListPagination from './ConfigTabUsersListPagination.vue'
 import { useChattersStore } from '../stores/chatters'
 import { onMounted } from 'vue'
 
@@ -26,5 +27,6 @@ onMounted(refresh)
         <ConfigTabUsersListRow v-else v-for="row in cs.items" :key="row.id" :row="row" />
       </div>
     </div>
+    <ConfigTabUsersListPagination />
   </div>
 </template>

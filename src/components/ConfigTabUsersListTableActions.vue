@@ -2,7 +2,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import FormField from './FormField.vue'
 import FormFieldSelect from './FormFieldSelect.vue'
-import { mdiSync } from '@mdi/js'
+import { mdiSync, mdiLoading, mdiChevronRight } from '@mdi/js'
 import { useChattersStore } from '../stores/chatters'
 const cs = useChattersStore()
 </script>
@@ -30,7 +30,7 @@ const cs = useChattersStore()
           class="button"
           :class="{ 'is-disabled': cs.fetching }"
           :disabled="cs.fetching"
-          @click.prevent="cs.filterSearch(props.type)"
+          @click.prevent="cs.filterSearch()"
         >
           <span class="text">Filter</span>
           <span class="icon" :class="{ 'is-spinner': cs.fetching }">
@@ -41,9 +41,14 @@ const cs = useChattersStore()
     </div>
     <div class="table-actions__right">
       <FormField>
-        <button class="button" title="Sync with Twitch">
-          <span class="text">Sync</span>
-          <span class="icon">
+        <button
+          class="button"
+          title="Sync with Twitch"
+          @click.prevent="() => cs.syncUsers()"
+          :disabled="cs.syncing"
+        >
+          <span class="text">Sync{{ cs.syncing ? 'ing' : '' }}</span>
+          <span class="icon" :class="{ 'is-spinner': cs.syncing }">
             <SvgIcon type="mdi" :path="mdiSync" />
           </span>
         </button>

@@ -1,6 +1,9 @@
 <script setup>
+import AvatarImage from './AvatarImage.vue'
 import { ref } from 'vue'
-
+import { popupWindowCenter } from '../util'
+import { useAccountsStore } from '../stores/accounts'
+const accounts = useAccountsStore()
 const hover = ref(false)
 const props = defineProps({
   row: {
@@ -8,6 +11,12 @@ const props = defineProps({
     required: true
   }
 })
+
+const openModCard = async () => {
+  popupWindowCenter({
+    url: `https://twitch.tv/popout/${accounts.broadcaster.username}/viewercard/${props.row.username}?popout=`
+  })
+}
 </script>
 
 <template>
@@ -15,17 +24,23 @@ const props = defineProps({
     <div class="table__cell cb"><input type="checkbox" /></div>
     <div class="table__cell">
       <div class="table__cell-content">
-        <h4 class="title">{{ row.display_name }}</h4>
+        <div class="chatter-inline">
+          <AvatarImage :src="row.profile_image_url" class="chatter-inline__avatar" />
+          <div class="chatter-inline__name">
+            <h4 class="title">{{ row.display_name }}</h4>
+            <p class="is-id">{{ row.twitch_id }}</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="table__cell">
-      <p>{{ row.username }}</p>
+      <p class="is-id">{{ row.username }}</p>
     </div>
     <div class="table__cell">
       <p>Affiliate</p>
     </div>
-    <div class="table__cellactions right">
-      <button class="button">
+    <div class="table__cell actions right">
+      <button class="button" @click.prevent="() => openModCard()">
         <span class="text">Mod Card</span>
       </button>
     </div>

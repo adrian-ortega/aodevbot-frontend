@@ -173,3 +173,15 @@
     }
   }
 }
+
+.chatter-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  &__name {
+    .title {
+      margin: 0;
+    }
+  }
+}

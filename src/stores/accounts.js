@@ -1,6 +1,8 @@
+import debounce from "lodash.debounce";
 import { computed, reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { useNotificationsStore } from "./notifications";
+import { ONE_SECOND } from "../util";
 
 
 export const BROADCASTER_PRIMARY_ACCOUNT = 1;
@@ -68,7 +70,7 @@ export const useAccountsStore = defineStore('accounts', () => {
     return data;
   }
 
-  const getBroadcaster = async () => {
+  const getBroadcaster = debounce(async () => {
     if (accounts.items[BROADCASTER_PRIMARY_ACCOUNT]) {
       return accounts.items[BROADCASTER_PRIMARY_ACCOUNT]
     }
@@ -79,9 +81,9 @@ export const useAccountsStore = defineStore('accounts', () => {
     accounts.items[BROADCASTER_PRIMARY_ACCOUNT] = { ...data };
     accounts.logins[BROADCASTER_PRIMARY_ACCOUNT] = await getAuthUrl(BROADCASTER_PRIMARY_ACCOUNT)
     return data;
-  }
+  }, 100)
 
-  const getSecondary = async () => {
+  const getSecondary = debounce(async () => {
     if (accounts.items[BROADCASTER_SECONDARY_ACCOUNT]) {
       return accounts.items[BROADCASTER_SECONDARY_ACCOUNT]
     }
@@ -91,9 +93,9 @@ export const useAccountsStore = defineStore('accounts', () => {
     accounts.items[BROADCASTER_SECONDARY_ACCOUNT] = { ...data };
     accounts.logins[BROADCASTER_SECONDARY_ACCOUNT] = await getAuthUrl(BROADCASTER_SECONDARY_ACCOUNT)
     return data;
-  }
+  }, 100)
 
-  const getSpotify = async () => {
+  const getSpotify = debounce(async () => {
     if (accounts.items[BROADCASTER_SPOTIFY_ACCOUNT]) {
       return accounts.items[BROADCASTER_SPOTIFY_ACCOUNT]
     }
@@ -112,7 +114,7 @@ export const useAccountsStore = defineStore('accounts', () => {
     accounts.items[BROADCASTER_SPOTIFY_ACCOUNT] = { ...data };
     accounts.logins[BROADCASTER_SPOTIFY_ACCOUNT] = await getAuthUrl(BROADCASTER_SPOTIFY_ACCOUNT)
     return data;
-  }
+  }, 100);
 
   const fetchAccounts = async () => {
     await getBroadcaster()
@@ -127,8 +129,11 @@ export const useAccountsStore = defineStore('accounts', () => {
     hasAuxDisabled,
     fetchAccounts,
     getBroadcaster,
+    broadcaster: computed(() => accounts.items[BROADCASTER_PRIMARY_ACCOUNT]),
     getSecondary,
+    secondary: computed(() => accounts.items[BROADCASTER_SECONDARY_ACCOUNT]),
     getSpotify,
+    spotify: computed(() => accounts.items[BROADCASTER_SPOTIFY_ACCOUNT]),
     getAuthUrl
   }
 });

@@ -2,8 +2,6 @@ import { defineStore } from 'pinia'
 import { computed, ref, reactive } from 'vue'
 import { createUrlSearchParams, isEmpty, objectHasKey } from '../util'
 
-const COMMAND_STUB = { template: null, permission: 1, name: null, response: null, aliases: [] }
-
 export const useCommandsStore = defineStore('commands', () => {
   const fetching = ref(false)
   const search = ref('')

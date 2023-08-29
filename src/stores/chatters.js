@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
-import { createUrlSearchParams } from '../util'
+import { ONE_SECOND, createUrlSearchParams, objectHasKey } from '../util'
+import { useNotificationsStore } from './notifications'
+import debounce from 'lodash.debounce'
 
 export const useChattersStore = defineStore('users', () => {
   const fetching = ref(false)
@@ -39,7 +41,7 @@ export const useChattersStore = defineStore('users', () => {
     }
   }
 
-  const fetchItems = async () => {
+  const fetchItems = debounce(async () => {
     isFetching()
     let responseData
     try {
@@ -62,11 +64,68 @@ export const useChattersStore = defineStore('users', () => {
       pages.value = responseData.pagination.pages
       pageTotal.value = responseData.pagination.total
     }
+  }, 10)
+
+  const filterSearch = () => {
+    pageLimit.value = state.filters.limit;
+    return fetchItems()
   }
 
-  const filterSearch = () => { }
+  const hasNextPage = computed(() => page + 1 > pages)
+  const nextPage = (type) => {
+    if (hasNextPage) {
+      page.value++
+    }
+    return filterSearch()
+  }
+
+  const hasPreviousPage = computed(() => page - 1 > 1)
+  const previousPage = (type) => {
+    if (hasPreviousPage) {
+      page.value--
+    }
+    return filterSearch(type)
+  }
 
   const getUser = () => { }
+
+  const syncing = ref(false)
+  const syncPercentage = ref(100)
+
+  const syncUsers = () => {
+    const ns = useNotificationsStore();
+    syncing.value = true;
+    const progressId = ns.progress('Syncing Users', syncPercentage.value)
+    const updateProgress = (progress, total = 0, current = 0) => {
+      const statusText = progress < 100 ? `Working: ${current} of ${total}` : 'Done'
+      ns.updateProgress(progressId, progress, statusText);
+    }
+
+    let updateId;
+    const update = async () => {
+      clearTimeout(updateId)
+      try {
+        const response = await fetch('/api/chatters/sync-status')
+        const { percentage, total, current } = await response.json();
+        updateProgress(percentage, total, current);
+        if (percentage < 100) {
+          updateId = setTimeout(update, ONE_SECOND * 1.5)
+        } else {
+          fetchItems()
+          updateId = setTimeout(() => {
+            ns.dismiss(progressId)
+            syncing.value = false
+          }, ONE_SECOND * 3)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    window.navigator.sendBeacon('/api/chatters/sync');
+
+    setTimeout(update, ONE_SECOND);
+  }
 
   return {
     page,
@@ -81,9 +140,15 @@ export const useChattersStore = defineStore('users', () => {
     fetching,
     fetchItems,
     filters: computed(() => state.filters),
-    filterSearch,
     updateFilter,
+    filterSearch,
+    hasNextPage,
+    nextPage,
+    hasPreviousPage,
+    previousPage,
 
-    getUser
+    getUser,
+    syncUsers,
+    syncing,
   }
 })
