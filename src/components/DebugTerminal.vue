@@ -9,7 +9,15 @@ ws.onMessage(({ event, payload }) => {
   state.items.push({ ...payload })
 })
 
-const items = computed(() => state.items)
+const items = computed(() =>
+  state.items.map((item) => ({
+    ...item,
+    message: item.message.replace(
+      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+      ''
+    )
+  }))
+)
 </script>
 
 <template>
