@@ -1,5 +1,5 @@
 @charset 'utf-8';
-@keyframes time-cmd-in {
+@keyframes hug-cmd-in {
   from {
     transform: scale(0) translateY(-20%);
     opacity: 0;
@@ -13,7 +13,7 @@
   }
 }
 
-@keyframes time-cmd-out {
+@keyframes hug-cmd-out {
   from {
     transform: scale(1) translateY(0);
 
@@ -42,11 +42,11 @@
   overflow: hidden;
 
   &.animate-in {
-    animation: time-cmd-in 400ms forwards var(--o-cb-in);
+    animation: hug-cmd-in 400ms forwards var(--o-cb-in);
   }
 
   &.animate-out {
-    animation: time-cmd-out 400ms forwards var(--o-cb-out);
+    animation: hug-cmd-out 400ms forwards var(--o-cb-out);
   }
 
   .marquee {
