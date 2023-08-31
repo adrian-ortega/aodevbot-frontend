@@ -112,8 +112,11 @@
   --o-primary-bis: hsl(352, 55%, 43%);
   --o-secondary: hsl(213, 28%, 13%);
   --o-tertiary: hsl(41, 100%, 64%);
+  --o-tertiary-bis: hsl(41, 100%, 49%);
+
   --o-fg: var(--white);
   --o-bg: hsl(213, 28%, 13%);
+  --o-bg-bis: hsl(204, 100%, 33%);
 
   --o-gap: 1em;
   --o-gap-small: 0.65em;
@@ -140,4 +143,11 @@
   --o-toast-width: 20em;
   --o-toast-width-medium: 15em;
   --o-toast-width-small: 10em;
+
+  // Spotify
+  --o-spotify-top: 0.25em;
+  --o-spotify-right: 0.25em;
+  --o-spotify-bottom: 0.25em;
+  --o-spotify-left: 0.25em;
+  --o-spotify-width: var(--o-toast-width-medium);
 }
