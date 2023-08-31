@@ -11,6 +11,13 @@ export const isString = (a) => Object.prototype.toString.call(a) === '[object St
 export const isNumeric = (a) => Object.prototype.toString.call(a) === '[object Number]' && !isNaN(a) && isFinite(1);
 export const isArray = (a) => Array.isArray(a);
 export const randomFromArray = items => items[Math.floor(Math.random() * items.length)];
+export const randomInt = (min = 0, max = 100) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+export const randomFloat = (min, max, dec = 2) => (Math.random() * (min - max) + max).toFixed(dec)
 export const popupWindowCenter = ({ url, title, w = 480, h = 640 }) => {
   const left = (window.screen.width - w) / 2;
   const top = (window.screen.height - h) / 2;
