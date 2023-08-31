@@ -106,4 +106,38 @@
   --loader-color-fg: var(--primary);
   --loader-animation-timing-func: linear;
   --loader-animation-duration: 0.75s;
+
+  // overlay component variables
+  --o-primary: hsl(352, 100%, 59%);
+  --o-primary-bis: hsl(352, 55%, 43%);
+  --o-secondary: hsl(213, 28%, 13%);
+  --o-tertiary: hsl(41, 100%, 64%);
+  --o-fg: var(--white);
+  --o-bg: hsl(213, 28%, 13%);
+
+  --o-gap: 1em;
+  --o-gap-small: 0.65em;
+  --o-gap-tiny: 0.45em;
+
+  --o-cb-in: cubic-bezier(0.55, 0.52, 0, 1.11);
+  --o-cb-out: cubic-bezier(0.79, -0.28, 0.58, 1);
+  --o-radius: 5px;
+  --o-radius-rounded: 3000em;
+  --o-font-family-mono: var(--font-family-mono);
+  --o-font-size-small: 0.875em;
+  --o-font-size-1: 1em;
+  --o-font-size-2: 1.25em;
+  --o-font-size-3: 2.2em;
+  --o-font-weight-bold: 700;
+
+  // Overlay Toast Components
+  --o-toast-bg: var();
+  --o-toast-fg: var();
+  --o-toast-top: var(--o-gap);
+  --o-toast-right: var(--o-gap);
+  --o-toast-bottom: var(--o-gap);
+  --o-toast-left: var(--o-gap);
+  --o-toast-width: 20em;
+  --o-toast-width-medium: 15em;
+  --o-toast-width-small: 10em;
 }

@@ -8,7 +8,7 @@ const accounts = useAccountsStore()
 const route = useRoute()
 const addCssClassToRoute = (to) => {
   const { name: routeName, meta } = to
-  const $root = document.getElementById('app')
+  const $root = document.body
   let routeClassName = (routeName ?? '')
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .toLowerCase()

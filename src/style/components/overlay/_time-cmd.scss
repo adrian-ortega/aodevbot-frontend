@@ -1,0 +1,114 @@
+@charset 'utf-8';
+
+@keyframes time-cmd-image {
+}
+
+@keyframes time-cmd-in {
+  from {
+    transform: translateX(-100em);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes time-cmd-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(-100em);
+    opacity: 0;
+  }
+}
+
+.time-cmd.toast {
+  background: none;
+  gap: 0;
+  transform: translateX(-100em);
+  opacity: 0;
+
+  &.animate-in {
+    animation: time-cmd-in 400ms forwards var(--o-cb-in);
+  }
+
+  &.animate-out {
+    animation: time-cmd-out 400ms forwards var(--o-cb-out);
+  }
+
+  .toast__title {
+    font-size: var(--o-font-size-small);
+  }
+
+  .toast__image {
+    position: relative;
+    z-index: 3;
+    width: 5em;
+    border: 0.15em solid var(--o-primary);
+
+    &:after {
+      display: block;
+      content: '';
+      padding-bottom: 100%;
+      background: var(--o-primary);
+      border-radius: var(--o-radius-rounded);
+    }
+
+    .avatar {
+      width: 80%;
+      height: 80%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .toast__content {
+    background: var(--o-bg);
+    position: relative;
+    border-right-width: 0.15em;
+    border-left-width: 0;
+    border-top-right-radius: var(--o-radius);
+    border-bottom-right-radius: var(--o-radius);
+
+    &,
+    &:before {
+      border-style: solid;
+      border-color: var(--o-primary);
+      border-top-width: 0.15em;
+      border-bottom-width: 0.15em;
+    }
+
+    &:before {
+      display: block;
+      content: '';
+      position: absolute;
+      top: -0.13em;
+      right: 100%;
+      background: var(--o-bg);
+      width: 2.5em;
+      height: calc(100% + (0.13em * 2));
+      z-index: 1;
+      border-right-width: 0;
+      border-left-width: 0;
+    }
+  }
+
+  .time-cmd__value {
+    font-size: var(--o-font-size-2);
+    display: flex;
+    gap: 0.25em;
+
+    .time {
+      font-size: 0.9em;
+      font-family: var(--o-font-family-mono);
+      color: var(--o-fg);
+    }
+  }
+}

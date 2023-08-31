@@ -11,6 +11,10 @@ body {
   color: var(--base-color-fg);
 }
 
+body.v-home {
+  background: none;
+}
+
 a:not(.button):not(.tabs__trigger) {
   text-decoration: none;
   color: var(--link-color);

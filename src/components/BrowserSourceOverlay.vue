@@ -1,7 +1,12 @@
 <script setup>
-import ChannelRedemptionFirst from './ChannelRedemptionFirst.vue';
+import ChannelRedemptionFirst from './ChannelRedemptionFirst.vue'
+import TimeCommand from './overlay/TimeCommand.vue'
+import HugCommand
+ from './overlay/HugCommand.vue'
 </script>
 
 <template>
-  <ChannelRedemptionFirst/>
+  <TimeCommand />
+  <HugCommand/>
+  <ChannelRedemptionFirst />
 </template>

@@ -1,0 +1,17 @@
+@charset 'utf-8';
+
+@keyframes blinking {
+  from {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blinking 0.75s infinite;
+}
