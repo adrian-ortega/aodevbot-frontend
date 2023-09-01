@@ -1,8 +1,10 @@
 <script setup>
+import SvgIcon from '@jamescoyle/vue-icon'
 import placeholderImg from '../../assets/gifs/friends-hug.gif'
+import { mdiSpotify } from '@mdi/js'
 </script>
 <template>
-  <div class="spotify-player animate-in">
+  <div class="spotify-player">
     <div class="spotify-player__container">
       <div class="spotify-player__track">
         <div class="spotify-player__album">
@@ -20,6 +22,11 @@ import placeholderImg from '../../assets/gifs/friends-hug.gif'
             </div>
           </div>
         </div>
+      </div>
+      <div class="spotify-player__brand">
+        <span class="icon">
+          <SvgIcon type="mdi" :path="mdiSpotify" />
+        </span>
       </div>
       <div class="spotify-player__progress">
         <div :style="{ width: '25%' }"></div>

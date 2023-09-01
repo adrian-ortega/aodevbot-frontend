@@ -12,10 +12,14 @@
 .icon {
   display: inline-flex;
   font-size: 1em;
+  align-items: center;
+  justify-content: center;
+  // border: 1px dashed purple;
 
   svg {
+    display: block;
     width: 1em;
-    height: 1em;
+    height: auto;
   }
 
   &.is-spinner {
