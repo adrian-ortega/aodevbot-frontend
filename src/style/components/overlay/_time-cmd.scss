@@ -41,21 +41,26 @@
     animation: time-cmd-out 400ms forwards var(--o-cb-out);
   }
 
+  &.offset-top {
+    top: 5em;
+  }
+
   .toast__title {
     font-size: var(--o-font-size-small);
+    font-family: var(--o-font-family-head);
   }
 
   .toast__image {
     position: relative;
     z-index: 3;
     width: 5em;
-    border: 0.15em solid var(--o-primary);
+    border: 0.15em solid var(--o-primary-bis);
 
     &:after {
       display: block;
       content: '';
       padding-bottom: 100%;
-      background: var(--o-primary);
+      background: var(--o-primary-bis);
       border-radius: var(--o-radius-rounded);
     }
 
@@ -80,7 +85,7 @@
     &,
     &:before {
       border-style: solid;
-      border-color: var(--o-primary);
+      border-color: var(--o-primary-bis);
       border-top-width: 0.15em;
       border-bottom-width: 0.15em;
     }

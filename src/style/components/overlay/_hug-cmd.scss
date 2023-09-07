@@ -1,13 +1,15 @@
 @charset 'utf-8';
 @keyframes hug-cmd-in {
   from {
-    transform: scale(0) translateY(-20%);
+    top: 50%;
+    transform: scale(0) translateY(-70%);
     opacity: 0;
     visibility: hidden;
   }
 
   to {
-    transform: scale(1) translateY(0);
+    top: 50%;
+    transform: scale(1) translateY(-50%);
     opacity: 1;
     visibility: visible;
   }
@@ -15,14 +17,15 @@
 
 @keyframes hug-cmd-out {
   from {
-    transform: scale(1) translateY(0);
-
+    top: 50%;
+    transform: scale(1) translateY(-50%);
     opacity: 1;
     visibility: visible;
   }
 
   to {
-    transform: scale(0) translateY(20%);
+    top: 50%;
+    transform: scale(0) translateY(-70%);
     opacity: 0;
     visibility: hidden;
   }
@@ -35,7 +38,7 @@
 }
 
 .hug-cmd.toast {
-  transform: scale(0);
+  transform: scale(0) translateY(-50%);
   opacity: 0;
   visibility: hidden;
   border: 0.15em solid var(--o-primary);

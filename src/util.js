@@ -63,3 +63,9 @@ export const cssClassesFromProps = (props, defaults = {}) => {
     }
   }
 }
+export const elapsedSeconds = (time) => {
+  const mins = Math.floor(time / 60);
+  const secs = Math.floor(time - mins * 60);
+  const pad = a => a < 10 ? `0${a}` : a;
+  return `${pad(Math.trunc(mins))}:${pad(Math.trunc(secs))}`
+}

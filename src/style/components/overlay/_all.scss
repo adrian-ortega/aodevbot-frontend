@@ -6,3 +6,10 @@
 @import 'time-cmd';
 @import 'hug-cmd';
 @import 'spotify-player';
+@import 'header-and-stats';
+@import 'header-stat';
+@import 'fireflies';
+
+.overlay {
+  font-family: var(--o-font-family);
+}

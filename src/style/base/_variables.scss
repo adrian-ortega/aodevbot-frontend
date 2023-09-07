@@ -52,6 +52,7 @@
   --font-size-3: 2.2em;
 
   --font-weight-normal: 400;
+  --font-weight-medium: 600;
   --font-weight-bold: 700;
   --font-weight-black: 900;
 
@@ -110,6 +111,9 @@
   --loader-animation-timing-func: linear;
   --loader-animation-duration: 0.75s;
 
+  --o-font-family: 'Nunito', sans-serif;
+  --o-font-family-head: 'Passion One', sans-serif;
+  --o-font-family-cursive: 'Permanent Marker', cursive;
   // overlay component variables
   --o-primary: hsl(352, 100%, 59%);
   --o-primary-bis: hsl(352, 55%, 43%);
@@ -153,4 +157,7 @@
   --o-spotify-bottom: 0.25em;
   --o-spotify-left: 0.25em;
   --o-spotify-width: var(--o-toast-width-medium);
+
+  // Header stats
+  --o-header-skew: -40deg;
 }
