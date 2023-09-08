@@ -113,7 +113,7 @@
   --loader-animation-timing-func: linear;
   --loader-animation-duration: 0.75s;
 
-  --debug-sidear-width: calc(minmax(33vw, 360px) * 1px);
+  --debug-sidear-width: minmax(33vw, 360px);
   --debug-overlay-font-size: 0.75em;
   --debug-checker-fg: var(--base-color-bg-bis);
   --debug-checker-bg: var(--base-color-bg);
