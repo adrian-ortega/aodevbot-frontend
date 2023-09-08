@@ -28,7 +28,8 @@ watch(state.items, () => {
 </script>
 
 <template>
-  <div class="overlay-terminal">
+  <fieldset class="overlay-terminal">
+    <legend>Logs</legend>
     <div class="overlay-terminal__container" ref="lines">
       <div
         v-for="item in items"
@@ -48,5 +49,5 @@ watch(state.items, () => {
         }}</span>
       </div>
     </div>
-  </div>
+  </fieldset>
 </template>

@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import AvatarImage from '../AvatarImage.vue'
+import { isObject } from '../../util'
 
 const props = defineProps({
   type: {
@@ -12,10 +13,21 @@ const props = defineProps({
 })
 const itemBitValue = computed(() => {
   const val = props.item.value
-  if (val > 1000000) {
-    ;`${(val / 1000000).toFixed(1)}M`
+  switch (true) {
+    case val > 1000000:
+      return `${(val / 1000000).toFixed(1)}M`
+    case val > 1000:
+      return `${(val / 1000).toFixed(1)}K`
+    default:
+      return val
   }
-  return val > 1000 ? `${(val / 1000).toFixed(1)}K` : val
+})
+
+const itemHasUser = computed(() => isObject(props.item.user))
+const itemUser = computed(() => (itemHasUser.value ? props.item.user : null))
+const itemProfileImageUrl = computed(() => {
+  if (!itemHasUser.value || !itemUser.value.profile_image_url) return null
+  return itemUser.value.profile_image_url
 })
 </script>
 <template>
@@ -24,7 +36,7 @@ const itemBitValue = computed(() => {
     :class="{
       [`header-stat--${props.type}`]: true,
       'header-stat--has-image':
-        ['bits-leaders', 'followers'].includes(props.type) || item?.user.profile_image_url
+        ['bits-leaders', 'followers'].includes(props.type) || itemProfileImageUrl
     }"
   >
     <template v-if="props.type === 'bits-leaders'">
@@ -39,9 +51,9 @@ const itemBitValue = computed(() => {
       </div>
     </template>
     <template v-else>
-      <template v-if="item?.user.profile_image_url">
+      <template v-if="itemProfileImageUrl">
         <div class="header-stat__image">
-          <AvatarImage :src="item.user.profile_image_url" />
+          <AvatarImage :src="itemProfileImageUrl" />
         </div>
       </template>
       <div class="header-stat__title"><span v-html="item.title"></span></div>

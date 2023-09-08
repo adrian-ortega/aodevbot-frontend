@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
 import { useNotificationsStore } from './notifications';
-import { ONE_SECOND } from "../util";
+import { ONE_SECOND, isObject } from "../util";
 
 export const useWebsocketStore = defineStore('websockets', () => {
   const connected = ref(false);
@@ -84,9 +84,17 @@ export const useWebsocketStore = defineStore('websockets', () => {
     delete messageActions[id];
   }
 
-  const send = (event, payload) => ws.send(JSON.stringify({
-    event, payload
-  }));
+  const send = (event, payload) => {
+    if (!isObject(payload)) {
+      payload = {}
+    }
+    if (!payload.timestamp) {
+      payload.timestamp = new Date().getTime();
+    }
+    return ws.send(JSON.stringify({
+      event, payload
+    }))
+  };
 
   connect();
   return {

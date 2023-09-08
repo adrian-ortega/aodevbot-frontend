@@ -2,8 +2,7 @@
 
 .v-debug {
   #app,
-  .container,
-  .container .content {
+  .container {
     display: grid;
   }
 
@@ -19,12 +18,16 @@
 
   .container {
     grid-area: page;
-    grid-template-columns: 1fr minmax(33vw, 360px);
+    grid-template-columns: 1fr var(--debug-sidear-width);
+    grid-template-rows: calc(100vh - 45px);
     grid-template-areas: 'content sidebar';
 
     .content {
       grid-area: content;
-      grid-template-rows: 1fr auto;
+      overflow: auto;
+
+      &__scroller {
+      }
     }
 
     .sidebar {
@@ -37,34 +40,46 @@
   }
 
   .overlay-debug,
-  .overlay-terminal {
-    margin: 1em;
+  .overlay-terminal,
+  .overlay-controls {
+    display: block;
+    margin: 0 1em 0.5em;
+    padding: 0 0.5em 0.5em;
+
     border: 0.25em solid var(--base-color-bg-bis);
+    background: var(--black-alpha-30);
     border-radius: var(--radius);
   }
-  .overlay-debug {
-    --fg: var(--base-color-bg-bis);
-    --bg: var(--base-color-bg);
-    --size: 1em;
 
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 16/9;
-    background-color: var(--bg);
-    background-image: linear-gradient(45deg, var(--fg) 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, var(--fg) 75%),
-      linear-gradient(45deg, transparent 75%, var(--fg) 75%),
-      linear-gradient(45deg, var(--fg) 25%, var(--bg) 25%);
-    background-size: var(--size) var(--size);
-    background-position: 0 0, 0 0, calc(var(--size) * -0.5) calc(var(--size) * -0.5),
-      calc(var(--size) * 0.5) calc(var(--size) * 0.5);
+  .fieldset,
+  fieldset {
+    border: 0.25em solid var(--base-color-bg-bis);
+    background: var(--black-alpha-20);
+  }
+
+  .overlay-debug {
+    .overlay {
+      font-size: var(--debug-overlay-font-size);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background-color: var(--debug-checker-bg);
+      background-image: linear-gradient(45deg, var(--debug-checker-fg) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--debug-checker-fg) 75%),
+        linear-gradient(45deg, transparent 75%, var(--debug-checker-fg) 75%),
+        linear-gradient(45deg, var(--debug-checker-fg) 25%, var(--debug-checker-bg) 25%);
+      background-size: var(--debug-checker-size) var(--debug-checker-size);
+      background-position: 0 0, 0 0,
+        calc(var(--debug-checker-size) * -0.5) calc(var(--debug-checker-size) * -0.5),
+        calc(var(--debug-checker-size) * 0.5) calc(var(--debug-checker-size) * 0.5);
+      border-radius: var(--radius);
+    }
   }
 
   .overlay-terminal {
-    background: var(--black-alpha-30);
-    padding: 1em;
-    height: 10em;
+    max-height: 10em;
     font-family: var(--font-family-mono);
+    margin-bottom: 1em;
 
     &__container {
       max-height: 100%;
@@ -116,6 +131,53 @@
         .pre {
           color: var(--danger);
         }
+      }
+    }
+  }
+
+  .overlay-controls {
+    dl {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      grid-auto-flow: column;
+      gap: 0 calc(var(--page-gap) * 2);
+
+      dt,
+      dd {
+        padding: 0.15em 0.25em;
+      }
+
+      dt {
+        font-weight: var(--font-weight-bold);
+        color: var(--gray-bis);
+      }
+
+      dd {
+        color: var(--secondary);
+        font-family: var(--font-family-mono);
+        font-size: var(--font-size-small);
+      }
+    }
+
+    &__header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 0.5em 0.5em 0;
+      margin-bottom: 0.5em;
+      align-items: center;
+    }
+
+    &__title {
+      font-weight: var(--font-weight-bold);
+    }
+
+    &__container {
+      display: flex;
+      gap: var(--page-gap);
+
+      > fieldset {
+        flex: 1 1 auto;
       }
     }
   }

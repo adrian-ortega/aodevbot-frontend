@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 :root {
   --primary: hsl(352, 55%, 43%);
   --primary-bis: hwb(352 15% 45%);
@@ -110,6 +112,12 @@
   --loader-color-fg: var(--primary);
   --loader-animation-timing-func: linear;
   --loader-animation-duration: 0.75s;
+
+  --debug-sidear-width: calc(minmax(33vw, 360px) * 1px);
+  --debug-overlay-font-size: 0.75em;
+  --debug-checker-fg: var(--base-color-bg-bis);
+  --debug-checker-bg: var(--base-color-bg);
+  --debug-checker-size: 1em;
 
   --o-font-family: 'Nunito', sans-serif;
   --o-font-family-head: 'Passion One', sans-serif;

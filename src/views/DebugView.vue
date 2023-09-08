@@ -1,18 +1,23 @@
 <script setup>
 import Chat from '../components/Chat.vue'
+import BrowserSourceControls from '../components/BrowserSourceControls.vue'
 import BrowserSourceOverlay from '../components/BrowserSourceOverlay.vue'
+import BrowserSourceTerminal from '../components/BrowserSourceTerminal.vue'
 import PageHeader from '../components/PageHeader.vue'
-import DebugTerminal from '../components/DebugTerminal.vue'
 </script>
 
 <template>
   <PageHeader title="Debug" />
   <div class="container">
     <div class="content">
-      <div class="overlay-debug">
-        <BrowserSourceOverlay />
+      <div class="content__scroller">
+        <fieldset class="overlay-debug">
+          <legend>Browser Source</legend>
+          <BrowserSourceOverlay />
+        </fieldset>
+        <BrowserSourceControls />
+        <BrowserSourceTerminal />
       </div>
-      <DebugTerminal />
     </div>
     <div class="sidebar">
       <Chat />

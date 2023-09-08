@@ -104,3 +104,24 @@ input[type='checkbox'] {
     font-weight: var(--font-weight-bold);
   }
 }
+
+.fieldset,
+fieldset {
+  display: inline-flex;
+  flex-direction: column;
+  border: 0.25em solid transparent;
+  border-radius: var(--radius);
+  padding: calc(var(--page-gap) * 2);
+
+  .legend,
+  legend {
+    padding: calc(var(--page-gap) * 2);
+    text-transform: uppercase;
+    font-size: var(--font-size-small);
+    color: var(--gray-bis);
+  }
+
+  .form-buttons {
+    margin: 0;
+  }
+}
