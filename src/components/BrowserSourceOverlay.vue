@@ -5,6 +5,7 @@ import HugCommand from './overlay/HugCommand.vue'
 import SpotifyPlayer from './overlay/SpotifyPlayer.vue'
 import SpotifyUpNext from './overlay/SpotifyUpNext.vue'
 import HeaderAndStats from './overlay/HeaderAndStats.vue'
+import ShoutoutCommand from './overlay/ShoutoutCommand.vue'
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import HeaderAndStats from './overlay/HeaderAndStats.vue'
     <HeaderAndStats />
     <TimeCommand />
     <HugCommand />
+    <ShoutoutCommand />
     <SpotifyUpNext />
     <SpotifyPlayer />
     <ChannelRedemptionFirst />
