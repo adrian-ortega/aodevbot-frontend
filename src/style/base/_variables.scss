@@ -33,7 +33,7 @@
   --white-alpha-50: hsla(0, 0%, 100%, 50%);
   --white-alpha-80: hsla(0, 0%, 100%, 80%);
 
-  --danger: hsl(0, 100%, 50%);
+  --danger: hsl(346, 100%, 32%);
   --warning: orange;
   --success: hsl(122, 39%, 49%);
   --info: hsl(214, 35%, 45%);
@@ -119,9 +119,11 @@
   --debug-checker-bg: var(--base-color-bg);
   --debug-checker-size: 1em;
 
+  --o-font-size: 18px;
   --o-font-family: 'Nunito', sans-serif;
   --o-font-family-head: 'Passion One', sans-serif;
   --o-font-family-cursive: 'Permanent Marker', cursive;
+
   // overlay component variables
   --o-primary: hsl(352, 100%, 59%);
   --o-primary-bis: hsl(352, 55%, 43%);

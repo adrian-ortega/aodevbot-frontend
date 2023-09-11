@@ -154,6 +154,12 @@
     margin-left: auto;
   }
 
+  .is-active {
+    color: var(--white);
+    font-weight: var(--font-weight-bold);
+    border-color: var(--secondary-ter);
+  }
+
   &--inline {
     margin: 0;
     gap: 0.25em;

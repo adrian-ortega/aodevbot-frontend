@@ -1,7 +1,7 @@
 <script setup>
 import ConfigTabAccountItem from './ConfigTabAccountItem.vue'
 import InlineNotification from '../components/InlineNotification.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import {
   useAccountsStore,
   BROADCASTER_PRIMARY_ACCOUNT,
@@ -36,6 +36,7 @@ onMounted(async () => store.fetchAccounts())
           :icon="mdiTwitch"
           :account="store.accounts[BROADCASTER_PRIMARY_ACCOUNT]"
           :login-url="store.logins[BROADCASTER_PRIMARY_ACCOUNT]"
+          token-type="twitch"
           help-text="Please log in to use this app"
         />
         <ConfigTabAccountItem
@@ -45,6 +46,7 @@ onMounted(async () => store.fetchAccounts())
           :account="store.accounts[BROADCASTER_SECONDARY_ACCOUNT]"
           :login-url="store.logins[BROADCASTER_SECONDARY_ACCOUNT]"
           :disabled="store.hasAuxDisabled"
+          token-type="twitch"
           help-text="Bot accounts are optional"
         />
         <ConfigTabAccountItem
@@ -54,6 +56,7 @@ onMounted(async () => store.fetchAccounts())
           :account="store.accounts[BROADCASTER_SPOTIFY_ACCOUNT]"
           :login-url="store.logins[BROADCASTER_SPOTIFY_ACCOUNT]"
           :disabled="store.hasAuxDisabled"
+          token-type="spotify"
           help-text="Is used to add songs to your queue"
         />
       </div>

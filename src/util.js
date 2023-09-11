@@ -55,14 +55,6 @@ export const isEmpty = (mixedValue) => {
 
   return false;
 };
-export const cssClassesFromProps = (props, defaults = {}) => {
-  return () => {
-    return {
-      ...varsToClasses(defaults),
-      ...varsToClasses(props)
-    }
-  }
-}
 export const elapsedSeconds = (time) => {
   const mins = Math.floor(time / 60);
   const secs = Math.floor(time - mins * 60);

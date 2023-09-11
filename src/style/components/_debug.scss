@@ -73,6 +73,10 @@
         calc(var(--debug-checker-size) * -0.5) calc(var(--debug-checker-size) * -0.5),
         calc(var(--debug-checker-size) * 0.5) calc(var(--debug-checker-size) * 0.5);
       border-radius: var(--radius);
+
+      &.is-2k {
+        font-size: calc((var(--debug-overlay-font-size) * 0.3) + var(--debug-overlay-font-size));
+      }
     }
   }
 

@@ -1,7 +1,8 @@
 <script setup>
 import AvatarImage from '../AvatarImage.vue'
 import { useWebsocketStore } from '../../stores/websocket'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { ONE_SECOND } from '../../util'
 
 const animateIn = ref(false)
 const animateOut = ref(false)
@@ -24,7 +25,10 @@ ws.onMessage(({ event, payload }) => {
 </script>
 
 <template>
-  <div class="toast animate-in so-cmd">
+  <div
+    class="toast animate-in so-cmd"
+    :class="{ 'animate-in': animateIn, 'animate-out': animateOut }"
+  >
     <div class="toast__title">
       <h4>Shoutout</h4>
     </div>
