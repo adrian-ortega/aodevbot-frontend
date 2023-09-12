@@ -67,7 +67,7 @@ onMounted(() => {
       <div class="field">
         <dl>
           <dt>Group</dt>
-          <dd>{{ statsState.data?.currentGroup }}</dd>
+          <dd>{{ statsState.data?.type }}</dd>
           <dt>Next</dt>
           <dd>{{ statsState.data?.nextGroup }}</dd>
           <dt>Duration</dt>
