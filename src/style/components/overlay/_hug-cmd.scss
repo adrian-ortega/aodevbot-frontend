@@ -43,6 +43,8 @@
   visibility: hidden;
   border: 0.15em solid var(--o-primary);
   overflow: hidden;
+  flex-direction: column;
+  width: 15em;
 
   &.animate-in {
     animation: hug-cmd-in 400ms forwards var(--o-cb-in);

@@ -41,7 +41,11 @@ const message = computed(() => {
 })
 </script>
 <template>
-  <div class="hug-cmd toast small" :class="{ 'animate-in': animateIn, 'animate-out': animateOut }">
+  <div
+    ref="root"
+    class="hug-cmd toast small"
+    :class="{ 'animate-in': animateIn, 'animate-out': animateOut }"
+  >
     <div class="toast__banner">
       <figure>
         <img :src="randomFromArray([hugsGif, friendsGif, goldenGirlsGif])" alt="" />

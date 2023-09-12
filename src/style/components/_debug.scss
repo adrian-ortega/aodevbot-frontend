@@ -58,7 +58,10 @@
   }
 
   .overlay-debug {
+    overflow: hidden;
     .overlay {
+      display: block;
+      margin: 0 auto;
       font-size: var(--debug-overlay-font-size);
       position: relative;
       overflow: hidden;
@@ -73,14 +76,18 @@
         calc(var(--debug-checker-size) * -0.5) calc(var(--debug-checker-size) * -0.5),
         calc(var(--debug-checker-size) * 0.5) calc(var(--debug-checker-size) * 0.5);
       border-radius: var(--radius);
+      border: 0.125em solid var(--black-alpha-50);
+      box-shadow: 0 0 3em var(--black-alpha-50);
 
       &.is-2k {
         font-size: calc((var(--debug-overlay-font-size) * 0.3) + var(--debug-overlay-font-size));
+        max-width: 1200px;
       }
     }
   }
 
   .overlay-terminal {
+    height: 10em;
     max-height: 10em;
     font-family: var(--font-family-mono);
     margin-bottom: 1em;

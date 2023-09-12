@@ -1,0 +1,24 @@
+@charset 'utf-8';
+
+.twitch-card {
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: 3em auto;
+
+  &__avatar {
+    width: 3em;
+    height: 3em;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-items: center;
+  }
+
+  &__name {
+    color: var(--o-tertiary);
+    font-weight: var(--o-font-weight-bold);
+  }
+}

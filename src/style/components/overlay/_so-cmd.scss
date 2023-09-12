@@ -1,11 +1,189 @@
 @charset 'utf-8';
+@keyframes so-cmd-in {
+  from {
+    top: 50%;
+    transform: scale(0) translateY(-70%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  to {
+    top: 50%;
+    transform: scale(1) translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes so-cmd-out {
+  from {
+    top: 50%;
+    transform: scale(1) translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  to {
+    top: 50%;
+    transform: scale(0) translateY(-70%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes so-cmd-title-after {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+
+  33% {
+    opacity: 0;
+  }
+
+  75% {
+    transform: scale(5) translateY(-10%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 .toast.so-cmd {
+  display: block;
   top: 50%;
   transform: translateY(-50%);
   border: 0.15em solid var(--o-primary);
+  max-width: 15em;
 
-  // transform: scale(0) translateY(-70%);
-  // opacity: 0;
-  // visibility: hidden;
+  transform: scale(0) translateY(-70%);
+  opacity: 0;
+  visibility: hidden;
+
+  .toast__banner {
+    background: var(--black-alpha-20);
+  }
+
+  .toast__title {
+    font-size: calc(var(--o-font-size) * 1.75);
+    position: absolute;
+    left: 0;
+    bottom: calc(100% - 0.5em);
+    width: 100%;
+
+    h4 {
+      position: relative;
+      text-align: center;
+      font-family: var(--o-font-family-cursive);
+      text-shadow: 0.125em 0.125em 0 var(--o-tertiary-ter);
+
+      &,
+      > span {
+        position: relative;
+      }
+
+      > span {
+        z-index: 1;
+      }
+
+      &:before,
+      &:after {
+        display: block;
+        content: attr(data-content);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      &:after {
+        color: var(--primary);
+        transform: rotate(-3deg) scale(1.1);
+        text-shadow: 0.125em 0.125em 0 var(--o-primary-bis), 0.25em 0.25em 0 var(--white-alpha-30);
+      }
+
+      &:before {
+        color: var(--primary-bis);
+        transform: rotate(3deg) scale(1.1);
+        text-shadow: -0.125em 0.125em 0 var(--primary);
+      }
+    }
+  }
+
+  .toast__content {
+    padding: 0;
+  }
+
+  .twitch-card {
+    font-size: 1.25em;
+
+    &__avatar {
+      box-shadow: 0 0 0 0.125em var(--o-secondary), 0 0 0 0.25em var(--o-tertiary),
+        0 0 0 0.5em var(--o-primary);
+      border: none;
+      transform: translateX(-12%);
+    }
+
+    &__info {
+      padding-left: 1em;
+      padding-right: 0.5em;
+    }
+
+    &__name {
+      padding: 0.25em 0 0;
+    }
+
+    p {
+      font-size: 0.875em;
+      padding: 0.25em 0 0.5em;
+    }
+  }
+
+  .twitch-card {
+    &__name,
+    p {
+      opacity: 0;
+      transform: translateX(-100em);
+    }
+
+    p {
+      animation-delay: 300ms;
+    }
+  }
+
+  &.animate-in {
+    animation: so-cmd-in 400ms forwards var(--o-cb-in);
+
+    .toast__title h4:after,
+    .toast__title h4:before {
+      animation-delay: 400ms;
+      animation: so-cmd-title-after 400ms forwards var(--o-cb-in);
+    }
+
+    .toast__title h4:before {
+      animation-delay: 20ms;
+    }
+
+    .twitch-card__name,
+    p {
+      animation: stat-item-in 300ms forwards var(--o-cb-in);
+      animation-delay: 300ms;
+    }
+
+    p {
+      animation-delay: 400ms;
+    }
+
+    .twitch-card__avatar {
+      animation: jump-and-shimmy 1s infinite;
+    }
+  }
+
+  &.animate-out {
+    animation: so-cmd-out 400ms forwards var(--o-cb-out);
+  }
 }

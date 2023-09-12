@@ -10,19 +10,3 @@
 @import 'header-and-stats';
 @import 'header-stat';
 @import 'fireflies';
-
-.overlay {
-  font-family: var(--o-font-family);
-
-  &.is-tiny {
-  }
-
-  &,
-  &.is-hd {
-    font-size: var(--o-font-size);
-  }
-
-  &.is-2k {
-    font-size: calc((var(--o-font-size) * 0.2) + var(--o-font-size));
-  }
-}

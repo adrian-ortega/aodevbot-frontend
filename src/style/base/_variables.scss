@@ -113,13 +113,7 @@
   --loader-animation-timing-func: linear;
   --loader-animation-duration: 0.75s;
 
-  --debug-sidear-width: minmax(33vw, 360px);
-  --debug-overlay-font-size: 0.75em;
-  --debug-checker-fg: var(--base-color-bg-bis);
-  --debug-checker-bg: var(--base-color-bg);
-  --debug-checker-size: 1em;
-
-  --o-font-size: 18px;
+  --o-font-size: 20px;
   --o-font-family: 'Nunito', sans-serif;
   --o-font-family-head: 'Passion One', sans-serif;
   --o-font-family-cursive: 'Permanent Marker', cursive;
@@ -130,6 +124,7 @@
   --o-secondary: hsl(213, 28%, 13%);
   --o-tertiary: hsl(41, 100%, 64%);
   --o-tertiary-bis: hsl(41, 100%, 49%);
+  --o-tertiary-ter: hsl(32, 100%, 30%);
 
   --o-fg: var(--white);
   --o-bg: hsl(213, 28%, 13%);
@@ -159,7 +154,7 @@
   --o-toast-left: var(--o-gap);
   --o-toast-width: 20em;
   --o-toast-width-medium: 15em;
-  --o-toast-width-small: 10em;
+  --o-toast-width-small: minmax(max-content, 100px);
 
   // Spotify
   --o-spotify-top: 0.25em;
@@ -170,4 +165,10 @@
 
   // Header stats
   --o-header-skew: -40deg;
+
+  --debug-sidear-width: minmax(33vw, 360px);
+  --debug-overlay-font-size: calc(var(--o-font-size) * 0.6);
+  --debug-checker-fg: var(--base-color-bg-bis);
+  --debug-checker-bg: var(--base-color-bg);
+  --debug-checker-size: 1em;
 }
