@@ -1,19 +1,20 @@
 <script setup>
 import { computed, reactive, ref, watch } from 'vue'
 import { useWebsocketStore } from '../stores/websocket'
+import { makeId } from '../util'
 const ws = useWebsocketStore()
 const lines = ref(null)
 const state = reactive({ items: [] })
 
 ws.onMessage(({ event, payload }) => {
   if (event !== 'log') return
-  state.items.push({ ...payload })
+  state.items.push({ id: makeId(), ...payload })
 })
 
 const items = computed(() =>
   state.items.map((item) => ({
     ...item,
-    message: item.message.replace(
+    message: item?.message.replace(
       /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
       ''
     )
@@ -34,6 +35,7 @@ watch(state.items, () => {
       <div
         v-for="item in items"
         class="overlay-terminal__line"
+        :key="item.id"
         :class="{
           'is-error': [item.levels.error, item.levels.fatal].includes(item.type),
           'is-warning': item.levels.warn === item.type,
