@@ -1,5 +1,6 @@
 <script setup>
 import HeaderAndStatsControls from './overlay-controls/HeaderAndStatsControls.vue'
+import SpotifyControls from './overlay-controls/SpotifyControls.vue'
 </script>
 
 <template>
@@ -7,9 +8,7 @@ import HeaderAndStatsControls from './overlay-controls/HeaderAndStatsControls.vu
     <legend>Controls</legend>
     <div class="overlay-controls__container">
       <HeaderAndStatsControls />
-      <fieldset>
-        <legend>Spotify</legend>
-      </fieldset>
+      <SpotifyControls />
       <fieldset>
         <legend>Drawer</legend>
       </fieldset>

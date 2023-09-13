@@ -1,6 +1,6 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiLoading, mdiPlay, mdiSkipNext, mdiStop } from '@mdi/js'
+import { mdiLoading, mdiSkipNext, mdiStop } from '@mdi/js'
 import { useWebsocketStore } from '../../stores/websocket'
 import { ONE_SECOND, elapsedSeconds } from '../../util'
 import { onMounted, reactive, ref } from 'vue'
