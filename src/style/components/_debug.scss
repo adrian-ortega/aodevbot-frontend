@@ -83,6 +83,10 @@
         font-size: calc((var(--debug-overlay-font-size) * 0.3) + var(--debug-overlay-font-size));
         max-width: 1200px;
       }
+
+      @media screen and (max-width: 1900px) {
+        max-width: 800px;
+      }
     }
   }
 
@@ -195,9 +199,11 @@
     .spotify-track {
       display: grid;
       grid-template-columns: 2.5em auto;
+      grid-template-rows: auto 1em auto;
       grid-template-areas:
         'image info'
-        'progress progress';
+        'progress progress'
+        'progress-data progress-data';
       width: 100%;
 
       &__image {
@@ -217,17 +223,17 @@
       }
 
       &__song-name {
-        color: var(--secondary);
+        color: var(--gray);
         font-weight: var(--font-weight-bold);
       }
 
       &__artist {
+        color: var(--secondary);
         font-size: 0.875em;
       }
 
       &__progress {
         grid-area: progress;
-
         position: relative;
         max-width: 100%;
         height: 0.35em;
@@ -245,6 +251,14 @@
           background: var(--primary);
           border-right: 0.0625em solid var(--white-alpha-20);
         }
+      }
+
+      &__progress-ts {
+        display: flex;
+        justify-content: space-between;
+        grid-area: progress-data;
+        font-size: 0.75em;
+        color: var(--white-alpha-30);
       }
     }
   }
