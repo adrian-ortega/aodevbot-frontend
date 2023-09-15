@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { useNotificationsStore } from './notifications';
 import { ONE_SECOND, isObject } from "../util";
 
@@ -98,6 +98,7 @@ export const useWebsocketStore = defineStore('websockets', () => {
 
   connect();
   return {
+    isReady: computed(() => ws.readyState === ws.OPEN),
     connected,
     onConnect,
     onMessage,
