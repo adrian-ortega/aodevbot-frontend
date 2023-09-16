@@ -24,7 +24,7 @@ export const useSpotifyStore = defineStore('spotify', () => {
 
   const updateProgress = (timestmap) => {
     progressTimeoutId = window.requestAnimationFrame(updateProgress)
-    if (playerStateProgress.value >= track.value.duration_ms) {
+    if (playerStateProgress.value >= (track.value?.duration_ms || 0)) {
       cancelAnimationFrame(progressTimeoutId)
     }
     if (timestmap - progressLastTs > ONE_SECOND) {

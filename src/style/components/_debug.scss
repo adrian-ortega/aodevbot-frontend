@@ -190,6 +190,7 @@
     &__container {
       display: flex;
       gap: var(--page-gap);
+      flex-wrap: wrap;
 
       > fieldset {
         flex: 1 1 auto;
@@ -259,6 +260,60 @@
         grid-area: progress-data;
         font-size: 0.75em;
         color: var(--white-alpha-30);
+      }
+    }
+  }
+
+  .overlay-control {
+    &--redemptions {
+      .field,
+      .dropdown,
+      .dropdown .button {
+        width: 100%;
+      }
+
+      .dropdown .button {
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .channel-point-rewards-selector {
+    .dropdown__content {
+      width: 300px;
+      max-height: 10em;
+      overflow: auto;
+    }
+  }
+  .channel-point-reward {
+    display: grid;
+    grid-template-columns: 2em auto;
+    gap: 0.5em;
+    padding: 0.25em;
+    border-radius: var(--radius);
+
+    &:hover {
+      background: var(--black-alpha-30);
+    }
+
+    &__image {
+      figure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1/1;
+        border-radius: var(--radius);
+      }
+    }
+
+    &__info {
+      h4 {
+        font-weight: var(--font-weight-bold);
+      }
+
+      p {
+        color: var(--gray-bis);
+        font-size: var(--font-size-small);
       }
     }
   }
