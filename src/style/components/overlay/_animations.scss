@@ -12,6 +12,39 @@
   }
 }
 
+@keyframes jumping-text-char {
+  0% {
+    transform: translateY(3%) scale(1.15, 1);
+  }
+
+  50% {
+    transform: translateY(0) scale(1, 1);
+  }
+
+  100% {
+    transform: translateY(3%) scale(1.15, 1);
+  }
+}
+
 .blink {
   animation: blinking 0.75s infinite;
+}
+
+.jumping-text {
+  display: inline-flex;
+  > span {
+    animation: jumping-text-char 0.75s infinite linear;
+
+    @for $i from 1 through 10 {
+      $animationDuration: random() * $i * 1000;
+      $animationDelay: random() * $i * 100;
+
+      &:nth-child(n + #{$i}) {
+        animation-delay: #{$animationDelay}ms;
+        @if $animationDuration > 700 {
+          animation-duration: #{$animationDuration}ms;
+        }
+      }
+    }
+  }
 }

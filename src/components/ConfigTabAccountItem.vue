@@ -63,7 +63,7 @@ const openLoginPopup = () => {
             Logged in as <strong>{{ account.display_name }}</strong>
           </p>
           <p v-if="tokenType">
-            <small v-if="expires_at.toLocaleLowerCase() === 'expired'" class="error"
+            <small v-if="expires_at && expires_at.toLowerCase() === 'expired'" class="error"
               ><strong class="is-error-text">Token Expired </strong></small
             >
             <small v-else>Token Expires at {{ expires_at }}</small>

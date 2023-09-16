@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive, computed } from "vue";
 import { useWebsocketStore } from "../stores/websocket";
+import { objectHasKey } from "../util";
 
 export const useRedeemablesStore = defineStore('redeemables', () => {
   const webSocketStore = useWebsocketStore();
@@ -29,6 +30,11 @@ export const useRedeemablesStore = defineStore('redeemables', () => {
     state,
     rewards: computed(() => rewards.data),
     fetchRewards,
-    firstToChat: computed(() => state.firstToChat)
+    firstToChat: computed(() => state.firstToChat),
+    clearState: (key) => {
+      if (objectHasKey(state, key)) {
+        state[key] = null;
+      }
+    }
   }
 });

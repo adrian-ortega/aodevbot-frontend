@@ -1,15 +1,14 @@
 <script setup>
 import soundFxConfetti from '../assets/audio/confetti-poppers.mp3'
-import { storeToRefs } from 'pinia'
 import { useRedeemablesStore } from '../stores/redeemables'
 import { useEffectsStore } from '../stores/effects'
 import { useSoundsStore } from '../stores/sounds'
 import { watch, ref, reactive } from 'vue'
-import { randomFromArray } from '../util'
-const redeemablesStore = useRedeemablesStore()
-const { firstToChat } = storeToRefs(redeemablesStore)
+import { ONE_SECOND, randomFromArray } from '../util'
+import JumpingText from './overlay/JumpingText.vue'
 
-const effects = useEffectsStore()
+const rs = useRedeemablesStore()
+const es = useEffectsStore()
 
 const redemption = reactive({})
 const hiddenCheer = ref(false)
@@ -17,12 +16,14 @@ const animateIn = ref(false)
 const animateOut = ref(false)
 
 const showMessage = async (payload) => {
-  const soundsStore = useSoundsStore()
+  const ss = useSoundsStore()
+
   hiddenCheer.value = false
   animateIn.value = true
   animateOut.value = false
-  effects.confettiFromSides()
-  soundsStore.play(soundFxConfetti)
+
+  es.confettiFromSides()
+  // ss.play(soundFxConfetti)
 
   redemption.name = payload.name
   redemption.message = randomFromArray([
@@ -35,20 +36,33 @@ const showMessage = async (payload) => {
   setTimeout(() => {
     animateOut.value = true
     animateIn.value = false
-    effects.clearConffetiCanvas()
-  })
+    es.clearConffetiCanvas()
+  }, ONE_SECOND * 15)
 }
 
-watch(firstToChat, (value) => {
-  if (value !== null) showMessage({ ...value })
-})
+watch(
+  () => rs.firstToChat,
+  (value) => {
+    if (value !== null) showMessage({ ...value })
+  }
+)
 </script>
 <template>
-  <div class="redemption first-to-chat">
+  <div
+    v-if="rs.firstToChat"
+    class="redemption first-to-chat"
+    :class="{
+      'animate-in': animateIn,
+      'animate-out': animateOut
+    }"
+  >
     <div class="channel-notification from-center">
-      <div>
-        <h4>{{ redemption.name }}</h4>
-        <div :vhtml="redemption.message"></div>
+      <div class="channel-notification__title">
+        <h4 data-content="First!"><span>First! </span></h4>
+      </div>
+      <div class="channel-notification__content">
+        <h4><JumpingText :text="redemption.name" /></h4>
+        <div v-html="redemption.message"></div>
       </div>
     </div>
   </div>

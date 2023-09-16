@@ -1,0 +1,121 @@
+@charset 'utf-8';
+
+@keyframes ftc-in {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(-100em) translateX(-50%);
+  }
+
+  90% {
+    opacity: 1;
+    transform: scale(1.1) translateY(5em) translateX(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+}
+
+@keyframes ftc-out {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translateY(-100em) translateX(-50%);
+  }
+}
+
+.first-to-chat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: scale(0) translateY(100em) translateX(-50%);
+
+  &.animate-in {
+    animation: ftc-in 1s forwards ease-in-out;
+  }
+
+  &.animate-out {
+    animation: ftc-out 1s forwards ease-in-out;
+  }
+}
+
+.channel-notification {
+  background: var(--o-bg);
+  padding: calc(var(--page-gap) * 4);
+  border: 0.25em solid var(--o-tertiary);
+  border-radius: var(--o-radius);
+  box-shadow: 0 0 0 0.25em var(--o-primary-bis);
+
+  &__title {
+    font-size: calc(var(--o-font-size) * 1.75);
+    color: var(--o-tertiary);
+    position: absolute;
+    left: 0;
+    bottom: calc(100% - 0.5em);
+    width: 100%;
+
+    h4 {
+      position: relative;
+      text-align: center;
+      font-family: var(--o-font-family-cursive);
+      text-shadow: 0.125em 0.125em 0 var(--o-tertiary-ter);
+
+      &,
+      > span {
+        position: relative;
+      }
+
+      > span {
+        z-index: 1;
+      }
+
+      &:before,
+      &:after {
+        display: block;
+        content: attr(data-content);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      &:after {
+        color: var(--primary);
+        transform: rotate(-3deg) scale(1.1);
+        text-shadow: 0.125em 0.125em 0 var(--o-primary-bis), 0.25em 0.25em 0 var(--white-alpha-30);
+      }
+
+      &:before {
+        color: var(--primary-bis);
+        transform: rotate(3deg) scale(1.1);
+        text-shadow: -0.125em 0.125em 0 var(--primary);
+      }
+    }
+  }
+
+  &__content {
+    padding: 1em 0;
+    font-size: 1.25em;
+
+    h4 {
+      display: flex;
+      font-family: var(--o-font-family-head);
+      color: var(--o-tertiary);
+      font-size: 1.5em;
+      justify-content: center;
+      text-shadow: 0.05em 0.05em var(--black), -0.05em -0.05em var(--black),
+        0.05em -0.05em var(--black), -0.05em 0.05em var(--black);
+    }
+
+    > div {
+    }
+  }
+}

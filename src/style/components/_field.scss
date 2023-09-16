@@ -2,23 +2,30 @@
 
 .field {
   margin: 0 0 1em;
+  position: relative;
 
   &,
   &__label,
   &__content,
   &__input,
+  &__pre,
   &__post {
     display: flex;
   }
 
   &__label,
   &__input,
+  &__pre,
   &__post {
     flex: 1 1 auto;
   }
 
+  &__pre {
+    margin-right: var(--page-gap);
+  }
+
   &__post {
-    margin-left: 0.25em;
+    margin-left: var(--page-gap);
 
     > .button {
       display: flex;

@@ -32,6 +32,9 @@ const hasLabel = computed(() => $slots.label || props.label)
       <slot name="label">{{ props.label }}</slot>
     </div>
     <div class="field__content">
+      <div v-if="$slots.pre" class="field__pre">
+        <slot name="pre"></slot>
+      </div>
       <div class="field__input" v-if="$slots.default">
         <slot name="default"></slot>
       </div>

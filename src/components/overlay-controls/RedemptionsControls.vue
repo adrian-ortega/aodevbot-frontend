@@ -1,11 +1,17 @@
 <script setup>
 import MenuDropdown from '../MenuDropdown.vue'
 import FormField from '../FormField.vue'
-import { computed, onMounted, reactive, ref } from 'vue'
-import { useRedeemablesStore } from '../../stores/redeemables'
-import { mdiChevronDown, mdiSend } from '@mdi/js'
+import ChatUserSelector from '../ChatUserSelector.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiChevronDown, mdiSend } from '@mdi/js'
+import { useRedeemablesStore } from '../../stores/redeemables'
+import { useWebsocketStore } from '../../stores/websocket'
+import { computed, onMounted, reactive, ref } from 'vue'
+import { useChatStore } from '../../stores/chat'
+
 const rs = useRedeemablesStore()
+const ws = useWebsocketStore()
+const cs = useChatStore()
 const selected = reactive({ data: {} })
 const selectedReward = computed(() => selected.data)
 const chatMessage = ref('')
@@ -24,7 +30,14 @@ const onRewardSelect = ({ closeMenu, openMenu, reward }) => {
   closeMenu()
 }
 
-const sendRedemption = () => {}
+const sendRedemption = () => {
+  ws.send('debug.redeemable', {
+    data: { ...selected.data },
+    chatter_id: cs.chatter.chatter_id,
+    twitch_id: cs.chatter.twitch_id,
+    message: chatMessage.value
+  })
+}
 </script>
 
 <template>
@@ -84,7 +97,10 @@ const sendRedemption = () => {}
       </div>
     </div>
     <FormField label="Chat message" vertical>
-      <input type="text" v-model="chatMessage" />
+      <template v-slot:pre>
+        <ChatUserSelector />
+      </template>
+      <input type="text" v-model="chatMessage" @keyup.enter.prevent="sendRedemption" />
       <template v-slot:post>
         <button class="button button--primary" @click.prevent="sendRedemption">
           <span class="icon">
