@@ -1,4 +1,5 @@
 <script setup>
+import BrowserSourceControl from '../BrowserSourceControl.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiLoading, mdiSkipNext, mdiStop } from '@mdi/js'
 import { useWebsocketStore } from '../../stores/websocket'
@@ -58,8 +59,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <fieldset>
-    <legend>Header &amp; Stats</legend>
+  <BrowserSourceControl class="overlay-control--stats" title="Header &amp; Stats">
     <div v-if="!statsState.loaded" class="icon is-spinner">
       <SvgIcon type="mdi" :path="mdiLoading" />
     </div>
@@ -85,5 +85,5 @@ onMounted(() => {
         </button>
       </div>
     </template>
-  </fieldset>
+  </BrowserSourceControl>
 </template>

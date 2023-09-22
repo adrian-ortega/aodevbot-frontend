@@ -1,4 +1,5 @@
 <script setup>
+import BrowserSourceControl from '../BrowserSourceControl.vue'
 import MenuDropdown from '../MenuDropdown.vue'
 import FormField from '../FormField.vue'
 import ChatUserSelector from '../ChatUserSelector.vue'
@@ -41,8 +42,7 @@ const sendRedemption = () => {
 </script>
 
 <template>
-  <fieldset class="overlay-control overlay-control--redemptions">
-    <legend>Redemptions</legend>
+  <BrowserSourceControl class="overlay-control--redemptions" title="Rewards &amp; Redemptions">
     <div class="field">
       <MenuDropdown
         :trigger-label="menuDdLabel"
@@ -51,50 +51,30 @@ const sendRedemption = () => {
         class="channel-point-rewards-selector"
       >
         <template v-slot:default="{ closeMenu, openMenu }">
-          <div v-for="reward in rs.rewards" :key="reward.id">
-            <div
-              class="channel-point-reward"
-              @click.prevent="onRewardSelect({ closeMenu, openMenu, reward })"
-            >
-              <div class="channel-point-reward__image">
-                <figure :style="{ backgroundColor: reward.background_color }">
-                  <img
-                    :src="reward.image ? reward.image.url_1x : reward.default_image.url_1x"
-                    alt=""
-                  />
-                </figure>
-              </div>
-              <div class="channel-point-reward__info">
-                <p>{{ reward.title }}</p>
-              </div>
+          <div
+            v-for="reward in rs.rewards"
+            :key="reward.id"
+            class="channel-point-reward"
+            @click.prevent="onRewardSelect({ closeMenu, openMenu, reward })"
+          >
+            <div class="channel-point-reward__image">
+              <figure :style="{ backgroundColor: reward.background_color }">
+                <img
+                  :src="reward.image ? reward.image.url_1x : reward.default_image.url_1x"
+                  alt=""
+                />
+              </figure>
+            </div>
+            <div class="channel-point-reward__info">
+              <h4>{{ reward.title }}</h4>
+              <p>{{ reward.prompt }}</p>
+              <p>
+                <strong>{{ parseInt(reward.cost).toLocaleString() }}</strong> 🪙
+              </p>
             </div>
           </div>
         </template>
       </MenuDropdown>
-    </div>
-    <div class="field">
-      <div class="channel-point-reward">
-        <div class="channel-point-reward__image">
-          <figure :style="{ backgroundColor: selectedReward.background_color }">
-            <img
-              v-if="selectedReward.default_image"
-              :src="
-                selectedReward.image
-                  ? selectedReward.image.url_1x
-                  : selectedReward.default_image.url_1x
-              "
-              alt=""
-            />
-          </figure>
-        </div>
-        <div class="channel-point-reward__info">
-          <h4>{{ selectedReward.title }}</h4>
-          <p>{{ selectedReward.prompt }}</p>
-          <p>
-            <strong>{{ parseInt(selectedReward.cost).toLocaleString() }}</strong> 🪙
-          </p>
-        </div>
-      </div>
     </div>
     <FormField label="Chat message" vertical>
       <template v-slot:pre>
@@ -109,5 +89,5 @@ const sendRedemption = () => {
         </button>
       </template>
     </FormField>
-  </fieldset>
+  </BrowserSourceControl>
 </template>

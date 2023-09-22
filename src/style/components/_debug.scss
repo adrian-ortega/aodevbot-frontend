@@ -193,7 +193,7 @@
       flex-wrap: wrap;
 
       > fieldset {
-        flex: 1 1 auto;
+        flex: 1 0 auto;
       }
     }
 
@@ -265,6 +265,12 @@
   }
 
   .overlay-control {
+    min-width: 25%;
+
+    &--stats,
+    &--spotify {
+      max-width: 20em;
+    }
     &--redemptions {
       .field,
       .dropdown,
@@ -282,6 +288,7 @@
     .dropdown__content {
       width: 300px;
       max-height: 10em;
+      padding: calc(var(--page-gap) * 2);
       overflow: auto;
     }
   }
@@ -289,8 +296,12 @@
     display: grid;
     grid-template-columns: 2em auto;
     gap: 0.5em;
-    padding: 0.25em;
+    padding: calc(var(--page-gap) * 2);
     border-radius: var(--radius);
+
+    & + .channel-point-reward {
+      margin-top: 1em;
+    }
 
     &:hover {
       background: var(--black-alpha-30);
@@ -308,7 +319,11 @@
 
     &__info {
       h4 {
+        color: var(--white);
+        border: none;
         font-weight: var(--font-weight-bold);
+        padding: 0;
+        margin: 0 0 calc(var(--page-gap) * 2);
       }
 
       p {

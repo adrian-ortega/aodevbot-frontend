@@ -1,4 +1,5 @@
 <script setup>
+import BrowserSourceControl from '../BrowserSourceControl.vue'
 import noSongJpg from '../../assets/jpg/no-song.jpg'
 import SvgIcon from '@jamescoyle/vue-icon'
 import {
@@ -34,8 +35,7 @@ const skipToNext = () => {
 </script>
 
 <template>
-  <fieldset>
-    <legend>Spotify ({{ ss.isPlaying }})</legend>
+  <BrowserSourceControl class="overlay-control--spotify" title="Spotify">
     <div class="field">
       <div class="spotify-track">
         <div class="spotify-track__image">
@@ -78,7 +78,7 @@ const skipToNext = () => {
         </div>
       </div>
     </div>
-    <div class="form-buttons">
+    <div class="form-buttons form-buttons--centered">
       <button
         class="button"
         title="Skip Previous"
@@ -111,5 +111,5 @@ const skipToNext = () => {
         </span>
       </button>
     </div>
-  </fieldset>
+  </BrowserSourceControl>
 </template>
