@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import BrowserSourceView from '../views/BrowserSourceView.vue'
 import HomeView from '../views/HomeView.vue'
 import ChatView from '../views/ChatView.vue'
 import DebugView from '../views/DebugView.vue'
@@ -19,6 +20,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/browser-source',
+      name: 'browser-source',
+      component: BrowserSourceView
     },
     {
       path: '/config',

@@ -1,7 +1,7 @@
 <script setup>
-import BrowserSourceOverlay from '../components/BrowserSourceOverlay.vue';
+import PageHeader from '../components/PageHeader.vue'
 </script>
 
 <template>
-  <BrowserSourceOverlay/>  
+  <PageHeader title="Welcome" />
 </template>
