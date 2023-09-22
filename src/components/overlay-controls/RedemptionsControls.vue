@@ -9,26 +9,41 @@ import { useRedeemablesStore } from '../../stores/redeemables'
 import { useWebsocketStore } from '../../stores/websocket'
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useChatStore } from '../../stores/chat'
+import { useLocalStore } from '../../stores/local'
 
 const rs = useRedeemablesStore()
 const ws = useWebsocketStore()
 const cs = useChatStore()
-const selected = reactive({ data: {} })
-const selectedReward = computed(() => selected.data)
+const ls = useLocalStore()
+const LOCAL_STORAGE_KEY = 'oc:redemptions.selected'
+const selected = reactive({
+  id: ls.get(LOCAL_STORAGE_KEY, null),
+  data: {}
+})
+const chatInput = ref(null)
 const chatMessage = ref('')
 
 onMounted(async () => {
   await rs.fetchRewards()
-  selected.data = { ...rs.rewards[0] }
+  const getSelectedFromRewards = () => rs.rewards.find(({ id }) => selected.id === id)
+
+  if (selected.id && getSelectedFromRewards()) {
+    selected.data = { ...getSelectedFromRewards() }
+  } else {
+    selected.data = { ...rs.rewards[0] }
+  }
 })
 
-const menuDdLabel = computed(() => selected.data?.title)
+const menuDdLabel = computed(() => (!selected.id ? 'Select one' : selected.data.title))
 const onMenuDdToggle = ({ toggleMenu }) => {
   toggleMenu()
 }
 const onRewardSelect = ({ closeMenu, openMenu, reward }) => {
   selected.data = { ...reward }
+  selected.id = selected.data.id
+  ls.save(LOCAL_STORAGE_KEY, selected.id)
   closeMenu()
+  chatInput.value.focus()
 }
 
 const sendRedemption = () => {
@@ -50,6 +65,26 @@ const sendRedemption = () => {
         :trigger-handler="onMenuDdToggle"
         class="channel-point-rewards-selector"
       >
+        <template v-slot:trigger-label>
+          <figure
+            v-if="selected.id && selected.data.default_image"
+            class="icon"
+            :style="{ backgroundColor: selected.data.background_color }"
+          >
+            <img
+              :src="
+                selected.data.image
+                  ? selected.data.image.url_1x
+                  : selected.data.default_image.url_1x
+              "
+              alt=""
+            />
+          </figure>
+          <span class="label">{{ menuDdLabel }}</span>
+          <span class="cost" v-if="selected.id"
+            >🪙 {{ parseInt(selected.data.cost).toLocaleString() }}</span
+          >
+        </template>
         <template v-slot:default="{ closeMenu, openMenu }">
           <div
             v-for="reward in rs.rewards"
@@ -80,7 +115,13 @@ const sendRedemption = () => {
       <template v-slot:pre>
         <ChatUserSelector />
       </template>
-      <input type="text" v-model="chatMessage" @keyup.enter.prevent="sendRedemption" />
+      <input
+        type="text"
+        ref="chatInput"
+        v-model="chatMessage"
+        @keyup.enter.prevent="sendRedemption"
+        :disabled="!selected.id"
+      />
       <template v-slot:post>
         <button class="button button--primary" @click.prevent="sendRedemption">
           <span class="icon">

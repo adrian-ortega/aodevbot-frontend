@@ -4,11 +4,22 @@ import BrowserSourceControls from '../components/BrowserSourceControls.vue'
 import BrowserSourceOverlay from '../components/BrowserSourceOverlay.vue'
 import BrowserSourceTerminal from '../components/BrowserSourceTerminal.vue'
 import PageHeader from '../components/PageHeader.vue'
+import { useLocalStore } from '../stores/local'
+import { ref } from 'vue'
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiArrowCollapseLeft, mdiArrowCollapseRight, mdiArrowRight } from '@mdi/js'
+const ls = useLocalStore()
+const LOCAL_STORAGE_KEY = 'debug:sidebar'
+const isCollapsed = ref(ls.get(LOCAL_STORAGE_KEY, false))
+const toggleCollapsed = () => {
+  isCollapsed.value = !isCollapsed.value
+  ls.save(LOCAL_STORAGE_KEY, isCollapsed.value)
+}
 </script>
 
 <template>
   <PageHeader title="Debug" />
-  <div class="container">
+  <div class="container" :class="{ 'sidebar-collapsed': isCollapsed }">
     <div class="content">
       <div class="content__scroller">
         <fieldset class="overlay-debug">
@@ -20,7 +31,13 @@ import PageHeader from '../components/PageHeader.vue'
       </div>
     </div>
     <div class="sidebar">
-      <Chat />
+      <button class="button button--close" @click.prevent="toggleCollapsed">
+        <span class="icon">
+          <SvgIcon v-if="isCollapsed" type="mdi" :path="mdiArrowCollapseLeft" />
+          <SvgIcon v-else type="mdi" :path="mdiArrowRight" />
+        </span>
+      </button>
+      <Chat v-if="!isCollapsed" />
     </div>
   </div>
 </template>

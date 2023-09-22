@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 @keyframes ddOpen {
-  0% { 
+  0% {
     transform: translate3d(0, 10%, 0);
     opacity: 0;
     visibility: hidden;
@@ -32,10 +32,12 @@
   position: relative;
 
   &__trigger {
-
+    .button {
+      border: 1px solid var(--input-color-b);
+    }
   }
 
-  &__content  {
+  &__content {
     position: absolute;
     top: 100%;
     right: 0;
@@ -76,7 +78,7 @@
   &.is-closed &__content {
     animation-name: ddClose;
   }
-  
+
   &.is-open &__content {
     animation-name: ddOpen;
   }

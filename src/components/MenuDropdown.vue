@@ -84,7 +84,9 @@ const getIsClosed = () => isClosed.value
               })
           "
         >
-          <span class="text">{{ props.triggerLabel }}</span>
+          <span class="text">
+            <slot name="trigger-label">{{ props.triggerLabel }}</slot>
+          </span>
           <span class="icon" v-if="triggerIcon !== false">
             <SvgIcon type="mdi" :path="triggerIcon ? triggerIcon : mdiDotsVertical" />
           </span>

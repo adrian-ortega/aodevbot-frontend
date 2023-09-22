@@ -1,28 +1,47 @@
 <script setup>
-import BrowserSourceControl from './BrowserSourceControl.vue'
-import FormField from './FormField.vue'
 import HeaderAndStatsControls from './overlay-controls/HeaderAndStatsControls.vue'
 import RedemptionsControls from './overlay-controls/RedemptionsControls.vue'
 import SpotifyControls from './overlay-controls/SpotifyControls.vue'
+import { computed, reactive, shallowRef } from 'vue'
+
+const state = reactive({
+  data: [
+    {
+      id: 'header-and-stats',
+      collapsed: false,
+      component: shallowRef(HeaderAndStatsControls)
+    },
+    {
+      id: 'spotify-controls',
+      collapsed: false,
+      component: shallowRef(SpotifyControls)
+    },
+    {
+      id: 'redemptions',
+      collapsed: false,
+      component: shallowRef(RedemptionsControls)
+    }
+  ]
+})
+const updateControls = ({ id, value }) => {
+  const i = state.data.findIndex((c) => c.id === id)
+  state.data[i].collapsed = value
+  state.data = [...state.data.sort((a, b) => b.collapsed - a.collapsed)]
+}
+const controls = computed(() => state.data)
 </script>
 
 <template>
   <fieldset class="overlay-controls">
     <legend>Controls</legend>
     <div class="overlay-controls__container">
-      <HeaderAndStatsControls />
-      <SpotifyControls />
-      <RedemptionsControls />
-
-      <BrowserSourceControl title="Control">
-        <FormField label="Test"> test </FormField>
-      </BrowserSourceControl>
-      <BrowserSourceControl title="Control">
-        <FormField label="Test"> test </FormField>
-      </BrowserSourceControl>
-      <BrowserSourceControl title="Control">
-        <FormField label="Test"> test </FormField>
-      </BrowserSourceControl>
+      <component
+        v-for="control in controls"
+        :key="control.id"
+        :is="control.component"
+        :id="control.id"
+        @collapsed="updateControls"
+      />
     </div>
   </fieldset>
 </template>

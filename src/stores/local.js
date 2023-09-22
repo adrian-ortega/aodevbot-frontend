@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 
 export const useLocalStore = defineStore('local', () => {
-  const getItem = (key, defaultValue = {}) => {
+  const getItem = (key, defaultValue = null) => {
     try {
-      return JSON.parse(localStorage.getItem(key))
+      const value = JSON.parse(localStorage.getItem(key))
+      return value ?? defaultValue;
     } catch (err) {
       return defaultValue;
     }
@@ -29,7 +30,7 @@ export const useLocalStore = defineStore('local', () => {
 
   return {
     get: getItem,
-    update: updateItem,
+    save: updateItem,
     remove: removeItem
   }
 })

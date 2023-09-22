@@ -1,8 +1,11 @@
 @charset "utf-8";
 
 .page-header {
+  position: relative;
+  z-index: 3;
   background: var(--black-alpha-20);
   padding: var(--page-gap);
+  border-bottom: 0.125em solid var(--black-alpha-20);
 
   h1 {
     font-size: var(--font-size-2);

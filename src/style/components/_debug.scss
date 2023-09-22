@@ -22,6 +22,21 @@
     grid-template-rows: calc(100vh - 45px);
     grid-template-areas: 'content sidebar';
 
+    &.sidebar-collapsed {
+      grid-template-columns: 1fr 2em;
+
+      .sidebar > .button--close {
+        left: 0;
+        transform: translateX(0);
+        border-color: transparent;
+      }
+    }
+
+    .content,
+    .sidebar {
+      position: relative;
+    }
+
     .content {
       grid-area: content;
       overflow: auto;
@@ -32,7 +47,24 @@
 
     .sidebar {
       grid-area: sidebar;
-      border-left: 1px solid var(--gray-ter);
+      border-left: 0.25em solid var(--base-color-bg-bis);
+      box-shadow: 0 0 1em var(--black-alpha-50);
+
+      > .button--close {
+        position: absolute;
+        top: 1em;
+        left: -0.125em;
+        border: 0.15em solid var(--base-color-bg-bis);
+        border-radius: var(--radius-rounded);
+        background: var(--base-color-bg);
+        padding: 0.25em;
+        color: var(--gray);
+        transform: translateX(-50%);
+      }
+
+      &.is-collapsed {
+        max-width: 20px;
+      }
     }
   }
 
@@ -187,16 +219,6 @@
       font-weight: var(--font-weight-bold);
     }
 
-    &__container {
-      display: flex;
-      gap: var(--page-gap);
-      flex-wrap: wrap;
-
-      > fieldset {
-        flex: 1 0 auto;
-      }
-    }
-
     .spotify-track {
       display: grid;
       grid-template-columns: 2.5em auto;
@@ -264,13 +286,47 @@
     }
   }
 
-  .overlay-control {
-    min-width: 25%;
+  .overlay-controls__container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(10rem, 1fr));
+    grid-template-rows: auto [last-row];
+    gap: var(--page-gap);
+    flex-wrap: wrap;
+  }
 
-    &--stats,
-    &--spotify {
-      max-width: 20em;
+  .overlay-control {
+    flex: 1 0 auto;
+    width: 100%;
+    position: relative;
+    padding: calc(var(--page-gap) * 4) calc(var(--page-gap) * 2) calc(var(--page-gap) * 2);
+
+    > .button {
+      position: absolute;
+      bottom: calc(100% + 0.35em);
+      right: 0.5em;
+      background: var(--base-color-bg-bis);
+      text-transform: uppercase;
+      color: var(--gray);
     }
+
+    &.is-closed {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: var(--page-gap);
+      grid-column: 1/-1;
+
+      > .button {
+        position: unset;
+        margin-left: auto;
+      }
+
+      h4 {
+        font-weight: var(--font-weight-bold);
+        margin: 0 0 0 0.5em;
+      }
+    }
+
     &--redemptions {
       .field,
       .dropdown,
@@ -280,6 +336,27 @@
 
       .dropdown .button {
         justify-content: space-between;
+
+        .text {
+          width: 100%;
+          display: flex;
+          align-items: center;
+        }
+
+        .label {
+          padding-left: 0.75em;
+        }
+
+        .icon {
+          font-size: var(--font-size-2);
+          border-radius: var(--radius);
+        }
+
+        .cost {
+          margin-left: auto;
+          font-size: var(--font-size-small);
+          font-family: var(--font-family-mono);
+        }
       }
     }
   }

@@ -11,6 +11,18 @@ export const isString = (a) => Object.prototype.toString.call(a) === '[object St
 export const isNumeric = (a) => Object.prototype.toString.call(a) === '[object Number]' && !isNaN(a) && isFinite(1);
 export const isArray = (a) => Array.isArray(a);
 export const randomFromArray = items => items[Math.floor(Math.random() * items.length)];
+export const shuffleArray = (array, size) => {
+  let index = -1;
+  const length = array.length;
+  const copy = [...array];
+  size = size === undefined ? length : size;
+  while (++index < size) {
+    const rand = Math.floor(Math.random() * index);
+    [copy[index], copy[rand]] = [copy[rand], copy[index]];
+  }
+  copy.length = size;
+  return copy;
+};
 export const randomInt = (min = 0, max = 100) => {
   min = Math.ceil(min)
   max = Math.floor(max)
@@ -61,3 +73,11 @@ export const elapsedSeconds = (time) => {
   const pad = a => a < 10 ? `0${a}` : a;
   return `${pad(Math.trunc(mins))}:${pad(Math.trunc(secs))}`
 }
+export const slugify = (str) => str.toString()
+  .normalize('NFKD') // split accented characters into their base characters and diacritical marks
+  .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+  .trim() // trim leading or trailing whitespace
+  .toLowerCase() // convert to lowercase
+  .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
+  .replace(/\s+/g, '-') // replace spaces with hyphens
+  .replace(/-+/g, '-'); // remove consecutive hyphens

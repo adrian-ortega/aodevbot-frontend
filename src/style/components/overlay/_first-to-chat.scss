@@ -1,14 +1,15 @@
 @charset 'utf-8';
+@use 'sass:math';
 
 @keyframes ftc-in {
   0% {
     opacity: 0;
-    transform: scale(0) translateY(-100em) translateX(-50%);
+    transform: scale(0) translate(-50%, -50%);
   }
 
   90% {
     opacity: 1;
-    transform: scale(1.1) translateY(5em) translateX(-50%);
+    transform: scale(1.1) translate(-50%, -50%);
   }
 
   100% {
@@ -25,7 +26,7 @@
 
   100% {
     opacity: 0;
-    transform: scale(0) translateY(-100em) translateX(-50%);
+    transform: scale(0) translate(-50%, -50%);
   }
 }
 
@@ -34,7 +35,9 @@
   top: 50%;
   left: 50%;
   opacity: 0;
+  transform-origin: top;
   transform: scale(0) translateY(100em) translateX(-50%);
+  max-width: percentage(math.div(100, 3));
 
   &.animate-in {
     animation: ftc-in 1s forwards ease-in-out;

@@ -98,6 +98,10 @@
     }
   }
 
+  &--sm {
+    font-size: calc(var(--font-size-small) - 0.1em);
+  }
+
   &--fw {
     width: 100%;
   }

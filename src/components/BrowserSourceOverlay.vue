@@ -1,5 +1,5 @@
 <script setup>
-import ChannelRedemptionFirst from './ChannelRedemptionFirst.vue'
+import RewardRedemptions from './overlay/RewardRedemptions.vue'
 import TimeCommand from './overlay/TimeCommand.vue'
 import HugCommand from './overlay/HugCommand.vue'
 import ShoutoutCommand from './overlay/ShoutoutCommand.vue'
@@ -65,6 +65,6 @@ const fontSize = computed(() => {
     <ShoutoutCommand />
     <SpotifyUpNext />
     <SpotifyPlayer />
-    <ChannelRedemptionFirst />
+    <RewardRedemptions />
   </div>
 </template>
