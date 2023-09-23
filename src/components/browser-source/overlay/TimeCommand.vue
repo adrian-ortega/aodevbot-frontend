@@ -1,9 +1,9 @@
 <script setup>
-import AvatarImage from '../AvatarImage.vue'
-import { useWebsocketStore } from '../../stores/websocket'
+import AvatarImage from '../../AvatarImage.vue'
+import { useWebsocketStore } from '../../../stores/websocket'
 import { computed, reactive, ref } from 'vue'
-import { useAccountsStore } from '../../stores/accounts'
-import { ONE_SECOND } from '../../util'
+import { useAccountsStore } from '../../../stores/accounts'
+import { ONE_SECOND } from '../../../util'
 const animateIn = ref(false)
 const animateOut = ref(false)
 const as = useAccountsStore()

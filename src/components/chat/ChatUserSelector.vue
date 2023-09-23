@@ -1,11 +1,11 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import AvatarImage from './AvatarImage.vue'
-import { useChatStore } from '../stores/chat'
+import AvatarImage from '../AvatarImage.vue'
+import FormField from '../FormField.vue'
+import debounce from 'lodash.debounce'
 import { ref } from 'vue'
 import { mdiClose, mdiCheckBold } from '@mdi/js'
-import FormField from './FormField.vue'
-import debounce from 'lodash.debounce'
+import { useChatStore } from '../../stores/chat'
 
 const emit = defineEmits(['chatFocus'])
 

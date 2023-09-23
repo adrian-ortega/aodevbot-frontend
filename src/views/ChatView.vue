@@ -1,7 +1,7 @@
 <script setup>
-import PageNotifications from '../components/PageNotifications.vue'
-import PageHeader from '../components/PageHeader.vue'
-import Chat from '../components/Chat.vue'
+import PageNotifications from '../components/page/PageNotifications.vue'
+import PageHeader from '../components/page/PageHeader.vue'
+import Chat from '../components/chat/Chat.vue'
 </script>
 
 <template>

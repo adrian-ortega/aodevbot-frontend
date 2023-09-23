@@ -1,11 +1,11 @@
 <script setup>
-import logoPng from '../../assets/png/logo.png'
+import logoPng from '../../../assets/png/logo.png'
 import HeaderStat from './HeaderStat.vue'
 import Fireflies from './Fireflies.vue'
-import { useWebsocketStore } from '../../stores/websocket'
-import { useFlagsStore } from '../../stores/flags'
+import { useWebsocketStore } from '../../../stores/websocket'
+import { useFlagsStore } from '../../../stores/flags'
 import { reactive, ref } from 'vue'
-import { ONE_MINUTE, ONE_SECOND, isString, makeId, randomInt } from '../../util'
+import { ONE_MINUTE, ONE_SECOND, isString, makeId, randomInt } from '../../../util'
 
 const DURATION = ONE_MINUTE * 3
 const DURATION_FPS = 24

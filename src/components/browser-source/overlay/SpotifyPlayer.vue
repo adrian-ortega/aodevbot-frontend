@@ -1,8 +1,8 @@
 <script setup>
-import noSongJpg from '../../assets/jpg/no-song.jpg'
+import noSongJpg from '../../../assets/jpg/no-song.jpg'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiSpotify } from '@mdi/js'
-import { useSpotifyStore } from '../../stores/spotify'
+import { useSpotifyStore } from '../../../stores/spotify'
 import { onMounted } from 'vue'
 const ss = useSpotifyStore()
 onMounted(() => {

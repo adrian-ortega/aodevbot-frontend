@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref, watch } from 'vue'
-import { useWebsocketStore } from '../stores/websocket'
-import { makeId } from '../util'
+import { useWebsocketStore } from '../../stores/websocket'
+import { makeId } from '../../util'
 const ws = useWebsocketStore()
 const lines = ref(null)
 const state = reactive({ items: [] })

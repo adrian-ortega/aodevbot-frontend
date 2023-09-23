@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import AvatarImage from '../AvatarImage.vue'
-import { isObject } from '../../util'
+import AvatarImage from '../../AvatarImage.vue'
+import { isObject } from '../../../util'
 
 const props = defineProps({
   type: {

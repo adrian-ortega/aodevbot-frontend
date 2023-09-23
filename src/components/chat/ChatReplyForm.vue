@@ -1,6 +1,6 @@
 <script setup>
 import ChatUserSelector from './ChatUserSelector.vue'
-import { useChatStore } from '../stores/chat.js'
+import { useChatStore } from '../../stores/chat.js'
 import { ref } from 'vue'
 
 const chatStore = useChatStore()

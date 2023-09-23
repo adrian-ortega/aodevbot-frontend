@@ -2,7 +2,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import { computed, ref, watch } from 'vue'
 import { mdiCamera } from '@mdi/js'
-import { useChatStore } from '../stores/chat'
+import { useChatStore } from '../../stores/chat'
 
 const USER_COLOR = 'color'
 const USER_DISPLAY_NAME = 'display-name'

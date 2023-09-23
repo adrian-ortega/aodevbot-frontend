@@ -1,14 +1,14 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import chimeMp3 from '../../assets/audio/chime.mp3'
-import hugsGif from '../../assets/gifs/hugs.gif'
-import friendsGif from '../../assets/gifs/friends-hug.gif'
-import goldenGirlsGif from '../../assets/gifs/golden-girls-hug.gif'
-import { ONE_SECOND, randomFromArray, randomInt, randomFloat } from '../../util'
+import chimeMp3 from '../../../assets/audio/chime.mp3'
+import hugsGif from '../../../assets/gifs/hugs.gif'
+import friendsGif from '../../../assets/gifs/friends-hug.gif'
+import goldenGirlsGif from '../../../assets/gifs/golden-girls-hug.gif'
 import { computed, reactive, ref } from 'vue'
-import { useWebsocketStore } from '../../stores/websocket'
 import { mdiHeart, mdiHeartCircle, mdiHeartCircleOutline, mdiHeartOutline } from '@mdi/js'
-import { useSoundsStore } from '../../stores/sounds'
+import { ONE_SECOND, randomFromArray, randomInt, randomFloat } from '../../../util'
+import { useWebsocketStore } from '../../../stores/websocket'
+import { useSoundsStore } from '../../../stores/sounds'
 
 const animateIn = ref(false)
 const animateOut = ref(false)

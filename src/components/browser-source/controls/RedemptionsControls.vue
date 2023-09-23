@@ -1,15 +1,15 @@
 <script setup>
 import BrowserSourceControl from '../BrowserSourceControl.vue'
-import MenuDropdown from '../MenuDropdown.vue'
-import FormField from '../FormField.vue'
-import ChatUserSelector from '../ChatUserSelector.vue'
+import MenuDropdown from '../../MenuDropdown.vue'
+import FormField from '../../FormField.vue'
+import ChatUserSelector from '../../chat/ChatUserSelector.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiChevronDown, mdiSend } from '@mdi/js'
-import { useRedeemablesStore } from '../../stores/redeemables'
-import { useWebsocketStore } from '../../stores/websocket'
+import { useRedeemablesStore } from '../../../stores/redeemables'
+import { useWebsocketStore } from '../../../stores/websocket'
 import { computed, onMounted, reactive, ref } from 'vue'
-import { useChatStore } from '../../stores/chat'
-import { useLocalStore } from '../../stores/local'
+import { useChatStore } from '../../../stores/chat'
+import { useLocalStore } from '../../../stores/local'
 
 const rs = useRedeemablesStore()
 const ws = useWebsocketStore()

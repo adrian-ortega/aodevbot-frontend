@@ -1,7 +1,7 @@
 <script setup>
-import HeaderAndStatsControls from './overlay-controls/HeaderAndStatsControls.vue'
-import RedemptionsControls from './overlay-controls/RedemptionsControls.vue'
-import SpotifyControls from './overlay-controls/SpotifyControls.vue'
+import HeaderAndStatsControls from './controls/HeaderAndStatsControls.vue'
+import RedemptionsControls from './controls/RedemptionsControls.vue'
+import SpotifyControls from './controls/SpotifyControls.vue'
 import { computed, reactive, shallowRef } from 'vue'
 
 const state = reactive({

@@ -1,8 +1,8 @@
 <script setup>
-import AvatarImage from '../AvatarImage.vue'
-import { useWebsocketStore } from '../../stores/websocket'
+import AvatarImage from '../../AvatarImage.vue'
+import { useWebsocketStore } from '../../../stores/websocket'
 import { ref, reactive, computed, watch } from 'vue'
-import { ONE_SECOND, objectHasKey, randomFromArray } from '../../util'
+import { ONE_SECOND, objectHasKey, randomFromArray } from '../../../util'
 
 const animateIn = ref(false)
 const animateOut = ref(false)

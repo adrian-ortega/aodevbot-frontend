@@ -1,6 +1,6 @@
 <script setup>
 import BrowserSourceControl from '../BrowserSourceControl.vue'
-import noSongJpg from '../../assets/jpg/no-song.jpg'
+import noSongJpg from '../../../assets/jpg/no-song.jpg'
 import SvgIcon from '@jamescoyle/vue-icon'
 import {
   mdiPlay,
@@ -11,8 +11,8 @@ import {
   mdiReload,
   mdiPause
 } from '@mdi/js'
-import { useSpotifyStore } from '../../stores/spotify'
-import { useWebsocketStore } from '../../stores/websocket'
+import { useSpotifyStore } from '../../../stores/spotify'
+import { useWebsocketStore } from '../../../stores/websocket'
 
 const ss = useSpotifyStore()
 const ws = useWebsocketStore()

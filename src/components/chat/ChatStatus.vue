@@ -1,6 +1,6 @@
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useChatStore } from '../stores/chat'
+import { useChatStore } from '../../stores/chat'
 const chatStore = useChatStore()
 const { status } = storeToRefs(chatStore)
 </script>

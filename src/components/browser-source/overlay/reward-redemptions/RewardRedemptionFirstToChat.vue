@@ -1,13 +1,13 @@
 <script setup>
 import Fireflies from '../Fireflies.vue'
 import JumpingText from '../JumpingText.vue'
-import soundFxConfetti from '../../../assets/audio/confetti-poppers.mp3'
+import soundFxConfetti from '../../../../assets/audio/confetti-poppers.mp3'
 
-import { useRedeemablesStore } from '../../../stores/redeemables'
-import { useEffectsStore } from '../../../stores/effects'
-import { useSoundsStore } from '../../../stores/sounds'
+import { useRedeemablesStore } from '../../../../stores/redeemables'
+import { useEffectsStore } from '../../../../stores/effects'
+import { useSoundsStore } from '../../../../stores/sounds'
 import { watch, ref, reactive } from 'vue'
-import { ONE_SECOND, randomFromArray, randomInt, shuffleArray } from '../../../util'
+import { ONE_SECOND, randomFromArray, randomInt, shuffleArray } from '../../../../util'
 
 const rs = useRedeemablesStore()
 const es = useEffectsStore()

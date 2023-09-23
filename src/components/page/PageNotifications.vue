@@ -8,7 +8,7 @@ import {
   mdiProgressCheck,
   mdiProgressClock
 } from '@mdi/js'
-import { useNotificationsStore } from '../stores/notifications'
+import { useNotificationsStore } from '../../stores/notifications'
 const ns = useNotificationsStore()
 const getIconPath = ({ type, percentage }) => {
   switch (type) {

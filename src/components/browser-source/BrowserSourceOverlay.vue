@@ -7,7 +7,7 @@ import SpotifyPlayer from './overlay/SpotifyPlayer.vue'
 import SpotifyUpNext from './overlay/SpotifyUpNext.vue'
 import HeaderAndStats from './overlay/HeaderAndStats.vue'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { useBreakpointsStore } from '../stores/breakpoints'
+import { useBreakpointsStore } from '../../stores/breakpoints'
 
 const bp = useBreakpointsStore()
 const overlay = ref(null)

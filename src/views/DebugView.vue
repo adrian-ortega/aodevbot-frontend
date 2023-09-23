@@ -1,13 +1,14 @@
 <script setup>
-import Chat from '../components/Chat.vue'
-import BrowserSourceControls from '../components/BrowserSourceControls.vue'
-import BrowserSourceOverlay from '../components/BrowserSourceOverlay.vue'
-import BrowserSourceTerminal from '../components/BrowserSourceTerminal.vue'
-import PageHeader from '../components/PageHeader.vue'
+import SvgIcon from '@jamescoyle/vue-icon'
+import Chat from '../components/chat/Chat.vue'
+import BrowserSourceControls from '../components/browser-source/BrowserSourceControls.vue'
+import BrowserSourceOverlay from '../components/browser-source/BrowserSourceOverlay.vue'
+import BrowserSourceTerminal from '../components/browser-source/BrowserSourceTerminal.vue'
+import PageHeader from '../components/page/PageHeader.vue'
+import { mdiArrowCollapseLeft, mdiArrowRight } from '@mdi/js'
 import { useLocalStore } from '../stores/local'
 import { ref } from 'vue'
-import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiArrowCollapseLeft, mdiArrowRight } from '@mdi/js'
+
 const ls = useLocalStore()
 const LOCAL_STORAGE_KEY = 'debug:sidebar'
 const isCollapsed = ref(ls.get(LOCAL_STORAGE_KEY, false))

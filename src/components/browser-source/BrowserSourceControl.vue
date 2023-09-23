@@ -1,9 +1,9 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiWindowMinimize } from '@mdi/js'
-import { useLocalStore } from '../stores/local'
+import { useLocalStore } from '../../stores/local'
 import { onMounted, ref } from 'vue'
-import { slugify } from '../util'
+import { slugify } from '../../util'
 
 const props = defineProps({
   id: {
