@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useFlagsStore = defineStore("events", () => {
+export const useFlagsStore = defineStore('events', () => {
   const statsShown = ref(false)
   const setStatsShown = async (value) => {
     statsShown.value = value
@@ -11,4 +11,4 @@ export const useFlagsStore = defineStore("events", () => {
     statsShown,
     setStatsShown
   }
-});
+})

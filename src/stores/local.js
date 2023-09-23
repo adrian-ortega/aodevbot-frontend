@@ -1,30 +1,30 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
 export const useLocalStore = defineStore('local', () => {
   const getItem = (key, defaultValue = null) => {
     try {
       const value = JSON.parse(localStorage.getItem(key))
-      return value ?? defaultValue;
+      return value ?? defaultValue
     } catch (err) {
-      return defaultValue;
+      return defaultValue
     }
   }
 
   const updateItem = (key, value) => {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
-      return true;
+      localStorage.setItem(key, JSON.stringify(value))
+      return true
     } catch (err) {
-      return false;
+      return false
     }
   }
 
   const removeItem = (key) => {
     try {
-      localStorage.removeItem(key);
-      return true;
+      localStorage.removeItem(key)
+      return true
     } catch (err) {
-      return false;
+      return false
     }
   }
 

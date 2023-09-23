@@ -1,8 +1,7 @@
 <script setup>
-import PageMenu from './PageMenu.vue';
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiRobotHappy } from '@mdi/js';
-
+import PageMenu from './PageMenu.vue'
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiRobotHappy } from '@mdi/js'
 
 defineProps({
   title: String
@@ -14,7 +13,7 @@ defineProps({
     <div class="page-header__container">
       <div class="page-header__item page-header__item--left">
         <div class="logo">
-          <SvgIcon type="mdi" :path="mdiRobotHappy" size="28"/>
+          <SvgIcon type="mdi" :path="mdiRobotHappy" size="28" />
           <span class="name">
             <span>aodev</span>
             <span>bot</span>

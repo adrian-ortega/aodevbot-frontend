@@ -1,7 +1,5 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-export const useEventsStore = defineStore("events", () => {
-  return {
-
-  }
-});
+export const useEventsStore = defineStore('events', () => {
+  return {}
+})

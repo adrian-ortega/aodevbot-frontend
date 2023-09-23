@@ -1,28 +1,31 @@
 export const ONE_SECOND = 1000
-export const ONE_MINUTE = ONE_SECOND * 60;
-export const isObject = a => typeof a === 'object' && a !== null;
+export const ONE_MINUTE = ONE_SECOND * 60
+export const isObject = (a) => typeof a === 'object' && a !== null
 export const isFunction = (a) => {
-  if (!a) { return false };
-  const t = {}.toString.call(a);
-  return t === '[object Function]' || t === '[object AsyncFunction]';
-};
-export const objectHasKey = (a, k) => isObject(a) && Object.prototype.hasOwnProperty.call(a, k);
-export const isString = (a) => Object.prototype.toString.call(a) === '[object String]';
-export const isNumeric = (a) => Object.prototype.toString.call(a) === '[object Number]' && !isNaN(a) && isFinite(1);
-export const isArray = (a) => Array.isArray(a);
-export const randomFromArray = items => items[Math.floor(Math.random() * items.length)];
-export const shuffleArray = (array, size) => {
-  let index = -1;
-  const length = array.length;
-  const copy = [...array];
-  size = size === undefined ? length : size;
-  while (++index < size) {
-    const rand = Math.floor(Math.random() * index);
-    [copy[index], copy[rand]] = [copy[rand], copy[index]];
+  if (!a) {
+    return false
   }
-  copy.length = size;
-  return copy;
-};
+  const t = {}.toString.call(a)
+  return t === '[object Function]' || t === '[object AsyncFunction]'
+}
+export const objectHasKey = (a, k) => isObject(a) && Object.prototype.hasOwnProperty.call(a, k)
+export const isString = (a) => Object.prototype.toString.call(a) === '[object String]'
+export const isNumeric = (a) =>
+  Object.prototype.toString.call(a) === '[object Number]' && !isNaN(a) && isFinite(1)
+export const isArray = (a) => Array.isArray(a)
+export const randomFromArray = (items) => items[Math.floor(Math.random() * items.length)]
+export const shuffleArray = (array, size) => {
+  let index = -1
+  const length = array.length
+  const copy = [...array]
+  size = size === undefined ? length : size
+  while (++index < size) {
+    const rand = Math.floor(Math.random() * index)
+    ;[copy[index], copy[rand]] = [copy[rand], copy[index]]
+  }
+  copy.length = size
+  return copy
+}
 export const randomInt = (min = 0, max = 100) => {
   min = Math.ceil(min)
   max = Math.floor(max)
@@ -31,53 +34,59 @@ export const randomInt = (min = 0, max = 100) => {
 
 export const randomFloat = (min, max, dec = 2) => (Math.random() * (min - max) + max).toFixed(dec)
 export const popupWindowCenter = ({ url, title, w = 480, h = 640 }) => {
-  const left = (window.screen.width - w) / 2;
-  const top = (window.screen.height - h) / 2;
-  const newWindow = window.open(url, title, `scrollbars=yes,width=${w},height=${h},top=${top},left=${left}`);
+  const left = (window.screen.width - w) / 2
+  const top = (window.screen.height - h) / 2
+  const newWindow = window.open(
+    url,
+    title,
+    `scrollbars=yes,width=${w},height=${h},top=${top},left=${left}`
+  )
   if (window.focus) newWindow.focus()
-  return newWindow;
-};
+  return newWindow
+}
 export const makeId = (function () {
-  let i = 0;
-  return () => (i++).toString(36) + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36);
-})();
+  let i = 0
+  return () => (i++).toString(36) + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36)
+})()
 export const createUrlSearchParams = (query) => {
-  const searchParams = new URLSearchParams();
+  const searchParams = new URLSearchParams()
   Object.entries(query).forEach(([key, value]) => {
-    searchParams.append(key, value);
-  });
-  return searchParams;
+    searchParams.append(key, value)
+  })
+  return searchParams
 }
 export const isEmpty = (mixedValue) => {
-  const emptyValues = [undefined, null, false, 0, "", "0"];
+  const emptyValues = [undefined, null, false, 0, '', '0']
   for (let i = 0, len = emptyValues.length; i < len; i++) {
     if (mixedValue === emptyValues[i]) {
-      return true;
+      return true
     }
   }
 
   if (isObject(mixedValue)) {
     for (let key in mixedValue) {
       if (objectHasKey(mixedValue, key)) {
-        return false;
+        return false
       }
     }
-    return true;
+    return true
   }
 
-  return false;
-};
+  return false
+}
 export const elapsedSeconds = (time) => {
-  const mins = Math.floor(time / 60);
-  const secs = Math.floor(time - mins * 60);
-  const pad = a => a < 10 ? `0${a}` : a;
+  const mins = Math.floor(time / 60)
+  const secs = Math.floor(time - mins * 60)
+  const pad = (a) => (a < 10 ? `0${a}` : a)
   return `${pad(Math.trunc(mins))}:${pad(Math.trunc(secs))}`
 }
-export const slugify = (str) => str.toString()
-  .normalize('NFKD') // split accented characters into their base characters and diacritical marks
-  .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
-  .trim() // trim leading or trailing whitespace
-  .toLowerCase() // convert to lowercase
-  .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
-  .replace(/\s+/g, '-') // replace spaces with hyphens
-  .replace(/-+/g, '-'); // remove consecutive hyphens
+export const slugify = (str) =>
+  str
+    .toString()
+    .normalize('NFKD') // split accented characters into their base characters and diacritical marks
+    .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+    .trim() // trim leading or trailing whitespace
+    .toLowerCase() // convert to lowercase
+    .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+    .replace(/-+/g, '-') // remove consecutive hyphens

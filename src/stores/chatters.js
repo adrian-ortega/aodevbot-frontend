@@ -67,7 +67,7 @@ export const useChattersStore = defineStore('users', () => {
   }, 10)
 
   const filterSearch = () => {
-    pageLimit.value = state.filters.limit;
+    pageLimit.value = state.filters.limit
     return fetchItems()
   }
 
@@ -87,27 +87,27 @@ export const useChattersStore = defineStore('users', () => {
     return filterSearch(type)
   }
 
-  const getUser = () => { }
+  const getUser = () => {}
 
   const syncing = ref(false)
   const syncPercentage = ref(100)
 
   const syncUsers = () => {
-    const ns = useNotificationsStore();
-    syncing.value = true;
+    const ns = useNotificationsStore()
+    syncing.value = true
     const progressId = ns.progress('Syncing Users', syncPercentage.value)
     const updateProgress = (progress, total = 0, current = 0) => {
       const statusText = progress < 100 ? `Working: ${current} of ${total}` : 'Done'
-      ns.updateProgress(progressId, progress, statusText);
+      ns.updateProgress(progressId, progress, statusText)
     }
 
-    let updateId;
+    let updateId
     const update = async () => {
       clearTimeout(updateId)
       try {
         const response = await fetch('/api/chatters/sync-status')
-        const { percentage, total, current } = await response.json();
-        updateProgress(percentage, total, current);
+        const { percentage, total, current } = await response.json()
+        updateProgress(percentage, total, current)
         if (percentage < 100) {
           updateId = setTimeout(update, ONE_SECOND * 1.5)
         } else {
@@ -122,9 +122,9 @@ export const useChattersStore = defineStore('users', () => {
       }
     }
 
-    window.navigator.sendBeacon('/api/chatters/sync');
+    window.navigator.sendBeacon('/api/chatters/sync')
 
-    setTimeout(update, ONE_SECOND);
+    setTimeout(update, ONE_SECOND)
   }
 
   return {
@@ -149,6 +149,6 @@ export const useChattersStore = defineStore('users', () => {
 
     getUser,
     syncUsers,
-    syncing,
+    syncing
   }
 })

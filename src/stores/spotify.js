@@ -1,11 +1,11 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 import { useWebsocketStore } from '../stores/websocket'
-import { reactive, ref, computed, watch } from "vue";
-import { ONE_SECOND, elapsedSeconds } from "../util";
+import { reactive, ref, computed, watch } from 'vue'
+import { ONE_SECOND, elapsedSeconds } from '../util'
 
 export const useSpotifyStore = defineStore('spotify', () => {
   let progressTimeoutId
-  let progressLastTs = 0;
+  let progressLastTs = 0
   const ws = useWebsocketStore()
   const playerState = reactive({
     data: {
@@ -15,12 +15,14 @@ export const useSpotifyStore = defineStore('spotify', () => {
   const playerStateProgress = ref(0)
   const currentlyPlaying = reactive({ data: {} })
   const isPlaying = computed(() => !!playerState.data.is_playing)
-  const track = computed(() =>
-    currentlyPlaying.data.item ? currentlyPlaying.data.item : null
-  )
+  const track = computed(() => (currentlyPlaying.data.item ? currentlyPlaying.data.item : null))
   const trackAlbum = computed(() => (track.value ? track.value.album : null))
   const trackArtist = computed(() => (track.value ? track.value.artists[0] : null))
-  const progressPercentage = computed(() => !track.value || !playerStateProgress.value ? 0 : parseFloat(((playerStateProgress.value / track.value.duration_ms) * 100).toFixed(6)))
+  const progressPercentage = computed(() =>
+    !track.value || !playerStateProgress.value
+      ? 0
+      : parseFloat(((playerStateProgress.value / track.value.duration_ms) * 100).toFixed(6))
+  )
 
   const updateProgress = (timestmap) => {
     progressTimeoutId = window.requestAnimationFrame(updateProgress)
@@ -28,8 +30,8 @@ export const useSpotifyStore = defineStore('spotify', () => {
       cancelAnimationFrame(progressTimeoutId)
     }
     if (timestmap - progressLastTs > ONE_SECOND) {
-      progressLastTs = timestmap;
-      playerStateProgress.value += ONE_SECOND;
+      progressLastTs = timestmap
+      playerStateProgress.value += ONE_SECOND
     }
   }
 
@@ -52,15 +54,18 @@ export const useSpotifyStore = defineStore('spotify', () => {
   })
 
   const refresh = () => {
-    return !ws.isReady ? setTimeout(refresh, 10) : ws.send('spotify.current');
+    return !ws.isReady ? setTimeout(refresh, 10) : ws.send('spotify.current')
   }
 
-  watch(() => isPlaying.value, (value) => {
-    cancelAnimationFrame(progressTimeoutId)
-    if (value) {
-      progressTimeoutId = window.requestAnimationFrame(updateProgress)
+  watch(
+    () => isPlaying.value,
+    (value) => {
+      cancelAnimationFrame(progressTimeoutId)
+      if (value) {
+        progressTimeoutId = window.requestAnimationFrame(updateProgress)
+      }
     }
-  })
+  )
 
   return {
     refresh,
@@ -73,11 +78,15 @@ export const useSpotifyStore = defineStore('spotify', () => {
     currentlyPlayingType: computed(() => playerState.data?.currently_playing_type),
 
     progressPercentage,
-    durationFormatted: computed(() => elapsedSeconds(track.value ? track.value.duration_ms / 1000 : 0)),
-    progressFormatted: computed(() => elapsedSeconds(playerStateProgress.value ? playerStateProgress.value / 1000 : 0)),
+    durationFormatted: computed(() =>
+      elapsedSeconds(track.value ? track.value.duration_ms / 1000 : 0)
+    ),
+    progressFormatted: computed(() =>
+      elapsedSeconds(playerStateProgress.value ? playerStateProgress.value / 1000 : 0)
+    ),
 
     track,
     trackAlbum,
     trackArtist
   }
-});
+})
