@@ -2,7 +2,6 @@ import debounce from "lodash.debounce";
 import { computed, reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { useNotificationsStore } from "./notifications";
-import { ONE_SECOND } from "../util";
 
 
 export const BROADCASTER_PRIMARY_ACCOUNT = 1;
@@ -35,7 +34,7 @@ export const useAccountsStore = defineStore('accounts', () => {
   })
 
   let errorNotificationId;
-  const notify = (message, type = 'info', { redirect }) => {
+  const notify = (message, type = 'info') => {
     const ns = useNotificationsStore();
     if (errorNotificationId) ns.dismiss(errorNotificationId);
     errorNotificationId = ns.append(message, type);
@@ -50,7 +49,9 @@ export const useAccountsStore = defineStore('accounts', () => {
       const response = await fetch(endpoint);
       const { data } = await response.json();
       return data;
-    } catch (err) { }
+    } catch (err) {
+      // Do nothing
+    }
   }
 
   const getBroadcasterAccount = async (type) => {

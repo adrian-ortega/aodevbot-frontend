@@ -1,7 +1,6 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { computed } from 'vue'
-import { objectHasKey } from '../util'
 
 const props = defineProps({
   baseRoute: {

@@ -22,7 +22,9 @@ export const useRedeemablesStore = defineStore('redeemables', () => {
       const data = await response.json();
       rewards.data = [...data.data]
       return rewards.data;
-    } catch (err) { }
+    } catch (err) {
+      // Do nothing
+    }
     return []
   }
 

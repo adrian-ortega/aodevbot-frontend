@@ -38,7 +38,7 @@ const menuDdLabel = computed(() => (!selected.id ? 'Select one' : selected.data.
 const onMenuDdToggle = ({ toggleMenu }) => {
   toggleMenu()
 }
-const onRewardSelect = ({ closeMenu, openMenu, reward }) => {
+const onRewardSelect = ({ closeMenu, reward }) => {
   selected.data = { ...reward }
   selected.id = selected.data.id
   ls.save(LOCAL_STORAGE_KEY, selected.id)

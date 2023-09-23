@@ -92,17 +92,17 @@ export const useCommandsStore = defineStore('commands', () => {
     return fetchItems(type)
   }
 
-  const hasNextPage = computed(() => page + 1 > pages)
+  const hasNextPage = computed(() => page.value + 1 > pages.value)
   const nextPage = (type) => {
-    if (hasNextPage) {
+    if (hasNextPage.value) {
       page.value++
     }
-    return filterSearch()
+    return filterSearch(type)
   }
 
-  const hasPreviousPage = computed(() => page - 1 > 1)
+  const hasPreviousPage = computed(() => page.value - 1 > 1)
   const previousPage = (type) => {
-    if (hasPreviousPage) {
+    if (hasPreviousPage.value) {
       page.value--
     }
     return filterSearch(type)
@@ -144,13 +144,18 @@ export const useCommandsStore = defineStore('commands', () => {
   }
 
   // Individial command actions
-  const enableCommand = (command) => { }
+  const enableCommand = (command) => {
+    // @TODO implement enableCommand(command)
+    console.log({ command })
+  }
 
   const editCommand = (command) => {
     editId.value = command.id
   }
 
   const deleteCommand = (command) => {
+    // @TODO implement deleteCommand(command)
+    console.log({ command })
     if (!confirm('Are you sure you want to delete this Command?')) {
       return
     }

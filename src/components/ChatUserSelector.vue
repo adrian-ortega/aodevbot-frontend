@@ -31,7 +31,7 @@ const escapeKeyHandler = (event) => {
   if (event.keyCode === 27) closeUsersPopup()
 }
 
-const openUsersPopup = async (e) => {
+const openUsersPopup = async () => {
   await searchUsers()
   showPopup.value = true
   document.addEventListener('keyup', escapeKeyHandler, false)

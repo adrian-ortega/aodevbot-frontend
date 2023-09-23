@@ -71,17 +71,17 @@ export const useChattersStore = defineStore('users', () => {
     return fetchItems()
   }
 
-  const hasNextPage = computed(() => page + 1 > pages)
+  const hasNextPage = computed(() => page.value + 1 > pages.value)
   const nextPage = (type) => {
-    if (hasNextPage) {
+    if (hasNextPage.value) {
       page.value++
     }
-    return filterSearch()
+    return filterSearch(type)
   }
 
-  const hasPreviousPage = computed(() => page - 1 > 1)
+  const hasPreviousPage = computed(() => page.value - 1 > 1)
   const previousPage = (type) => {
-    if (hasPreviousPage) {
+    if (hasPreviousPage.value) {
       page.value--
     }
     return filterSearch(type)

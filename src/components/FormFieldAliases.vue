@@ -55,14 +55,12 @@ const append = () => {
       </template>
     </FormField>
     <div class="aliases" v-if="aliases.length > 0">
-      <template v-for="(alias, i) in aliases">
-        <button class="button button--tag">
-          <span class="text">!{{ alias }}</span>
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiClose" />
-          </span>
-        </button>
-      </template>
+      <button v-for="(alias, i) in aliases" :key="i" class="button button--tag">
+        <span class="text">!{{ alias }}</span>
+        <span class="icon">
+          <SvgIcon type="mdi" :path="mdiClose" />
+        </span>
+      </button>
     </div>
   </FormField>
 </template>

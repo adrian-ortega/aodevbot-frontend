@@ -4,12 +4,10 @@ import { useWebsocketStore } from '../../stores/websocket'
 import { computed, reactive, ref } from 'vue'
 import { useAccountsStore } from '../../stores/accounts'
 import { ONE_SECOND } from '../../util'
-import { useFlagsStore } from '../../stores/flags'
 const animateIn = ref(false)
 const animateOut = ref(false)
 const as = useAccountsStore()
 const ws = useWebsocketStore()
-const fs = useFlagsStore()
 const state = reactive({
   payload: {}
 })

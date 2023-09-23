@@ -1,19 +1,20 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiDotsVertical } from '@mdi/js'
-import { ref, computed, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { isFunction } from '../util'
 
 const dd = ref(null)
 const ddContent = ref(null)
 const isOpen = ref(false)
 const isClosed = ref(false)
-const coords = reactive({
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-})
+// @TODO figure out how to open the menu by intersectable coords
+// const coords = reactive({
+//   top: 0,
+//   right: 0,
+//   bottom: 0,
+//   left: 0
+// })
 
 const toggleMenu = () => (isOpen.value ? closeMenu() : openMenu())
 const escapeKeyHandler = (event) => (event.keyCode === 27 ? closeMenu() : undefined)

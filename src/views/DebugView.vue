@@ -7,7 +7,7 @@ import PageHeader from '../components/PageHeader.vue'
 import { useLocalStore } from '../stores/local'
 import { ref } from 'vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiArrowCollapseLeft, mdiArrowCollapseRight, mdiArrowRight } from '@mdi/js'
+import { mdiArrowCollapseLeft, mdiArrowRight } from '@mdi/js'
 const ls = useLocalStore()
 const LOCAL_STORAGE_KEY = 'debug:sidebar'
 const isCollapsed = ref(ls.get(LOCAL_STORAGE_KEY, false))

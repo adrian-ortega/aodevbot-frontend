@@ -80,7 +80,7 @@ export const useWebsocketStore = defineStore('websockets', () => {
     return messageActions.indexOf(action);
   };
 
-  const removeMessageAction = () => {
+  const removeMessageAction = (id) => {
     delete messageActions[id];
   }
 
@@ -101,7 +101,9 @@ export const useWebsocketStore = defineStore('websockets', () => {
     isReady: computed(() => ws.readyState === ws.OPEN),
     connected,
     onConnect,
+    removeConnectAction,
     onMessage,
+    removeMessageAction,
     send
   }
 });
