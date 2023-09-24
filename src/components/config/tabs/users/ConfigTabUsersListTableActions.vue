@@ -1,9 +1,9 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import FormField from './FormField.vue'
-import FormFieldSelect from './FormFieldSelect.vue'
+import FormField from '../../../FormField.vue'
+import FormFieldSelect from '../../../FormFieldSelect.vue'
 import { mdiSync, mdiLoading, mdiChevronRight } from '@mdi/js'
-import { useChattersStore } from '../stores/chatters'
+import { useChattersStore } from '../../../../stores/chatters'
 const cs = useChattersStore()
 </script>
 <template>

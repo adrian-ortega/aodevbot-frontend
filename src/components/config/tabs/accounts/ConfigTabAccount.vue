@@ -1,14 +1,14 @@
 <script setup>
 import ConfigTabAccountItem from './ConfigTabAccountItem.vue'
-import InlineNotification from '../components/InlineNotification.vue'
+import InlineNotification from '../../../InlineNotification.vue'
+import { mdiSpotify, mdiTwitch } from '@mdi/js'
 import { onMounted } from 'vue'
 import {
   useAccountsStore,
   BROADCASTER_PRIMARY_ACCOUNT,
   BROADCASTER_SECONDARY_ACCOUNT,
   BROADCASTER_SPOTIFY_ACCOUNT
-} from '../stores/accounts'
-import { mdiSpotify, mdiTwitch } from '@mdi/js'
+} from '../../../../stores/accounts'
 const store = useAccountsStore()
 onMounted(async () => store.fetchAccounts())
 </script>

@@ -1,15 +1,15 @@
 <script setup>
-import FormField from './FormField.vue'
-import FormFieldSelect from './FormFieldSelect.vue'
-import FormFieldAliases from './FormFieldAliases.vue'
+import FormField from '../../../FormField.vue'
+import FormFieldSelect from '../../../FormFieldSelect.vue'
+import FormFieldAliases from '../../../FormFieldAliases.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import FormButtons from './FormButtons.vue'
-import { onMounted, computed, ref, reactive } from 'vue'
-import { useCommandsStore } from '../stores/commands'
-import { useNotificationsStore, NOTIFICATION_ERROR } from '../stores/notifications'
+import FormButtons from '../../../FormButtons.vue'
 import { mdiChevronLeft } from '@mdi/js'
+import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { objectHasKey } from '../util'
+import { useCommandsStore } from '../../../../stores/commands'
+import { useNotificationsStore, NOTIFICATION_ERROR } from '../../../../stores/notifications'
+import { objectHasKey } from '../../../../util'
 
 const route = useRoute()
 const router = useRouter()

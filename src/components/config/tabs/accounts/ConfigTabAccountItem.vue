@@ -2,7 +2,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiChevronRight } from '@mdi/js'
 import { computed } from 'vue'
-import { objectHasKey, popupWindowCenter } from '../util'
+import { objectHasKey, popupWindowCenter } from '../../../../util'
 
 let loginIframe
 

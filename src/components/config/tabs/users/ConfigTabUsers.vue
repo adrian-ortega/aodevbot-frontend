@@ -2,7 +2,7 @@
 import ConfigTabUsersListRow from './ConfigTabUsersListRow.vue'
 import ConfigTabUsersListTableActions from './ConfigTabUsersListTableActions.vue'
 import ConfigTabUsersListPagination from './ConfigTabUsersListPagination.vue'
-import { useChattersStore } from '../stores/chatters'
+import { useChattersStore } from '../../../../stores/chatters'
 import { onMounted } from 'vue'
 
 const cs = useChattersStore()

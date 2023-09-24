@@ -1,8 +1,8 @@
 <script setup>
-import { useCommandsStore } from '../stores/commands'
-import ConfigTabs from './ConfigTabs.vue'
-import FormLoadingOverlay from './FormLoadingOverlay.vue'
-import InlineNotification from './InlineNotification.vue'
+import { useCommandsStore } from '../../../../stores/commands'
+import ConfigTabs from '../../ConfigTabs.vue'
+import FormLoadingOverlay from '../../../FormLoadingOverlay.vue'
+import InlineNotification from '../../../InlineNotification.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const cs = useCommandsStore()

@@ -3,7 +3,7 @@ import ConfigTabCommandsListTableActions from './ConfigTabCommandsListTableActio
 import ConfigTabCommandsListNotFound from './ConfigTabCommandsListNotFound.vue'
 import ConfigTabCommandsListRow from './ConfigTabCommandsListRow.vue'
 import ConfigTabCommandsListPagination from './ConfigTabCommandsListPagination.vue'
-import { useCommandsStore } from '../stores/commands'
+import { useCommandsStore } from '../../../../stores/commands'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
 

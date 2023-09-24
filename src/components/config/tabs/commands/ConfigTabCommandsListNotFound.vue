@@ -1,5 +1,5 @@
 <script setup>
-import { useCommandsStore } from '../stores/commands'
+import { useCommandsStore } from '../../../../stores/commands'
 const cs = useCommandsStore()
 </script>
 <template>

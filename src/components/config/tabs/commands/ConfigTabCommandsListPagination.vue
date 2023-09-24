@@ -2,17 +2,21 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js'
 import { computed } from 'vue'
-import { useChattersStore } from '../stores/chatters'
+import { useCommandsStore } from '../../../../stores/commands'
 
-const cs = useChattersStore()
+const props = defineProps({
+  type: String
+})
+const cs = useCommandsStore()
 const currentPage = computed(() => cs.page)
 </script>
+
 <template>
   <div class="table-actions">
     <div class="table-actions__left">
       <button
         class="button button--transparent"
-        @click.prevent="() => cs.previousPage()"
+        @click.prevent="() => cs.previousPage(props.type)"
         :disabled="!cs.hasPreviousPage"
       >
         <span class="icon">
@@ -27,7 +31,7 @@ const currentPage = computed(() => cs.page)
     <div class="table-actions__right">
       <button
         class="button button--transparent"
-        @click.prevent="() => cs.nextPage()"
+        @click.prevent="() => cs.nextPage(props.type)"
         :disabled="!cs.hasNextPage"
       >
         <span class="text">Next</span>

@@ -1,8 +1,8 @@
 <script setup>
-import AvatarImage from './AvatarImage.vue'
+import AvatarImage from '../../../AvatarImage.vue'
 import { ref } from 'vue'
-import { popupWindowCenter } from '../util'
-import { useAccountsStore } from '../stores/accounts'
+import { popupWindowCenter } from '../../../../util'
+import { useAccountsStore } from '../../../../stores/accounts'
 const accounts = useAccountsStore()
 const hover = ref(false)
 const props = defineProps({
