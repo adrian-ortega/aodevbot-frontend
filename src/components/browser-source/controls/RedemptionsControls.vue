@@ -1,7 +1,7 @@
 <script setup>
 import BrowserSourceControl from '../BrowserSourceControl.vue'
 import MenuDropdown from '../../MenuDropdown.vue'
-import FormField from '../../FormField.vue'
+import FormField from '../../form/FormField.vue'
 import ChatUserSelector from '../../chat/ChatUserSelector.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiChevronDown, mdiSend } from '@mdi/js'

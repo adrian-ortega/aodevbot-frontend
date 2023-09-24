@@ -1,7 +1,7 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
 import AvatarImage from '../AvatarImage.vue'
-import FormField from '../FormField.vue'
+import FormField from '../form/FormField.vue'
 import debounce from 'lodash.debounce'
 import { ref } from 'vue'
 import { mdiClose, mdiCheckBold } from '@mdi/js'

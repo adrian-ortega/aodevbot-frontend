@@ -3,7 +3,7 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import FormField from './FormField.vue'
 import { mdiClose, mdiPlus } from '@mdi/js'
 import { ref, computed } from 'vue'
-import { isNumeric, isString, isArray } from '../util'
+import { isNumeric, isString, isArray } from '../../util'
 const $emit = defineEmits(['input'])
 const props = defineProps({
   label: {

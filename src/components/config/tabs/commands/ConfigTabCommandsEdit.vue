@@ -1,9 +1,9 @@
 <script setup>
-import FormField from '../../../FormField.vue'
-import FormFieldSelect from '../../../FormFieldSelect.vue'
-import FormFieldAliases from '../../../FormFieldAliases.vue'
+import FormField from '../../../form/FormField.vue'
+import FormFieldSelect from '../../../form/FormFieldSelect.vue'
+import FormFieldAliases from '../../../form/FormFieldAliases.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import FormButtons from '../../../FormButtons.vue'
+import FormButtons from '../../../form/FormButtons.vue'
 import { mdiChevronLeft } from '@mdi/js'
 import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'

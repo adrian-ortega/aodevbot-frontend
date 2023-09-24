@@ -1,5 +1,5 @@
 <script setup>
-import FormButtons from '../../../FormButtons.vue'
+import FormButtons from '../../../form/FormButtons.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { ref } from 'vue'
 import {

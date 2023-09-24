@@ -1,6 +1,6 @@
 <script setup>
-import FormField from '../../../FormField.vue'
-import FormFieldSelect from '../../../FormFieldSelect.vue'
+import FormField from '../../../form/FormField.vue'
+import FormFieldSelect from '../../../form/FormFieldSelect.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiLoading, mdiPlus, mdiChevronRight } from '@mdi/js'
 import { useCommandsStore } from '../../../../stores/commands'
