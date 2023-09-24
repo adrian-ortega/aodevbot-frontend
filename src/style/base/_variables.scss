@@ -42,6 +42,11 @@
   --base-color-bg-bis: hsl(223, 7%, 20%);
   --base-color-fg: var(--gray);
 
+  --scrollbar-width: 0.9em;
+  --scrollbar-color-track: var(--base-color-bg);
+  --scrollbar-color-bg: var(--base-color-bg-bis);
+  --scrollbar-color-bg-hover: var(--gray-ter);
+
   --font-family-body: 'Roboto', sans-serif;
   --font-family-mono: 'Monaco', 'Consolas', mono;
   --font-family-code: var(--font-family-mono);
@@ -167,7 +172,7 @@
   // Header stats
   --o-header-skew: -40deg;
 
-  --debug-sidear-width: minmax(33vw, 360px);
+  --debug-sidear-width: minmax(25em, 300px);
   --debug-overlay-font-size: calc(var(--o-font-size) * 0.6);
   --debug-checker-fg: var(--base-color-bg-bis);
   --debug-checker-bg: var(--base-color-bg);

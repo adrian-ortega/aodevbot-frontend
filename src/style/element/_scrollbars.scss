@@ -1,0 +1,25 @@
+@charset 'utf-8';
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-color-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color-bg);
+  border-radius: var(--radius-rounded);
+  border: 0.25em solid var(--scrollbar-color-track);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-color-bg-hover);
+}
