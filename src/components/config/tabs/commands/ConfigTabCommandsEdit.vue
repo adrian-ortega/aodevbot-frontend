@@ -4,7 +4,7 @@ import FormFieldSelect from '../../../form/FormFieldSelect.vue'
 import FormFieldAliases from '../../../form/FormFieldAliases.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import FormButtons from '../../../form/FormButtons.vue'
-import { mdiChevronLeft } from '@mdi/js'
+import { mdiChevronLeft, mdiPound } from '@mdi/js'
 import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCommandsStore } from '../../../../stores/commands'
@@ -71,9 +71,13 @@ onMounted(async () => {
         </RouterLink>
       </div>
       <div class="edit-form__title">
-        <h2>
-          {{ formTitle }} <code v-if="form.id">{{ form.id }}</code>
-        </h2>
+        <h2>{{ formTitle }}</h2>
+        <code v-if="form.id">
+          <span class="icon">
+            <SvgIcon type="mdi" :path="mdiPound" />
+          </span>
+          {{ form.id }}
+        </code>
       </div>
     </div>
     <hr />

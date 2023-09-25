@@ -8,6 +8,7 @@ import PageHeader from '../components/page/PageHeader.vue'
 import { mdiArrowCollapseLeft, mdiArrowRight } from '@mdi/js'
 import { useLocalStore } from '../stores/local'
 import { ref } from 'vue'
+import PageContent from '../components/page/PageContent.vue'
 
 const ls = useLocalStore()
 const LOCAL_STORAGE_KEY = 'debug:sidebar'
@@ -20,7 +21,8 @@ const toggleCollapsed = () => {
 
 <template>
   <PageHeader title="Debug" />
-  <div class="container" :class="{ 'sidebar-collapsed': isCollapsed }">
+  <PageContent>
+    <div class="container" :class="{ 'sidebar-collapsed': isCollapsed }">
     <div class="content">
       <div class="content__scroller">
         <fieldset class="overlay-debug">
@@ -41,4 +43,5 @@ const toggleCollapsed = () => {
       <Chat v-if="!isCollapsed" />
     </div>
   </div>
+  </PageContent>
 </template>

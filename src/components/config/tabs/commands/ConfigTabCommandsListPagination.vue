@@ -12,7 +12,7 @@ const currentPage = computed(() => cs.page)
 </script>
 
 <template>
-  <div class="table-actions">
+  <div class="table-actions table-actions--footer">
     <div class="table-actions__left">
       <button
         class="button button--transparent"

@@ -13,7 +13,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <div class="table-actions">
+  <div class="table-actions table-actions--header">
     <div class="table-actions__left">
       <FormField label="Search for a command" vertical>
         <input

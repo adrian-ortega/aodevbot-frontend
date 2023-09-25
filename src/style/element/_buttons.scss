@@ -112,11 +112,12 @@
     padding: 0;
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 0.25em;
+    gap: var(--page-gap);
+    background-color: var(--secondary-ter);
 
     .icon,
     .text {
-      padding: 0.35em;
+      padding: calc(var(--page-gap) + 0.1em);
     }
 
     // Needs to be specific because of the above
@@ -130,8 +131,8 @@
 
   &--icon {
     font-size: 1.1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-left: calc(var(--page-gap) * 2);
+    padding-right: calc(var(--page-gap) * 2);
   }
 
   &[disabled='true'],
@@ -150,7 +151,7 @@
 
 .form-buttons {
   display: flex;
-  gap: 0.5em;
+  gap: calc(var(--page-gap) * 2);
   width: 100%;
   margin: 2em 0;
 

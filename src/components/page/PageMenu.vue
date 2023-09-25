@@ -6,7 +6,12 @@ import { RouterLink } from 'vue-router'
 const dd_links = [
   { label: 'Chat', to: { name: 'chat' }, icon: mdiChat },
   { label: 'Debug', to: { name: 'debug' }, icon: mdiBug },
-  { label: 'Config', to: { name: 'config' }, icon: mdiTuneVerticalVariant }
+  {
+    label: 'Config',
+    to: { name: 'config' },
+    icon: mdiTuneVerticalVariant,
+    children: []
+  }
 ]
 </script>
 

@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .table-wrapper {
-  margin: 1.5em 0;
+  margin: 0;
 }
 
 .table-actions {
@@ -14,8 +14,26 @@
   .field__label {
     text-transform: uppercase;
     color: var(--gray-bis);
-    font-size: 0.875em;
+    font-size: var(--font-size-tiny);
+    letter-spacing: 0.025em;
   }
+
+  .field__input {
+    input,
+    .input-select__v {
+      border-width: 0.25em;
+    }
+  }
+}
+
+.table-actions--header {
+  padding: 1em 0;
+}
+
+.table-actions--footer {
+  background: var(--table-header-color-bg);
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
 }
 
 @media screen and (min-width: 700px) {
@@ -49,15 +67,23 @@
 }
 
 .table {
-  border: 1px solid var(--table-border-color);
-  margin: 1em 0;
+  border: 0.25em solid var(--table-border-color);
+  border-radius: var(--radius);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 0 1em var(--black-alpha-20);
 
   &__header {
     background: var(--table-header-color-bg);
-    border-bottom: 1px solid var(--table-border-color);
 
-    .table__cell {
-      font-weight: var(--font-weight-bold);
+    .table__row {
+      align-items: center;
+      border-bottom: 0.25em solid var(--table-border-color);
+    }
+
+    .table__cell--h:not(.cb) {
+      text-transform: uppercase;
+      font-size: var(--font-size-tiny);
     }
   }
 

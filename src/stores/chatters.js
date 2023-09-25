@@ -9,12 +9,12 @@ export const useChattersStore = defineStore('users', () => {
   const search = ref('')
   const page = ref(1)
   const pages = ref(1)
-  const pageLimit = ref(5)
+  const pageLimit = ref(10)
   const pageTotal = ref(1)
   const state = reactive({
     items: [],
     filters: {
-      limit: 5
+      limit: 10
     }
   })
 
@@ -87,7 +87,7 @@ export const useChattersStore = defineStore('users', () => {
     return filterSearch(type)
   }
 
-  const getUser = () => {}
+  const getUser = () => { }
 
   const syncing = ref(false)
   const syncPercentage = ref(100)

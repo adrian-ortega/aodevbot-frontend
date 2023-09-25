@@ -7,7 +7,7 @@ import { useChattersStore } from '../../../../stores/chatters'
 const cs = useChattersStore()
 </script>
 <template>
-  <div class="table-actions">
+  <div class="table-actions table-actions--header">
     <div class="table-actions__left">
       <FormField label="Search for a user" vertical>
         <input
