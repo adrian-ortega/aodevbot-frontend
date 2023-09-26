@@ -32,18 +32,20 @@
     display: inline-flex;
   }
 
-  .text + .icon:last-child {
+  .icon:last-child:not(:first-child) {
+    margin-left: 0.5em;
     margin-right: -0.25em;
   }
 
-  .avatar:first-child + .text,
-  .icon:first-child + .text,
-  .text + .icon:last-child {
-    margin-left: 0.5em;
+  .avatar:first-child:not(:last-child),
+  .icon:first-child:not(:last-child) {
+    margin-left: -0.25em;
+    margin-right: 0.5em;
   }
 
   &--primary {
     background: var(--primary);
+    color: var(--white-alpha-70);
 
     &:hover,
     &:focus {
@@ -70,7 +72,7 @@
 
     &:focus,
     &:hover {
-      background: var(--white-alpha-10);
+      border-color: var(--gray-ter);
     }
   }
 
@@ -155,6 +157,10 @@
   width: 100%;
   margin: 2em 0;
 
+  & + .form-buttons {
+    margin-top: calc(var(--page-gap) * 2);
+  }
+
   .button--right {
     margin-left: auto;
   }
@@ -162,12 +168,23 @@
   .is-active {
     color: var(--white);
     font-weight: var(--font-weight-bold);
-    border-color: var(--secondary-ter);
+    background-color: var(--black);
+  }
+
+  &--fw {
+    display: block;
+
+    .button {
+      width: 100%;
+      & + .button {
+        margin-top: var(--page-gap);
+      }
+    }
   }
 
   &--inline {
     margin: 0;
-    gap: 0.25em;
+    gap: var(--page-gap);
   }
 
   &--right {

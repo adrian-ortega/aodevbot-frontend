@@ -3,9 +3,9 @@
 .page-header {
   position: relative;
   z-index: 3;
-  background: var(--black-alpha-20);
+  background: var(--page-header-color-bg);
   padding: var(--page-gap);
-  border-bottom: 0.125em solid var(--black-alpha-20);
+  border-bottom: 0.125em solid var(--black);
 
   h1 {
     font-size: var(--font-size-2);

@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+.v-components,
 .v-debug {
   #app,
   .container {
@@ -77,16 +78,8 @@
     display: block;
     margin: 0 1em 0.5em;
     padding: 0 0.5em 0.5em;
-
-    border: 0.25em solid var(--base-color-bg-bis);
     background: var(--black-alpha-30);
     border-radius: var(--radius);
-  }
-
-  .fieldset,
-  fieldset {
-    border: 0.25em solid var(--base-color-bg-bis);
-    background: var(--black-alpha-20);
   }
 
   .overlay-debug {
@@ -410,6 +403,70 @@
       p {
         color: var(--gray-bis);
         font-size: var(--font-size-small);
+      }
+    }
+  }
+}
+
+.v-debug,
+.v-components {
+  .fieldset,
+  fieldset {
+    border: 0.25em solid var(--base-color-bg-bis);
+    background: var(--black-alpha-20);
+
+    > h2 {
+      margin-top: calc(var(--page-gap) * 4);
+      margin-bottom: calc(var(--page-gap) * 2);
+      font-weight: var(--font-weight-bold);
+      color: var(--gray-bis);
+    }
+
+    > legend + h2 {
+      margin-top: 0;
+    }
+  }
+}
+
+.v-components {
+  .page-content .content {
+    margin: 0 auto 0.5em;
+    max-width: 65em;
+    padding: 1em 0.5em 0.5em;
+
+    @media screen and (min-width: 1120px) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(var(--page-gap) * 2);
+    }
+
+    .edit-form {
+      margin: 0;
+    }
+
+    fieldset {
+      display: flex;
+      border: none;
+      background: none;
+
+      > fieldset {
+        padding: 0.5em 1em 1em;
+        border: 0.25em solid var(--base-color-bg-bis);
+        background: var(--black-alpha-40);
+      }
+    }
+
+    > fieldset {
+      width: 100%;
+      padding: 0;
+
+      & + fieldset {
+        margin-top: 1em;
+      }
+
+      > legend {
+        font-weight: var(--font-weight-bold);
+        color: var(--secondary);
       }
     }
   }

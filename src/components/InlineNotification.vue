@@ -1,6 +1,6 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiAlert, mdiInformation } from '@mdi/js'
+import { mdiAlert, mdiExclamationThick, mdiInformation } from '@mdi/js'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -13,11 +13,9 @@ const props = defineProps({
 const iconPath = computed(() => {
   switch (true) {
     case props.isError:
-      return mdiAlert
     case props.isWarning:
       return mdiAlert
     case props.isSuccess:
-      return mdiAlert
     case props.isInfo:
       return mdiInformation
   }

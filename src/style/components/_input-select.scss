@@ -26,6 +26,7 @@
 
 .input-select {
   position: relative;
+  z-index: 3;
   width: 100%;
   min-width: 5em;
   font-size: var(--input-font-size);

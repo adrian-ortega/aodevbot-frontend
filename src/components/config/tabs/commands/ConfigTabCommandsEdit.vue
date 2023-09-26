@@ -94,6 +94,7 @@ onMounted(async () => {
     </FormField>
     <FormFieldAliases
       :value="form.aliases"
+      tag-prefix="!"
       @input="(value) => (form.aliases = [...form.aliases, value])"
     />
     <FormFieldSelect

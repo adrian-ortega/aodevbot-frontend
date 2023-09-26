@@ -3,6 +3,7 @@ import BrowserSourceView from '../views/BrowserSourceView.vue'
 import HomeView from '../views/HomeView.vue'
 import ChatView from '../views/ChatView.vue'
 import DebugView from '../views/DebugView.vue'
+import ComponentsView from '../views/ComponentsView.vue'
 import ConfigView from '../views/ConfigView.vue'
 import ConfigTabAccount from '../components/config/tabs/accounts/ConfigTabAccount.vue'
 import ConfigTabCommandsEdit from '../components/config/tabs/commands/ConfigTabCommandsEdit.vue'
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/components',
+      name: 'components',
+      component: ComponentsView
     },
     {
       path: '/browser-source',

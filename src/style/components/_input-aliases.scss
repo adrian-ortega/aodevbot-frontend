@@ -5,6 +5,7 @@
     flex-direction: column;
 
     > .field {
+      display: block;
       margin-bottom: calc(var(--page-gap) * 2);
 
       .field__content {

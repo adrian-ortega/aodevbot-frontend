@@ -12,6 +12,21 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(2px);
+
+  &.is-full-page {
+    position: fixed;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader {
+    margin: 1em 0;
+  }
 }
 
 @keyframes verticalLinesLoader {
