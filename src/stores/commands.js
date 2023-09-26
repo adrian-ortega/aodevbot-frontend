@@ -7,14 +7,14 @@ export const useCommandsStore = defineStore('commands', () => {
   const search = ref('')
   const page = ref(1)
   const pages = ref(1)
-  const pageLimit = ref(5)
+  const pageLimit = ref(10)
   const pageTotal = ref(1)
   const editId = ref(null)
   const state = reactive({
     items: [],
     templates: [],
     filters: {
-      limit: 5,
+      limit: pageLimit.value,
       status: -1
     }
   })

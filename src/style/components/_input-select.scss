@@ -26,8 +26,10 @@
 
 .input-select {
   position: relative;
+  z-index: 3;
   width: 100%;
   min-width: 5em;
+  font-size: var(--input-font-size);
 
   &__v,
   &__dd {
@@ -60,7 +62,7 @@
   &__oi,
   &__v {
     display: flex;
-    border: 1px solid transparent;
+    border: var(--input-border-width) solid transparent;
     border-radius: var(--radius);
   }
 
@@ -109,8 +111,9 @@
     cursor: pointer;
     align-items: center;
     justify-content: space-between;
-    border-color: var(--gray-ter);
-    height: calc(var(--input-height) - 0.2em);
+    border-color: var(--input-color-b);
+    height: var(--input-height);
+    background: var(--input-color-bg);
     padding: 0 0.5em;
   }
 

@@ -12,6 +12,17 @@ const props = defineProps({
   },
   value: {
     type: [Object, String, Array]
+  },
+  horizontal: {
+    type: Boolean,
+    default: true
+  },
+  vertical: {
+    type: Boolean,
+    default: false
+  },
+  tagPrefix: {
+    type: String
   }
 })
 
@@ -42,7 +53,12 @@ const append = () => {
 </script>
 
 <template>
-  <FormField class="field--input-aliases" :label="label">
+  <FormField
+    class="field--input-aliases"
+    :label="label"
+    :horizontal="props.horizontal"
+    :vertical="props.vertical"
+  >
     <FormField>
       <input type="text" v-model="alias" @keypress.enter="append" ref="input" />
       <template v-slot:post>
@@ -56,7 +72,7 @@ const append = () => {
     </FormField>
     <div class="aliases" v-if="aliases.length > 0">
       <button v-for="(alias, i) in aliases" :key="i" class="button button--tag">
-        <span class="text">!{{ alias }}</span>
+        <span class="text">{{ tagPrefix }}{{ alias }}</span>
         <span class="icon">
           <SvgIcon type="mdi" :path="mdiClose" />
         </span>

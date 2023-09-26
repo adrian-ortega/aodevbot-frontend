@@ -2,7 +2,7 @@
 
 :root {
   --primary: hsl(352, 55%, 43%);
-  --primary-bis: hwb(352 15% 45%);
+  --primary-bis: hsl(352, 55%, 35%);
   --primary-alpha-50: hsla(352, 55%, 43%, 50%);
   --primary-alpha-30: hsla(352, 55%, 43%, 30%);
 
@@ -13,38 +13,43 @@
   --spotify: hsl(141, 73%, 42%);
 
   --black: hsl(0, 0%, 0%);
-  --black-alpha-5: hsla(0, 0%, 0%, 5%);
-  --black-alpha-10: hsla(0, 0%, 0%, 10%);
-  --black-alpha-20: hsla(0, 0%, 0%, 20%);
-  --black-alpha-30: hsla(0, 0%, 0%, 30%);
-  --black-alpha-40: hsla(0, 0%, 0%, 40%);
-  --black-alpha-50: hsla(0, 0%, 0%, 50%);
+  --black-alpha-2: hsla(223, 50%, 0%, 2%);
+  --black-alpha-5: hsla(223, 50%, 0%, 5%);
+  --black-alpha-10: hsla(223, 50%, 0%, 10%);
+  --black-alpha-20: hsla(223, 50%, 0%, 20%);
+  --black-alpha-30: hsla(223, 50%, 0%, 30%);
+  --black-alpha-40: hsla(223, 50%, 0%, 40%);
+  --black-alpha-50: hsla(223, 50%, 0%, 50%);
+  --black-alpha-60: hsla(223, 50%, 0%, 60%);
+  --black-alpha-70: hsla(223, 50%, 0%, 70%);
 
-  --gray: hsl(227, 13%, 72%);
-  --gray-bis: hsl(223, 19%, 60%);
-  --gray-ter: hsl(224, 13%, 28%);
+  --gray: hsl(223, 20%, 70%);
+  --gray-bis: hsl(223, 20%, 60%);
+  --gray-ter: hsl(223, 20%, 20%);
 
-  --white: hsl(180, 100%, 97%);
-  --white-alpha-2: hsla(0, 0%, 100%, 2%);
-  --white-alpha-5: hsla(0, 0%, 100%, 5%);
-  --white-alpha-10: hsla(0, 0%, 100%, 10%);
-  --white-alpha-20: hwb(0 100% 0% / 0.2);
-  --white-alpha-30: hsla(0, 0%, 100%, 30%);
-  --white-alpha-50: hsla(0, 0%, 100%, 50%);
-  --white-alpha-80: hsla(0, 0%, 100%, 80%);
+  --white: hsl(223, 50%, 90%);
+  --white-alpha-2: hsla(223, 50%, 100%, 2%);
+  --white-alpha-5: hsla(223, 50%, 100%, 5%);
+  --white-alpha-10: hsla(223, 50%, 100%, 10%);
+  --white-alpha-20: hsla(223, 50%, 100%, 20%);
+  --white-alpha-30: hsla(223, 50%, 100%, 30%);
+  --white-alpha-50: hsla(223, 50%, 100%, 50%);
+  --white-alpha-60: hsla(223, 50%, 100%, 60%);
+  --white-alpha-70: hsla(223, 50%, 100%, 70%);
+  --white-alpha-80: hsla(223, 50%, 100%, 80%);
 
   --danger: hsl(346, 100%, 32%);
-  --warning: orange;
+  --warning: hsl(34, 100%, 50%);
   --success: hsl(122, 39%, 49%);
   --info: hsl(214, 35%, 45%);
 
-  --base-color-bg: hsl(225, 6%, 13%);
-  --base-color-bg-bis: hsl(223, 7%, 20%);
+  --base-color-bg: hsl(223, 20%, 10%);
+  --base-color-bg-bis: var(--gray-ter);
   --base-color-fg: var(--gray);
 
-  --scrollbar-width: 0.9em;
+  --scrollbar-width: 0.5em;
   --scrollbar-color-track: var(--base-color-bg);
-  --scrollbar-color-bg: var(--base-color-bg-bis);
+  --scrollbar-color-bg: transparent;
   --scrollbar-color-bg-hover: var(--gray-ter);
 
   --font-family-body: 'Roboto', sans-serif;
@@ -63,14 +68,17 @@
   --font-weight-bold: 700;
   --font-weight-black: 900;
 
-  --link-color: hsl(231, 51%, 80%);
+  --link-color: hsl(231, 15%, 70%);
   --link-hover-color: hsl(199, 98%, 48%);
   --link-active-color: var(--primary);
 
-  --input-height: 3em;
-  --input-height-offset: 0.37em;
-  --input-min-width: 20em;
-  --input-color-b: var(--gray-ter);
+  --input-font-size: 0.9em;
+  --input-height: 2.5em;
+  --input-height-offset: 0em;
+  --input-min-width: 16em;
+  --input-border-width: 0.01625em;
+  --input-color-bg: hsl(223, 30%, 10%);
+  --input-color-b: var(--base-color-bg-bis);
   --input-color-d: hsl(220, 5%, 12%);
   --input-checkbox-color-bg: var(--white-alpha-10);
   --input-checkbox-color-fg: var(--primary);
@@ -85,13 +93,14 @@
   --radius-rounded: 3000em;
 
   --button-height: 35px;
-  --button-color-fg: var(--white);
-  --button-color-bg: var(--white-alpha-5);
+  --button-color-fg: var(--gray-bis);
+  --button-color-bg: hsl(223, 20%, 15%);
   --button-color-hover-fg: var(--white);
   --button-color-hover-bg: var(--black);
 
   --page-gap: 0.25em;
   --page-header-height: auto;
+  --page-header-color-bg: var(--black);
   --page-footer-height: auto;
 
   --notification-error: hsl(342, 100%, 35%);
@@ -109,9 +118,9 @@
   --dd-menu-color-border: var(--black-alpha-20);
   --dd-menu-min-width: 10em;
 
-  --table-color-bg: var(--black-alpha-10);
-  --table-border-color: var(--black-alpha-20);
-  --table-header-color-bg: var(--black-alpha-10);
+  --table-color-bg: var(--input-color-bg);
+  --table-border-color: hsl(223, 20%, 15%);
+  --table-header-color-bg: var(--table-border-color);
 
   --loader-size: 2em;
   --loader-stroke-width: calc(var(--loader-size) / 6);
@@ -119,13 +128,14 @@
   --loader-animation-timing-func: linear;
   --loader-animation-duration: 0.75s;
 
+  // Overlay ------------------------------------------------------
+
   --o-font-size: 20px;
   --o-font-family: 'Nunito', sans-serif;
   --o-font-family-head: 'Passion One', sans-serif;
   --o-font-family-cursive: 'Permanent Marker', cursive;
   --o-font-family-mono: var(--font-family-mono);
 
-  // overlay component variables
   --o-primary: hsl(352, 100%, 59%);
   --o-primary-bis: hsl(352, 55%, 43%);
   --o-secondary: hsl(213, 28%, 13%);
@@ -151,7 +161,6 @@
   --o-font-size-3: 2.2em;
   --o-font-weight-bold: 700;
 
-  // Overlay Toast Components
   --o-toast-bg: var();
   --o-toast-fg: var();
   --o-toast-top: var(--o-gap);
@@ -162,15 +171,15 @@
   --o-toast-width-medium: 15em;
   --o-toast-width-small: minmax(max-content, 100px);
 
-  // Spotify
   --o-spotify-top: 0.25em;
   --o-spotify-right: 0.25em;
   --o-spotify-bottom: 0.25em;
   --o-spotify-left: 0.25em;
   --o-spotify-width: var(--o-toast-width-medium);
 
-  // Header stats
   --o-header-skew: -40deg;
+
+  // Debug --------------------------------------------------------
 
   --debug-sidear-width: minmax(25em, 300px);
   --debug-overlay-font-size: calc(var(--o-font-size) * 0.6);

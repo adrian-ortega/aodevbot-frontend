@@ -20,7 +20,12 @@ const openModCard = async () => {
 </script>
 
 <template>
-  <div class="table__row" :class="{ 'table__row--hovered': hover }">
+  <div
+    class="table__row"
+    :class="{ 'table__row--hovered': hover }"
+    @mouseover="hover = true"
+    @mouseleave="hover = false"
+  >
     <div class="table__cell cb"><input type="checkbox" /></div>
     <div class="table__cell">
       <div class="table__cell-content">

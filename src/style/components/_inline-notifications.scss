@@ -2,7 +2,12 @@
 
 .inline-notification {
   background: var(--black-alpha-20);
-  margin: 2em 0;
+  margin: 1em 0;
+
+  & + & {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
 }
 
 .notification,
@@ -60,5 +65,26 @@
 
   &__content {
     padding-top: 0.175em;
+
+    .form-buttons {
+      margin: calc(var(--page-gap) * 2) 0 var(--page-gap);
+
+      a {
+        display: flex;
+        align-items: center;
+        color: var(--secondary);
+      }
+
+      a + a {
+        &:before {
+          content: '';
+          display: inline-block;
+          height: 100%;
+          width: 1px;
+          background: var(--white-alpha-20);
+          margin: 0 0.35em 0 0;
+        }
+      }
+    }
   }
 }

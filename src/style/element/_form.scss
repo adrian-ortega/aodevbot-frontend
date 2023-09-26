@@ -8,11 +8,12 @@ textarea {
   padding: 0 0.5em;
 
   width: 100%;
-  background: none;
+  background: var(--input-color-bg);
   color: var(--white);
-  border: 1px solid var(--input-color-b);
+  border: var(--input-border-width) solid var(--input-color-b);
   border-radius: var(--radius);
   transition: all 0.1s linear;
+  font-size: var(--input-font-size);
 
   &:focus {
     outline: none;
@@ -94,6 +95,8 @@ input[type='checkbox'] {
 }
 
 .edit-form {
+  --input-border-width: 0.25em;
+
   width: 100%;
   margin: 1em auto;
   max-width: 40em;
@@ -105,8 +108,12 @@ input[type='checkbox'] {
   }
 
   &__title {
+    display: flex;
     flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
   }
+
   h2 {
     font-size: var(--font-size-2);
     font-weight: var(--font-weight-bold);
