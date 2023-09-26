@@ -9,7 +9,7 @@ import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCommandsStore } from '../../../../stores/commands'
 import { useNotificationsStore, NOTIFICATION_ERROR } from '../../../../stores/notifications'
-import { objectHasKey } from '../../../../util'
+import { isEmpty, objectHasKey } from '../../../../util'
 
 const route = useRoute()
 const router = useRouter()
@@ -19,11 +19,21 @@ const nameInput = ref(null)
 const formTitle = ref('')
 const form = reactive({
   id: undefined,
+  type: 1,
+  enabled: false,
+  description: '',
   name: '',
   permission: 0,
   response: '',
+  options: {},
   aliases: []
 })
+const isCustomCommand = computed(() => form.type && form.type === 2)
+const hasAliasResponses = computed(
+  () =>
+    !isEmpty(form.options.fields) &&
+    form.options.fields.find((field) => field.type === 'alias-responses')
+)
 
 const templateOptions = computed(() => {
   return cs.templates.map((template, i) => ({ label: template.name, value: i }))
@@ -33,8 +43,6 @@ const onTemplateChange = (id) => {
   const template = cs.templates[id]
   Object.keys(form).forEach((key) => {
     if (objectHasKey(template, key)) {
-      console.log(key)
-
       form[key] = template[key]
     }
   })
@@ -52,10 +60,16 @@ onMounted(async () => {
       return
     }
 
-    formTitle.value = 'Editing'
+    formTitle.value = `Editing: ${command.formatted_name}`
     form.id = command.id
     form.name = command.name
     form.aliases = command.aliases
+    form.type = command.type
+    form.enabled = command.enabled
+    form.formated_name = command.formatted_name
+    form.description = command.description
+    form.response = command.response
+    form.options = command.options
   } else {
     formTitle.value = 'Create'
   }
@@ -78,20 +92,33 @@ onMounted(async () => {
     </div>
     <hr />
     <FormFieldSelect
+      v-if="!isCustomCommand"
       label="Template"
       :options="templateOptions"
       @input="(id) => onTemplateChange(id)"
     />
     <FormField label="Name">
-      <input type="text" ref="nameInput" v-model="form.name" />
+      <input type="text" ref="nameInput" v-model="form.name" :disabled="isCustomCommand" />
     </FormField>
-    <FormField label="Response">
-      <textarea v-model="form.response"></textarea>
-    </FormField>
-    <FormFieldAliases
-      :value="form.aliases"
-      @input="(value) => (form.aliases = [...form.aliases, value])"
-    />
+    <template v-if="!hasAliasResponses">
+      <FormField label="Response">
+        <textarea v-model="form.response"></textarea>
+      </FormField>
+      <FormFieldAliases
+        :value="form.aliases"
+        @input="(value) => (form.aliases = [...form.aliases, value])"
+      />
+    </template>
+    <template v-if="isCustomCommand">
+      <component
+        v-for="field in form.options.fields"
+        v-model="form.options.field_values[field.id]"
+        :form="form"
+        :key="field.id"
+        :is="`form-field-${field.type}`"
+      />
+    </template>
+
     <FormFieldSelect
       label="Permission"
       :value="form.permission"
@@ -103,6 +130,7 @@ onMounted(async () => {
       ]"
       @input="(value) => (form.permission = value)"
     />
+
     <FormButtons>
       <RouterLink :to="{ name: 'config.commands' }" class="button button--fw">
         <span class="text">Close</span>

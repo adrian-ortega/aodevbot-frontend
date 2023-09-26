@@ -26,7 +26,10 @@
 
   &__post {
     margin-left: var(--page-gap);
+  }
 
+  &__pre,
+  &__post {
     > .button {
       display: flex;
       height: auto;
