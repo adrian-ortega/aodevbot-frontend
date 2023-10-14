@@ -1,17 +1,19 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import FormFieldAliases from './FormFieldAliases.vue'
 import FormField from './FormField.vue'
-import FormButtons from './FormButtons.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiDelete, mdiTag } from '@mdi/js'
+import { mdiDelete } from '@mdi/js'
+import FormFieldSelect from './FormFieldSelect.vue'
 const aliases = reactive({ data: [] })
 const props = defineProps({
   form: {
     type: Object
-  }
+  },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false }
 })
-
+const aliasOptions = computed(() => aliases.data.map((value) => ({ label: value, value })))
 onMounted(() => {
   if (props.form && props.form.aliases.length > 0) {
     aliases.data = props.form.aliases.map((alias) => {
@@ -43,24 +45,18 @@ responses [
 */
 </script>
 <template>
-  <fieldset class="field" style="border-color: var(--primary)">
+  <fieldset class="field">
+    <legend>Alias & Responses</legend>
     <FormFieldAliases
+      :horizontal="props.horizontal"
+      :vertical="props.vertical"
       :value="aliases.data"
-      label="Responses"
+      label="Aliases"
       @input="(value) => (aliases.data = [...aliases.data, value])"
     />
-    <FormButtons align-right>
-      <button class="button">
-        <span class="text">Add Response</span>
-      </button>
-    </FormButtons>
-    <FormField label="Responses">
+    <FormField label="Responses" :horizontal="props.horizontal" :vertical="props.vertical">
       <template v-slot:pre>
-        <button class="button button--icon">
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiTag" />
-          </span>
-        </button>
+        <FormFieldSelect :options="aliasOptions" multiple />
       </template>
       <input type="text" />
       <template v-slot:post>
@@ -70,6 +66,11 @@ responses [
           </span>
         </button>
       </template>
+    </FormField>
+    <FormField class="has-label">
+      <button class="button button--fw">
+        <span class="text">Add Response</span>
+      </button>
     </FormField>
   </fieldset>
 </template>

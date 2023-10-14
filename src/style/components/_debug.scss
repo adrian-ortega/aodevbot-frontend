@@ -408,26 +408,6 @@
   }
 }
 
-.v-debug,
-.v-components {
-  .fieldset,
-  fieldset {
-    border: 0.25em solid var(--base-color-bg-bis);
-    background: var(--black-alpha-20);
-
-    > h2 {
-      margin-top: calc(var(--page-gap) * 4);
-      margin-bottom: calc(var(--page-gap) * 2);
-      font-weight: var(--font-weight-bold);
-      color: var(--gray-bis);
-    }
-
-    > legend + h2 {
-      margin-top: 0;
-    }
-  }
-}
-
 .v-components {
   .page-content .content {
     margin: 0 auto 0.5em;
