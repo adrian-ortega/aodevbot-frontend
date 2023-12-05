@@ -6,9 +6,11 @@ import { mdiLoading, mdiPlus, mdiChevronRight } from '@mdi/js'
 import { useCommandsStore } from '../../../../stores/commands'
 const cs = useCommandsStore()
 const props = defineProps({
-  type: String,
-  default() {
-    return 'general'
+  type: {
+    type: String,
+    default() {
+      return 'general'
+    }
   }
 })
 </script>

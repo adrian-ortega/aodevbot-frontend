@@ -13,6 +13,12 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const hover = ref(false)
 const props = defineProps({
+  type: {
+    type: String,
+    default() {
+      return 'general'
+    }
+  },
   row: {
     type: Object,
     required: true
@@ -72,11 +78,13 @@ const props = defineProps({
             <SvgIcon type="mdi" :path="mdiPencil" />
           </span>
         </router-link>
-        <button class="button button--danger button--transparent button--icon" title="Delete">
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiDeleteOutline" />
-          </span>
-        </button>
+        <template v-if="props.type !== 'custom'">
+          <button class="button button--danger button--transparent button--icon" title="Delete">
+            <span class="icon">
+              <SvgIcon type="mdi" :path="mdiDeleteOutline" />
+            </span>
+          </button>
+        </template>
       </FormButtons>
     </div>
   </div>
