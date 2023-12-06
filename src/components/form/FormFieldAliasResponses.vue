@@ -2,16 +2,29 @@
 import { computed, onMounted, reactive } from 'vue'
 import FormFieldAliases from './FormFieldAliases.vue'
 import FormField from './FormField.vue'
+import FormHelpTokens from './help/FormHelpTokens.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiDelete } from '@mdi/js'
+import { mdiDelete, mdiDotsHorizontal, mdiTagMultiple } from '@mdi/js'
 import FormFieldSelect from './FormFieldSelect.vue'
-const aliases = reactive({ data: [] })
+import { makeId } from '../../util'
+const aliases = reactive({ data: [] });
+const responses = reactive({ data: [] });
+const responseToAdd = reactive({ aliases: [], response: '' });
 const props = defineProps({
   form: {
     type: Object
   },
+  value: {
+    type: [Object, String, Array]
+  },
   horizontal: { type: Boolean, default: true },
-  vertical: { type: Boolean, default: false }
+  vertical: { type: Boolean, default: false },
+  commandOptions: {
+    type: [Object],
+    default: () => {
+      return {}
+    }
+  }
 })
 const aliasOptions = computed(() => aliases.data.map((value) => ({ label: value, value })))
 onMounted(() => {
@@ -22,6 +35,16 @@ onMounted(() => {
     })
   }
 })
+
+const addResponse = () => {
+  const { aliases, response } = responseToAdd;
+  responseToAdd.aliases = [];
+  responseToAdd.response = '';
+
+  if (response.length) {
+    responses.data.push({ id: makeId(),aliases, response })
+  }
+}
 /*
 One reply can be mapped to multiple Aliases
 {
@@ -45,7 +68,7 @@ responses [
 */
 </script>
 <template>
-  <fieldset class="field">
+  <fieldset class="field field--input-alias-responses">
     <legend>Alias & Responses</legend>
     <FormFieldAliases
       :horizontal="props.horizontal"
@@ -54,21 +77,56 @@ responses [
       label="Aliases"
       @input="(value) => (aliases.data = [...aliases.data, value])"
     />
+
+    <FormField class="has-label" v-if="responses.data.length > 0">
+      <div class="alias-responses">
+        <h5>Alias/Response</h5>
+        <div class="alias-responses__items">
+          <div class="alias-responses__item" v-for="response in responses.data" :key="response.id">
+            <div>
+              <p>{{ response.response }}</p>
+            </div>
+            <div>
+              <div class="form-buttons">
+                <button class="button button--sm button--icon">
+                  <span class="icon">
+                    <SvgIcon type="mdi" :path="mdiTagMultiple" />
+                  </span>
+                </button>
+                <button class="button button--sm button--icon">
+                  <span class="icon">
+                    <SvgIcon type="mdi" :path="mdiDelete" />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </FormField>
+
     <FormField label="Responses" :horizontal="props.horizontal" :vertical="props.vertical">
       <template v-slot:pre>
-        <FormFieldSelect :options="aliasOptions" multiple />
+        <FormFieldSelect
+          :options="aliasOptions"
+          :value="responseToAdd.aliases"
+          @input="(value) => responseToAdd.aliases = [...value]"
+          multiple
+        >
+          <template v-slot:selected-label>
+            <span class="icon">
+              <SvgIcon type="mdi" :path="mdiTagMultiple"/>
+              </span>
+          </template>
+        </FormFieldSelect>
       </template>
-      <input type="text" />
-      <template v-slot:post>
-        <button class="button button--icon">
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiDelete" />
-          </span>
-        </button>
+      <input type="text" v-model="responseToAdd.response"/>
+      <template v-if="commandOptions.tokens" v-slot:helpopup>
+        <FormHelpTokens :command-options="commandOptions"/>
       </template>
     </FormField>
     <FormField class="has-label">
-      <button class="button button--fw">
+      <button class="button button--fw" @click.prevent="addResponse">
         <span class="text">Add Response</span>
       </button>
     </FormField>

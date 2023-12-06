@@ -10,3 +10,19 @@
     object-fit: cover;
   }
 }
+
+dl.token-descriptions {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1em;
+  margin: 1em 0;
+
+  dt {
+    width: 33%;
+  }
+
+  dd {
+    width: 66%;
+    margin-left: auto;
+  }
+}

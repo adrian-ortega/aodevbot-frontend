@@ -23,6 +23,12 @@ const props = defineProps({
   },
   tagPrefix: {
     type: String
+  },
+  commandOptions: {
+    type: [Object],
+    default: () => {
+      return {}
+    }
   }
 })
 

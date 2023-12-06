@@ -29,6 +29,12 @@ const props = defineProps({
   },
   options: {
     type: Array
+  },
+  commandOptions: {
+    type: [Object],
+    default: () => {
+      return {}
+    }
   }
 })
 const dd = ref(null)
@@ -58,9 +64,24 @@ const closeMenu = () => {
   document.removeEventListener('click', outsideClickEventHandler)
 }
 const selectOption = ({ value }) => {
+  if(props.multiple) {
+    value = props.value.includes(value)
+      ? props.value.filter(opt => opt !== value)
+      : [...(props.value || []), value];
+  }
   emit('input', value)
   closeMenu()
 }
+
+const selectAll = () => {
+  emit('input', [...parsedOptions.value].map(({ value }) => value));
+  closeMenu();
+}
+const selectNone = () => {
+  emit('input', []);
+  closeMenu();
+}
+
 const parsedOptions = computed(() => {
   const opts = []
   if (Array.isArray(props.options)) {
@@ -81,13 +102,29 @@ const parsedOptions = computed(() => {
   return opts
 })
 const selectOptionLabel = computed(() => {
+  const value = props.multiple ? [...props.value] : props.value;
+
+  if(!value || value.length === 0) {
+    return '---';
+  }
+
   const options = [...parsedOptions.value]
+  const multipleSel = [];
   for (let i = 0; i < options.length; i++) {
-    if (options[i].value === props.value) {
+    if (!props.multiple && options[i].value === value) {
       return options[i].label
     }
+
+    if(props.multiple && value.includes(options[i].value)) {
+      multipleSel.push(options[i].label)
+    }
   }
-  return props.value
+
+  if (multipleSel.length === options.length) {
+    return 'All'
+  }
+
+  return multipleSel.length === 2 ? `${multipleSel.length} Selected` : multipleSel.shift();
 })
 </script>
 <template>
@@ -100,7 +137,9 @@ const selectOptionLabel = computed(() => {
   >
     <div ref="dd" class="input-select" :class="{ 'is-open': isOpen, 'is-closed': isClosed }">
       <div class="input-select__v" @click.prevent="() => toggleMenu()">
-        <div class="input-select__vv">{{ selectOptionLabel }}</div>
+        <div class="input-select__vv">
+          <slot name="selected-label">{{ selectOptionLabel }}</slot>
+        </div>
         <div class="input-select__cd">
           <span class="icon">
             <SvgIcon type="mdi" :path="isOpen ? mdiChevronUp : mdiChevronDown" />
@@ -111,6 +150,12 @@ const selectOptionLabel = computed(() => {
         <div class="input-select__s" v-if="props.hasSearch">
           <input type="search" />
         </div>
+        <div class="input-select__b" v-if="props.multiple">
+          <div class="form-buttons">
+            <button class="button button--text" @click.prevent="selectAll">All</button>
+            <button class="button button--text" @click.prevent="selectNone">None</button>
+          </div>
+        </div>
         <div class="input-select__o">
           <div
             v-for="(option, oKey) in parsedOptions"
@@ -120,7 +165,9 @@ const selectOptionLabel = computed(() => {
             @click.prevent="() => selectOption(option)"
           >
             <div class="input-select__cb" v-if="props.multiple">
-              <span class="icon"><SvgIcon type="mdi" :path="mdiCheck" /> </span>
+              <span class="icon">
+                <SvgIcon v-if="props.value.includes(option.value)" type="mdi" :path="mdiCheck" />
+              </span>
             </div>
             <div class="input-select__vv">{{ option.label }}</div>
           </div>

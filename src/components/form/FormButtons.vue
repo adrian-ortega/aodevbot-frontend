@@ -1,7 +1,13 @@
 <script setup>
 const props = defineProps({
   inline: Boolean,
-  alignRight: Boolean
+  alignRight: Boolean,
+  commandOptions: {
+    type: [Object],
+    default: () => {
+      return {}
+    }
+  }
 })
 </script>
 <template>

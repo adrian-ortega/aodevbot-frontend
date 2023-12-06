@@ -30,6 +30,12 @@
   &--success {
     color: var(--success);
   }
+
+  &--small,
+  &--sm {
+    font-size: 0.9em;
+  }
+  
 }
 
 .avatar {

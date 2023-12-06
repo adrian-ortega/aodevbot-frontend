@@ -25,11 +25,10 @@
 }
 
 .input-select {
-  position: relative;
-  z-index: 3;
   width: 100%;
   min-width: 5em;
   font-size: var(--input-font-size);
+  position: relative;
 
   &__v,
   &__dd {
@@ -43,11 +42,13 @@
     top: calc(100% + var(--page-gap));
     left: 0;
     width: 100%;
+    min-width: 10em;;
     background-color: var(--base-color-bg);
     opacity: 0;
     visibility: hidden;
     border: 1px solid var(--black-alpha-30);
     box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);
+    z-index: 3;
   }
 
   &__s {
@@ -119,6 +120,15 @@
 
   &__cd {
     font-size: var(--font-size-2);
+  }
+
+  &__b {
+    padding:  0.5em;
+    border-bottom: 1px solid var(--white-alpha-5);
+
+    .form-buttons {
+      justify-content: flex-end;
+    }
   }
 
   &.is-open &__v {

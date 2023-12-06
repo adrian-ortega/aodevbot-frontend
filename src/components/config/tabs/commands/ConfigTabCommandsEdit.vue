@@ -4,6 +4,7 @@ import FormFieldSelect from '../../../form/FormFieldSelect.vue'
 import FormFieldAliases from '../../../form/FormFieldAliases.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import FormButtons from '../../../form/FormButtons.vue'
+import FormHelpTokens from '../../../form/help/FormHelpTokens.vue'
 import { mdiChevronLeft, mdiPound } from '@mdi/js'
 import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -18,21 +19,13 @@ const ns = useNotificationsStore()
 const nameInput = ref(null)
 const formTitle = ref('')
 const form = reactive({
-  id: undefined,
-  type: 1,
-  enabled: false,
-  description: '',
-  name: '',
-  permission: 0,
-  response: '',
-  options: {},
-  aliases: []
+  data: {}
 })
-const isCustomCommand = computed(() => form.type && form.type === 2)
+const isCustomCommand = computed(() => form.data.type && form.data.type === 2)
 const hasAliasResponses = computed(
   () =>
-    !isEmpty(form.options.fields) &&
-    form.options.fields.find((field) => field.type === 'alias-responses')
+    !isEmpty(form.data) && !isEmpty(form.data.options.fields) &&
+    form.data.options.fields.find((field) => field.type === 'alias-responses')
 )
 
 const templateOptions = computed(() => {
@@ -50,8 +43,14 @@ const onTemplateChange = (id) => {
 }
 
 const onSave = async () => {
-  const response = await cs.updateCommand(form.id, form);
-  console.log({ response });
+  const response = await cs.updateCommand(form.data.id, form.data);
+  if(response.message) {
+    ns.append(response.message, response.error ? ns.types.error : ns.types.success);
+  }
+}
+
+const onSaveAndClose = async () => {
+  await onSave();
 }
 
 onMounted(async () => {
@@ -66,15 +65,7 @@ onMounted(async () => {
     }
 
     formTitle.value = `Editing: ${command.formatted_name}`
-    form.id = command.id
-    form.name = command.name
-    form.aliases = command.aliases
-    form.type = command.type
-    form.enabled = command.enabled
-    form.formated_name = command.formatted_name
-    form.description = command.description
-    form.response = command.response
-    form.options = command.options
+    form.data = {...command}
   } else {
     formTitle.value = 'Create'
   }
@@ -91,11 +82,11 @@ onMounted(async () => {
       </div>
       <div class="edit-form__title">
         <h2>{{ formTitle }}</h2>
-        <code v-if="form.id">
+        <code v-if="form.data.id">
           <span class="icon">
             <SvgIcon type="mdi" :path="mdiPound" />
           </span>
-          {{ form.id }}
+          {{ form.data.id }}
         </code>
       </div>
     </div>
@@ -107,44 +98,51 @@ onMounted(async () => {
       @input="(id) => onTemplateChange(id)"
     />
     <FormField label="Name">
-      <input type="text" ref="nameInput" v-model="form.name" :disabled="isCustomCommand" />
+      <input type="text" ref="nameInput" v-model="form.data.name" :disabled="isCustomCommand" />
     </FormField>
     <template v-if="!hasAliasResponses">
       <FormField label="Response">
-        <textarea v-model="form.response"></textarea>
+        <textarea v-model="form.data.response"></textarea>
+        <template v-slot:helpopup>
+          <FormHelpTokens :command-options="form.data.options" />
+        </template>
       </FormField>
       <FormFieldAliases
-        :value="form.aliases"
+        :value="form.data.aliases"
         tag-prefix="!"
-        @input="(value) => (form.aliases = [...form.aliases, value])"
+        @input="(value) => (form.data.aliases = [...form.data.aliases, value])"
       />
     </template>
     <template v-if="isCustomCommand">
       <component
-        v-for="field in form.options.fields"
-        v-model="form.options.field_values[field.id]"
+        v-for="field in form.data.options.fields"
+        :value="form.data.options.field_values[field.id]"
         :form="form"
         :key="field.id"
         :is="`form-field-${field.type}`"
+        :command-options="form.data.options"
       />
     </template>
 
     <FormFieldSelect
       label="Permission"
-      :value="form.permission"
+      :value="form.data.permission"
       :options="[
         { label: 'Everyone', value: 0 },
         { label: 'Subscribers', value: 1 },
         { label: 'Moderators', value: 2 },
         { label: 'Broadcaster', value: 3 }
       ]"
-      @input="(value) => (form.permission = value)"
+      @input="(value) => (form.data.permission = value)"
     />
 
     <FormButtons>
       <RouterLink :to="{ name: 'config.commands' }" class="button button--fw">
         <span class="text">Close</span>
       </RouterLink>
+      <button class="button button--secondary button--fw" @click.prevent="onSaveAndClose">
+        <span class="text">Save & Close</span>
+      </button>
       <button class="button button--primary button--fw" @click.prevent="onSave">
         <span class="text">Save</span>
       </button>
