@@ -49,6 +49,11 @@ const onTemplateChange = (id) => {
   nameInput.value.focus()
 }
 
+const onSave = async () => {
+  const response = await cs.updateCommand(form.id, form);
+  console.log({ response });
+}
+
 onMounted(async () => {
   // await cs.fetchTemplates()
   const { id } = route.params
@@ -140,7 +145,7 @@ onMounted(async () => {
       <RouterLink :to="{ name: 'config.commands' }" class="button button--fw">
         <span class="text">Close</span>
       </RouterLink>
-      <button class="button button--primary button--fw">
+      <button class="button button--primary button--fw" @click.prevent="onSave">
         <span class="text">Save</span>
       </button>
     </FormButtons>

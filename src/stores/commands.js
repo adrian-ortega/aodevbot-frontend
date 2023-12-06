@@ -149,8 +149,24 @@ export const useCommandsStore = defineStore('commands', () => {
     console.log({ command })
   }
 
-  const editCommand = (command) => {
-    editId.value = command.id
+  const updateCommand = async (id, data) => {
+    let responseData;
+    isFetching();
+    try {
+      const response = await fetch(`/api/commands/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      responseData = await response.json()
+    } catch (err) {
+      responseData = { error: true };
+      console.log(err);
+    }
+    doneFetching();
+    return responseData;
   }
 
   const deleteCommand = (command) => {
@@ -188,7 +204,7 @@ export const useCommandsStore = defineStore('commands', () => {
     getCommand,
     createCommand,
     enableCommand,
-    editCommand,
+    updateCommand,
     deleteCommand
   }
 })
