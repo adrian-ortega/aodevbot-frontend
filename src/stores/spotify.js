@@ -14,6 +14,8 @@ export const useSpotifyStore = defineStore('spotify', () => {
   })
   const playerStateProgress = ref(0)
   const currentlyPlaying = reactive({ data: {} })
+  const upNext = reactive({ data: null })
+
   const isPlaying = computed(() => !!playerState.data.is_playing)
   const track = computed(() => (currentlyPlaying.data.item ? currentlyPlaying.data.item : null))
   const trackAlbum = computed(() => (track.value ? track.value.album : null))
@@ -44,6 +46,12 @@ export const useSpotifyStore = defineStore('spotify', () => {
       case 'spotify.player-state':
         playerState.data = { ...payload }
         playerStateProgress.value = playerState.data.progress_ms
+        break
+      case 'spotify.up-next':
+        upNext.data = { ...payload }
+        setTimeout(() => {
+          upNext.data = null;
+        }, ONE_SECOND * 15)
         break
     }
 
@@ -87,6 +95,7 @@ export const useSpotifyStore = defineStore('spotify', () => {
 
     track,
     trackAlbum,
-    trackArtist
+    trackArtist,
+    upNext: computed(() => upNext.data)
   }
 })

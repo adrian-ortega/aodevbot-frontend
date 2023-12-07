@@ -48,6 +48,7 @@
     display: inline-block;
     width: 100%;
     gap: 0.25em;
+    color: var(--white);
 
     &:not(:last-child) {
       margin-bottom: 0.2em;

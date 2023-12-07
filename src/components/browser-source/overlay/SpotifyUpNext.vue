@@ -1,15 +1,32 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiSpotify } from '@mdi/js'
+import { computed } from 'vue'
+import { useSpotifyStore } from '../../../stores/spotify'
+import { objectHasKey } from '../../../util'
+const ss = useSpotifyStore()
+const requesterName = computed(() => ss.upNext?.display_name)
+const trackArtist = computed(() => ss.upNext?.track_artist)
+const trackName = computed(() => ss.upNext?.track_name)
+const animateIn = computed(() => objectHasKey(ss.upNext, 'id'))
+const animateOut = computed(() => ss.upNext === null)
 </script>
 
 <template>
-  <div class="spotify-up-next">
+  <div
+    class="spotify-up-next"
+    :class="{
+      'animate-in': animateIn,
+      'animate-out': animateOut
+    }"
+  >
     <div class="spotify-up-next__container">
       <div class="spotify-up-next__header">
         <div><strong>!sr</strong> from</div>
         <div :class="{ marquee: true }">
-          <span><em>AODEV</em> </span>
+          <span
+            ><em>{{ requesterName }}</em>
+          </span>
         </div>
       </div>
       <div class="spotify-up-next__content">
@@ -21,12 +38,12 @@ import { mdiSpotify } from '@mdi/js'
         <div class="spotify-up-next__track">
           <div class="spotify-up-next__title">
             <div :class="{ marquee: false }">
-              <div>Some song name that's really long</div>
+              <div>{{ trackName }}</div>
             </div>
           </div>
           <div class="spotify-up-next__artist">
             <div :class="{ marquee: false }">
-              <div>Artist name</div>
+              <div>{{ trackArtist }}</div>
             </div>
           </div>
         </div>
