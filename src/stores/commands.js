@@ -177,6 +177,25 @@ export const useCommandsStore = defineStore('commands', () => {
     }
   }
 
+  const resetCustomCommand = async (id) => {
+    let responseData = {};
+    isFetching();
+    try {
+      const response = await fetch(`/api/commands/${id}/reset`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+      })
+    } catch (err) {
+      responseData = { error: true };
+      console.log(err);
+    }
+    doneFetching();
+    return responseData;
+  }
+
   return {
     page,
     pageLimit,
@@ -205,6 +224,7 @@ export const useCommandsStore = defineStore('commands', () => {
     createCommand,
     enableCommand,
     updateCommand,
+    resetCustomCommand,
     deleteCommand
   }
 })

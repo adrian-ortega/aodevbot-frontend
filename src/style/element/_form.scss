@@ -102,17 +102,25 @@ input[type='checkbox'] {
   margin: 1em auto;
   max-width: 40em;
 
+  h2,
   &__header {
     display: flex;
-    gap: 0.5em;
     align-items: center;
   }
 
+  &__header {
+    gap: 0.5em;
+  }
+
   &__title {
-    display: flex;
     flex-grow: 1;
-    align-items: center;
     justify-content: space-between;
+
+    &,
+    > div {
+      display: flex;
+      align-items: stretch;
+    }
   }
 
   h2 {

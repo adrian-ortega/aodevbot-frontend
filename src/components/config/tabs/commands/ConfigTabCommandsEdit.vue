@@ -5,7 +5,7 @@ import FormFieldAliases from '../../../form/FormFieldAliases.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import FormButtons from '../../../form/FormButtons.vue'
 import FormHelpTokens from '../../../form/help/FormHelpTokens.vue'
-import { mdiChevronLeft, mdiPound } from '@mdi/js'
+import { mdiChevronLeft, mdiPound, mdiRestore } from '@mdi/js'
 import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCommandsStore } from '../../../../stores/commands'
@@ -24,7 +24,8 @@ const form = reactive({
 const isCustomCommand = computed(() => form.data.type && form.data.type === 2)
 const hasAliasResponses = computed(
   () =>
-    !isEmpty(form.data) && !isEmpty(form.data.options.fields) &&
+    !isEmpty(form.data) &&
+    !isEmpty(form.data.options.fields) &&
     form.data.options.fields.find((field) => field.type === 'alias-responses')
 )
 
@@ -43,14 +44,21 @@ const onTemplateChange = (id) => {
 }
 
 const onSave = async () => {
-  const response = await cs.updateCommand(form.data.id, form.data);
-  if(response.message) {
-    ns.append(response.message, response.error ? ns.types.error : ns.types.success);
+  const response = await cs.updateCommand(form.data.id, form.data)
+  if (response.message) {
+    ns.append(response.message, response.error ? ns.types.error : ns.types.success)
   }
 }
 
 const onSaveAndClose = async () => {
-  await onSave();
+  await onSave()
+}
+
+const onResetCustomCommand = async () => {
+  const response = await cs.resetCustomCommand(form.data.id)
+  if (response.message) {
+    ns.append(response.message, response.error ? ns.types.error : ns.types.success)
+  }
 }
 
 onMounted(async () => {
@@ -65,7 +73,7 @@ onMounted(async () => {
     }
 
     formTitle.value = `Editing: ${command.formatted_name}`
-    form.data = {...command}
+    form.data = { ...command }
   } else {
     formTitle.value = 'Create'
   }
@@ -81,13 +89,23 @@ onMounted(async () => {
         </RouterLink>
       </div>
       <div class="edit-form__title">
-        <h2>{{ formTitle }}</h2>
-        <code v-if="form.data.id">
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiPound" />
-          </span>
-          {{ form.data.id }}
-        </code>
+        <div>
+          <h2>{{ formTitle }}</h2>
+        </div>
+        <div v-if="form.data.id">
+          <button
+            v-if="isCustomCommand"
+            class="button button--icon button--transparent button--danger-hover"
+            @click.prevent="onResetCustomCommand"
+          >
+            <span class="icon"><SvgIcon type="mdi" :path="mdiRestore" /></span>
+            <span class="popup-text">Reset to defaults</span>
+          </button>
+          <code>
+            <span class="icon"><SvgIcon type="mdi" :path="mdiPound" /></span>
+            {{ form.data.id }}
+          </code>
+        </div>
       </div>
     </div>
     <hr />

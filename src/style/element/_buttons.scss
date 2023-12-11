@@ -32,15 +32,54 @@
     display: inline-flex;
   }
 
-  .icon:last-child:not(:first-child) {
-    margin-left: 0.5em;
-    margin-right: -0.25em;
+  .popup-text {
+    position: absolute;
+    bottom: calc(100% + 0.5em);
+    background: var(--black);
+    font-size: var(--font-size-tiny);
+    padding: 0.5em;
+    border-radius: var(--radius);
+    transition: all 200ms linear;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10%);
+
+    &:after {
+      $size: 0.5em;
+      content: '';
+      position: absolute;
+      top: 99%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-top: $size solid var(--black);
+    }
   }
 
-  .avatar:first-child:not(:last-child),
-  .icon:first-child:not(:last-child) {
-    margin-left: -0.25em;
-    margin-right: 0.5em;
+  &:has(.popup-text) {
+    position: relative;
+
+    &:hover .popup-text {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &:not(:has(.popup-text)) {
+    .icon:last-child:not(:first-child) {
+      margin-left: 0.5em;
+      margin-right: -0.25em;
+    }
+
+    .avatar:first-child:not(:last-child),
+    .icon:first-child:not(:last-child) {
+      margin-left: -0.25em;
+      margin-right: 0.5em;
+    }
   }
 
   &--primary {
@@ -116,10 +155,12 @@
     }
   }
 
+  &--danger-hover,
   &--danger {
     &:hover,
     &:focus {
       background: var(--danger);
+      border-color: var(--danger);
       color: var(--white-alpha-80);
     }
   }
