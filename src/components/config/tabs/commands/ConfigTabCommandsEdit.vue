@@ -159,11 +159,6 @@ onMounted(async () => {
       ]"
       @input="(value) => (form.data.permission = value)"
     />
-
-    <div class="has-label">
-      <pre>{{ form.data }}</pre>
-    </div>
-
     <FormButtons>
       <RouterLink :to="{ name: 'config.commands' }" class="button button--fw">
         <span class="text">Close</span>
