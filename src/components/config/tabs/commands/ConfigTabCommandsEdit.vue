@@ -10,7 +10,7 @@ import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCommandsStore } from '../../../../stores/commands'
 import { useNotificationsStore, NOTIFICATION_ERROR } from '../../../../stores/notifications'
-import { isEmpty, objectHasKey } from '../../../../util'
+import { isEmpty, isObject, objectHasKey } from '../../../../util'
 
 const route = useRoute()
 const router = useRouter()
@@ -58,6 +58,9 @@ const onResetCustomCommand = async () => {
   const response = await cs.resetCustomCommand(form.data.id)
   if (response.message) {
     ns.append(response.message, response.error ? ns.types.error : ns.types.success)
+  }
+  if (isObject(response.data)) {
+    form.data = { ...response.data }
   }
 }
 
@@ -134,11 +137,14 @@ onMounted(async () => {
     <template v-if="isCustomCommand">
       <component
         v-for="field in form.data.options.fields"
+        :label="field.label"
+        :help="field.help"
         :value="form.data.options.field_values[field.id]"
         :form="form"
         :key="field.id"
         :is="`form-field-${field.type}`"
         :command-options="form.data.options"
+        @input="(value) => (form.data.options.field_values[field.id] = value)"
       />
     </template>
 
@@ -153,6 +159,10 @@ onMounted(async () => {
       ]"
       @input="(value) => (form.data.permission = value)"
     />
+
+    <div class="has-label">
+      <pre>{{ form.data }}</pre>
+    </div>
 
     <FormButtons>
       <RouterLink :to="{ name: 'config.commands' }" class="button button--fw">

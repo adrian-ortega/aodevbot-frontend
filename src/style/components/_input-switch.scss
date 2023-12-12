@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+.field--input-switch {
+  .input-switch {
+    position: relative;
+    display: inline-block;
+    width: 2.75em;
+    height: 1.5em;
+
+    &__s {
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--input-color-bg);
+      border: 2px solid var(--input-color-b);
+
+      &,
+      &:before {
+        position: absolute;
+        border-radius: var(--radius-rounded);
+        transition: 0.4s;
+      }
+
+      &:before {
+        top: 0.1em;
+        left: 0.1em;
+        content: '';
+        height: 1.1em;
+        width: 1.1em;
+        background-color: var(--input-color-b);
+      }
+    }
+
+    &__cb {
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      &:checked + .input-switch__s {
+        background-color: var(--secondary-ter);
+        border-color: var(--input-checkbox-color-b);
+
+        &:before {
+          background-color: var(--white);
+          transform: translateX(1.25em);
+        }
+      }
+    }
+  }
+}

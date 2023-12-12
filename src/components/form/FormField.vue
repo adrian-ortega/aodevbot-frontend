@@ -1,7 +1,7 @@
 <script setup>
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiClose, mdiHelp, mdiHelpCircle } from '@mdi/js';
-import { ref, computed, useSlots } from 'vue';
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiClose, mdiHelp, mdiHelpCircle } from '@mdi/js'
+import { ref, computed, useSlots } from 'vue'
 const $slots = useSlots()
 const props = defineProps({
   label: {
@@ -57,19 +57,17 @@ const helpPopupOutsideClickEventHandler = (event) => {
 const openHelpPopup = (evt) => {
   helpIsOpen.value = true
   setTimeout(() => {
-    helpPopupEl.value = evt.target.closest('.field').querySelector('.field__help-popup__inner');
-  }, 10);
+    helpPopupEl.value = evt.target.closest('.field').querySelector('.field__help-popup__inner')
+  }, 10)
   document.addEventListener('keyup', helpPopupEscapeKeyHandler, false)
   document.addEventListener('click', helpPopupOutsideClickEventHandler, false)
-} 
-
+}
 const closeHelpPopup = () => {
   helpIsOpen.value = false
-  helpPopupEl.value = null;
+  helpPopupEl.value = null
   document.removeEventListener('keyup', helpPopupEscapeKeyHandler)
   document.removeEventListener('click', helpPopupOutsideClickEventHandler)
 }
-
 </script>
 <template>
   <div :class="fieldCssClasses">
@@ -79,7 +77,7 @@ const closeHelpPopup = () => {
           <h4>Help</h4>
           <button class="button button--close" @click.prevent="closeHelpPopup">
             <span class="icon">
-              <SvgIcon type="mdi" :path="mdiClose"/>
+              <SvgIcon type="mdi" :path="mdiClose" />
             </span>
           </button>
         </div>

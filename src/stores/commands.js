@@ -188,6 +188,7 @@ export const useCommandsStore = defineStore('commands', () => {
         },
         body: JSON.stringify({ id })
       })
+      responseData = await response.json()
     } catch (err) {
       responseData = { error: true };
       console.log(err);

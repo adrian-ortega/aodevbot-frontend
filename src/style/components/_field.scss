@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .field {
-  margin: 0 0 1em;
+  margin: 0 0 1.5em;
   // position: relative;
   // z-index: 1;
 
@@ -13,7 +13,7 @@
 
   &__label {
     align-items: flex-start;
-    gap: 0.2em;  
+    gap: 0.2em;
   }
 
   &__pre {
@@ -81,8 +81,12 @@
     align-items: flex-start;
     font-size: var(--font-size-small);
     margin-top: calc(var(--page-gap) + 0.2em);
-    color: var(--gray-bis);
+    color: var(--white-bis);
     gap: var(--page-gap);
+
+    .icon {
+      color: var(--info-bis);
+    }
   }
 
   &__help-popup {
