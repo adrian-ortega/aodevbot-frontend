@@ -29,12 +29,6 @@ const props = defineProps({
   },
   options: {
     type: Array
-  },
-  commandOptions: {
-    type: [Object],
-    default: () => {
-      return {}
-    }
   }
 })
 const dd = ref(null)
@@ -64,22 +58,25 @@ const closeMenu = () => {
   document.removeEventListener('click', outsideClickEventHandler)
 }
 const selectOption = ({ value }) => {
-  if(props.multiple) {
+  if (props.multiple) {
     value = props.value.includes(value)
-      ? props.value.filter(opt => opt !== value)
-      : [...(props.value || []), value];
+      ? props.value.filter((opt) => opt !== value)
+      : [...(props.value || []), value]
   }
   emit('input', value)
   closeMenu()
 }
 
 const selectAll = () => {
-  emit('input', [...parsedOptions.value].map(({ value }) => value));
-  closeMenu();
+  emit(
+    'input',
+    [...parsedOptions.value].map(({ value }) => value)
+  )
+  closeMenu()
 }
 const selectNone = () => {
-  emit('input', []);
-  closeMenu();
+  emit('input', [])
+  closeMenu()
 }
 
 const parsedOptions = computed(() => {
@@ -102,20 +99,20 @@ const parsedOptions = computed(() => {
   return opts
 })
 const selectOptionLabel = computed(() => {
-  const value = props.multiple ? [...props.value] : props.value;
+  const value = props.multiple ? [...props.value] : props.value
 
-  if(!value || value.length === 0) {
-    return '---';
+  if (!value || value.length === 0) {
+    return '---'
   }
 
   const options = [...parsedOptions.value]
-  const multipleSel = [];
+  const multipleSel = []
   for (let i = 0; i < options.length; i++) {
     if (!props.multiple && options[i].value === value) {
       return options[i].label
     }
 
-    if(props.multiple && value.includes(options[i].value)) {
+    if (props.multiple && value.includes(options[i].value)) {
       multipleSel.push(options[i].label)
     }
   }
@@ -124,7 +121,7 @@ const selectOptionLabel = computed(() => {
     return 'All'
   }
 
-  return multipleSel.length === 2 ? `${multipleSel.length} Selected` : multipleSel.shift();
+  return multipleSel.length === 2 ? `${multipleSel.length} Selected` : multipleSel.shift()
 })
 </script>
 <template>

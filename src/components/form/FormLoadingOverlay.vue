@@ -2,12 +2,6 @@
 const props = defineProps({
   fullPage: {
     type: Boolean
-  },
-  commandOptions: {
-    type: [Object],
-    default: () => {
-      return {}
-    }
   }
 })
 </script>

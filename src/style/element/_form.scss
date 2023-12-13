@@ -9,7 +9,7 @@ textarea {
 
   width: 100%;
   background: var(--input-color-bg);
-  color: var(--gray-bis);
+  color: var(--input-color-placeholder);
   border: var(--input-border-width) solid var(--input-color-b);
   border-radius: var(--radius);
   transition: all 0.1s linear;
@@ -18,8 +18,8 @@ textarea {
   &:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px var(--body-color-bg), 0 0 0 5px var(--primary-alpha-30);
-    color: var(--white);
+    box-shadow: 0 0 0 0.2em var(--input-color-b);
+    color: var(--white-bis);
   }
 
   &.is-disabled,
@@ -93,39 +93,5 @@ input[type='checkbox'] {
     &:after {
       transform: rotate(45deg) scale(1) translateY(0);
     }
-  }
-}
-
-.edit-form {
-  --input-border-width: 0.25em;
-
-  width: 100%;
-  margin: 1em auto;
-  max-width: 40em;
-
-  h2,
-  &__header {
-    display: flex;
-    align-items: center;
-  }
-
-  &__header {
-    gap: 0.5em;
-  }
-
-  &__title {
-    flex-grow: 1;
-    justify-content: space-between;
-
-    &,
-    > div {
-      display: flex;
-      align-items: stretch;
-    }
-  }
-
-  h2 {
-    font-size: var(--font-size-2);
-    font-weight: var(--font-weight-bold);
   }
 }

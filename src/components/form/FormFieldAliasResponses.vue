@@ -1,4 +1,10 @@
 <script setup>
+//
+//
+// @TODO THIS WHOLE COMPONENT NEEDS TO BE REDONE
+//
+//
+
 import { computed, onMounted, reactive } from 'vue'
 import FormFieldAliases from './FormFieldAliases.vue'
 import FormField from './FormField.vue'
@@ -7,9 +13,9 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiDelete, mdiDotsHorizontal, mdiTagMultiple } from '@mdi/js'
 import FormFieldSelect from './FormFieldSelect.vue'
 import { makeId } from '../../util'
-const aliases = reactive({ data: [] });
-const responses = reactive({ data: [] });
-const responseToAdd = reactive({ aliases: [], response: '' });
+const aliases = reactive({ data: [] })
+const responses = reactive({ data: [] })
+const responseToAdd = reactive({ aliases: [], response: '' })
 const props = defineProps({
   form: {
     type: Object
@@ -37,12 +43,12 @@ onMounted(() => {
 })
 
 const addResponse = () => {
-  const { aliases, response } = responseToAdd;
-  responseToAdd.aliases = [];
-  responseToAdd.response = '';
+  const { aliases, response } = responseToAdd
+  responseToAdd.aliases = []
+  responseToAdd.response = ''
 
   if (response.length) {
-    responses.data.push({ id: makeId(),aliases, response })
+    responses.data.push({ id: makeId(), aliases, response })
   }
 }
 /*
@@ -110,19 +116,19 @@ responses [
         <FormFieldSelect
           :options="aliasOptions"
           :value="responseToAdd.aliases"
-          @input="(value) => responseToAdd.aliases = [...value]"
+          @input="(value) => (responseToAdd.aliases = [...value])"
           multiple
         >
           <template v-slot:selected-label>
             <span class="icon">
-              <SvgIcon type="mdi" :path="mdiTagMultiple"/>
-              </span>
+              <SvgIcon type="mdi" :path="mdiTagMultiple" />
+            </span>
           </template>
         </FormFieldSelect>
       </template>
-      <input type="text" v-model="responseToAdd.response"/>
+      <input type="text" v-model="responseToAdd.response" />
       <template v-if="commandOptions.tokens" v-slot:helpopup>
-        <FormHelpTokens :command-options="commandOptions"/>
+        <FormHelpTokens :command-options="commandOptions" />
       </template>
     </FormField>
     <FormField class="has-label">

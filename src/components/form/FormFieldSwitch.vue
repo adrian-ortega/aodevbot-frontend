@@ -7,7 +7,7 @@ const inputValue = ref(false)
 const inputCheckbox = ref(null)
 const props = defineProps({
   value: {
-    type: [String, Number, Array]
+    type: [Boolean]
   }
 })
 const onChange = () => {

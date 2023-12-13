@@ -13,8 +13,10 @@ const props = defineProps({
     <h4>Tokens</h4>
     <p>Use these placeholder tokens as such <code>{token_name}</code></p>
     <dl class="token-descriptions">
-      <template v-for="token in commandOptions.tokens"  :key="token">
-        <dt><code>{{ token }}</code></dt>
+      <template v-for="token in commandOptions.tokens" :key="token">
+        <dt>
+          <code>{{ token }}</code>
+        </dt>
         <dd>
           {{ commandOptions.token_descriptions[token] }}
         </dd>

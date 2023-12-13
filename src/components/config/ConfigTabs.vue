@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
+import { slugify } from '../../util'
 
 const props = defineProps({
   baseRoute: {
@@ -22,10 +23,11 @@ const routeTabs = computed(() => {
       }
     })
 })
+const tabSlug = computed(() => slugify(props.baseRoute.replace('.', ' ')))
 </script>
 
 <template>
-  <nav class="tabs">
+  <nav class="tabs" :class="`tabs--${tabSlug}`">
     <template v-for="{ to, name, label } in routeTabs" :key="name">
       <RouterLink
         :to="to"

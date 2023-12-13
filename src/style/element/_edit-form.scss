@@ -1,0 +1,158 @@
+@charset "utf-8";
+
+.edit-form {
+  --input-border-width: 0.25em;
+
+  padding: 1em 1.5em;
+  width: 100%;
+  margin: 1em 0;
+
+  h2,
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__header {
+    gap: 0.5em;
+  }
+
+  &__title {
+    flex-grow: 1;
+    justify-content: space-between;
+
+    &,
+    > div {
+      display: flex;
+      align-items: stretch;
+    }
+  }
+
+  h2 {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-bold);
+  }
+
+  h4 {
+    font-size: var(--font-size-small);
+    text-transform: uppercase;
+    color: var(--gray-bis);
+    margin: 0.5em 0 1em;
+  }
+
+  &--two-col {
+    display: grid;
+    column-count: 2;
+    grid-template-columns: auto minmax(250px, 450px);
+    grid-template-rows: 1fr auto 1fr;
+    grid-template-areas:
+      'header header'
+      'content sidebar'
+      'buttons sidebar';
+    column-gap: 2em;
+
+    .edit-form__header {
+      grid-area: header;
+      border-bottom: 2px solid var(--input-color-b);
+      padding-bottom: 1em;
+      margin-bottom: 2em;
+    }
+
+    .edit-form__sidebar {
+      grid-area: sidebar;
+      padding-left: 1em;
+    }
+
+    .edit-form__content {
+      grid-area: content;
+    }
+
+    .edit-form__buttons {
+      grid-area: buttons;
+    }
+  }
+
+  &__sidebar {
+  }
+
+  &__content {
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: flex-end;
+
+    .form-buttons {
+      margin: 0;
+    }
+  }
+
+  &__sidebar-widget {
+    margin-bottom: 2em;
+    color: var(--gray);
+    font-size: 0.9em;
+    position: relative;
+    z-index: 2;
+    color: var(--gray-bis);
+
+    &:first-child > h4 {
+      margin-top: 0;
+    }
+
+    > h4,
+    > div {
+      padding-left: 0.25em;
+      padding-right: 0.25em;
+    }
+
+    > h4 {
+      display: flex;
+      border-bottom: 2px solid var(--gray-ter);
+
+      padding-bottom: 0.5em;
+      align-items: center;
+      gap: 0.25em;
+
+      .icon {
+        color: var(--info-bis);
+      }
+    }
+  }
+
+  &__stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0em;
+
+    & + .edit-form__stat-item {
+      border-top: 1px dotted var(--gray-ter);
+    }
+  }
+
+  &__stat-label {
+    font-weight: bold;
+  }
+
+  &__stat-value {
+    span + span {
+      margin-left: 0.25em;
+    }
+  }
+
+  &__example {
+    font-size: 0.9em;
+    padding: 0.5em 0 1em;
+
+    pre {
+      padding: 0.5em;
+      border-radius: var(--radius);
+      border: 2px solid var(--input-color-b);
+      background: var(--input-color-bg);
+      overflow: auto;
+    }
+
+    p {
+      margin-bottom: 0.5em;
+    }
+  }
+}

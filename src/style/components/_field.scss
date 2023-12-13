@@ -14,6 +14,11 @@
   &__label {
     align-items: flex-start;
     gap: 0.2em;
+    color: var(--input-color-label);
+    font-size: 0.9em;
+    font-weight: var(--font-weight-bold);
+    padding-top: 0.5em;
+    padding-right: 2em;
   }
 
   &__pre {
@@ -81,7 +86,7 @@
     align-items: flex-start;
     font-size: var(--font-size-small);
     margin-top: calc(var(--page-gap) + 0.2em);
-    color: var(--white-bis);
+    color: var(--input-color-label);
     gap: var(--page-gap);
 
     .icon {
@@ -163,7 +168,7 @@
 
   &.is-horizontal {
     display: grid;
-    grid-template-columns: 33.333333% auto;
+    grid-template-columns: minmax(350px, 20em) auto;
     grid-template-areas: 'content content';
 
     &.has-label {

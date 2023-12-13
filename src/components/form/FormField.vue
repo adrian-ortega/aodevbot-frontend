@@ -17,12 +17,6 @@ const props = defineProps({
   vertical: {
     type: Boolean,
     default: false
-  },
-  commandOptions: {
-    type: [Object],
-    default: () => {
-      return {}
-    }
   }
 })
 
