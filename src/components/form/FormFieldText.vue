@@ -3,29 +3,20 @@ import { onMounted, ref } from 'vue'
 const $emit = defineEmits(['input'])
 const inputValue = ref(null)
 const props = defineProps({
-  value: {
-    type: [String, Number, Array]
-  },
-  label: {
-    type: String
-  },
-  horizontal: {
-    type: Boolean,
-    default: true
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  }
+  label: { type: String },
+  help: { type: String },
+  helpTokens: { type: [Object] },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false },
+  value: { type: [String] }
+})
+
+onMounted(() => {
+  inputValue.value = props.value
 })
 </script>
 <template>
-  <FormField
-    :label="props.label"
-    :horizontal="props.horizontal"
-    :vertical="props.vertical"
-    class="field--input-text"
-  >
+  <FormField v-bind="props" class="field--input-text">
     <input
       type="text"
       ref="inputValue"

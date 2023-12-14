@@ -52,13 +52,7 @@ const remove = (value) => {
 </script>
 
 <template>
-  <FormField
-    class="field--input-aliases"
-    :label="label"
-    :help="help"
-    :horizontal="horizontal"
-    :vertical="vertical"
-  >
+  <FormField v-bind="props" class="field--input-aliases">
     <div class="aliases" v-if="aliases.length > 0">
       <div v-for="(alias, i) in aliases" :key="i" class="tag">
         <span class="text">{{ tagPrefix }}{{ alias }}</span>

@@ -58,8 +58,8 @@ const props = defineProps({
         </button>
       </FormField>
     </div>
-    <div class="table-actions__right">
-      <FormField>
+    <div class="table-actions__right" v-if="props.type !== 'custom'">
+      <FormField vertical>
         <RouterLink class="button button--primary" :to="{ name: 'config.commands.create' }">
           <span class="text">Create</span>
           <span class="icon">

@@ -1,28 +1,14 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-
+const $emit = defineEmits(['input'])
 const inputValue = ref(null)
 const props = defineProps({
-  label: {
-    type: String
-  },
-  help: {
-    type: String
-  },
-  helpTokens: {
-    type: [Object]
-  },
-  horizontal: {
-    type: Boolean,
-    default: true
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  },
-  value: {
-    type: [String, Number, Array]
-  }
+  label: { type: String },
+  help: { type: String },
+  helpTokens: { type: [Object] },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false },
+  value: { type: [String] }
 })
 
 onMounted(() => {
@@ -30,12 +16,14 @@ onMounted(() => {
 })
 </script>
 <template>
-  <FormField
-    :label="props.label"
-    :horizontal="props.horizontal"
-    :vertical="props.vertical"
-    class="field--input-text"
-  >
-    <textarea v-model="inputValue"></textarea>
+  <FormField v-bind="props" class="field--input-textarea">
+    <textarea
+      v-model="inputValue"
+      @input="
+        (evt) => {
+          $emit('input', evt.target.value)
+        }
+      "
+    ></textarea>
   </FormField>
 </template>

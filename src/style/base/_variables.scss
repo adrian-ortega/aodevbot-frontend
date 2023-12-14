@@ -12,7 +12,9 @@
   --twitch: hsl(261, 43%, 45%);
   --spotify: hsl(141, 73%, 42%);
 
-  --black: hsl(0, 0%, 0%);
+  --black: hsl(223, 20%, 0%);
+  --black-bis: hsl(223, 20%, 10%);
+  --black-ter: hsl(223, 20%, 20%);
   --black-alpha-2: hsla(223, 50%, 0%, 2%);
   --black-alpha-5: hsla(223, 50%, 0%, 5%);
   --black-alpha-10: hsla(223, 50%, 0%, 10%);
@@ -27,17 +29,17 @@
   --gray-bis: hsl(223, 20%, 50%);
   --gray-ter: hsl(223, 20%, 30%);
 
-  --white: hsl(223, 50%, 90%);
-  --white-bis: hsl(223, 50%, 70%);
-  --white-alpha-2: hsla(223, 50%, 100%, 2%);
-  --white-alpha-5: hsla(223, 50%, 100%, 5%);
+  --white: hsl(223, 20%, 90%);
+  --white-bis: hsl(223, 20%, 70%);
+  --white-alpha-2: hsla(223, 20%, 90%, 2%);
+  --white-alpha-5: hsla(223, 20%, 90%, 5%);
   --white-alpha-10: hwb(0 100% 0% / 0.1);
-  --white-alpha-20: hsla(223, 50%, 100%, 20%);
-  --white-alpha-30: hsla(223, 50%, 100%, 30%);
-  --white-alpha-50: hsla(223, 50%, 100%, 50%);
-  --white-alpha-60: hsla(223, 50%, 100%, 60%);
-  --white-alpha-70: hsla(223, 50%, 100%, 70%);
-  --white-alpha-80: hsla(223, 50%, 100%, 80%);
+  --white-alpha-20: hsla(223, 20%, 90%, 20%);
+  --white-alpha-30: hsla(223, 20%, 90%, 30%);
+  --white-alpha-50: hsla(223, 20%, 90%, 50%);
+  --white-alpha-60: hsla(223, 20%, 90%, 60%);
+  --white-alpha-70: hsla(223, 20%, 90%, 70%);
+  --white-alpha-80: hsla(223, 20%, 90%, 80%);
 
   --danger: hsl(346, 100%, 32%);
   --warning: hsl(34, 100%, 50%);

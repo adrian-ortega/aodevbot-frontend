@@ -40,7 +40,7 @@ const cs = useChattersStore()
       </FormField>
     </div>
     <div class="table-actions__right">
-      <FormField>
+      <FormField vertical>
         <button
           class="button"
           title="Sync with Twitch"

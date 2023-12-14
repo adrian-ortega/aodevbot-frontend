@@ -26,10 +26,16 @@
     &.sidebar-collapsed {
       grid-template-columns: 1fr 2em;
 
-      .sidebar > .button--close {
-        left: 0;
-        transform: translateX(0);
-        border-color: transparent;
+      .sidebar {
+        border-width: 0.15em;
+        border-color: var(--black-ter);
+        background-color: var(--black-alpha-20);
+
+        > .button--close {
+          left: 50%;
+          transform: translateX(-50%);
+          background: transparent;
+        }
       }
     }
 
@@ -49,15 +55,13 @@
     .sidebar {
       grid-area: sidebar;
       border-left: 0.25em solid var(--base-color-bg-bis);
-      box-shadow: 0 0 1em var(--black-alpha-50);
 
       > .button--close {
         position: absolute;
         top: 1em;
         left: -0.125em;
-        border: 0.15em solid var(--base-color-bg-bis);
         border-radius: var(--radius-rounded);
-        background: var(--base-color-bg);
+        background: var(--base-color-bg-bis);
         padding: 0.25em;
         color: var(--gray);
         transform: translateX(-50%);
@@ -298,12 +302,17 @@
     padding: calc(var(--page-gap) * 4) calc(var(--page-gap) * 2) calc(var(--page-gap) * 2);
 
     > .button {
+      height: inherit;
       position: absolute;
       bottom: calc(100% + 0.35em);
       right: 0.5em;
       background: var(--base-color-bg-bis);
       text-transform: uppercase;
       color: var(--gray);
+
+      &--sm {
+        font-size: 0.75em;
+      }
     }
 
     &.is-closed {

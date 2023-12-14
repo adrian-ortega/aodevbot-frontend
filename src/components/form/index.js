@@ -1,4 +1,5 @@
-import FormField from './FormField.vue'
+import FormButtons from './FormButtons.vue';
+import FormField from './FormField.vue';
 import FormFieldAliases from './FormFieldAliases.vue';
 import FormFieldSelect from './FormFieldSelect.vue';
 import FormFieldAliasResponses from './FormFieldAliasResponses.vue';
@@ -7,6 +8,7 @@ import FormFieldTextarea from './FormFieldTextarea.vue';
 import FormFieldSwitch from './FormFieldSwitch.vue'
 
 export default (app) => Object.entries({
+  FormButtons,
   FormField,
   FormFieldAliases,
   FormFieldSelect,

@@ -171,12 +171,19 @@ export const useCommandsStore = defineStore('commands', () => {
     return responseData;
   }
 
-  const deleteCommand = (command) => {
-    // @TODO implement deleteCommand(command)
-    console.log({ command })
-    if (!confirm('Are you sure you want to delete this Command?')) {
-      return
+  const deleteCommand = async (id) => {
+    let responseData = {}
+    isFetching()
+    try {
+      const response = await fetch(`/api/commands/${id}`, { method: 'DELETE' })
+      responseData = await response.json()
+      state.lastSubmission = { id }
+    } catch (err) {
+      responseData = { error: true };
+      console.log(err);
     }
+    doneFetching()
+    return responseData;
   }
 
   const resetCustomCommand = async (id) => {

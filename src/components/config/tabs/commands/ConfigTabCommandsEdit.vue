@@ -1,17 +1,13 @@
 <script setup>
-import FormField from '../../../form/FormField.vue'
-import FormFieldSelect from '../../../form/FormFieldSelect.vue'
-import FormFieldAliases from '../../../form/FormFieldAliases.vue'
-import FormButtons from '../../../form/FormButtons.vue'
-import FormHelpTokens from '../../../form/help/FormHelpTokens.vue'
+import ConfigTabCommandsEditHeader from './ConfigTabCommandsEditHeader.vue'
+import ConfigTabCommandsEditSidebar from './ConfigTabCommandsEditSidebar.vue'
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiDelete } from '@mdi/js'
 import { onMounted, computed, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCommandsStore } from '../../../../stores/commands'
 import { useNotificationsStore, NOTIFICATION_ERROR } from '../../../../stores/notifications'
-import { isArray, isEmpty, isObject, objectHasKey } from '../../../../util'
-import ConfigTabCommandsEditHeader from './ConfigTabCommandsEditHeader.vue'
-import ConfigTabCommandsEditSidebar from './ConfigTabCommandsEditSidebar.vue'
-import FormFieldSwitch from '../../../form/FormFieldSwitch.vue'
+import { isArray, isEmpty, objectHasKey } from '../../../../util'
 
 const route = useRoute()
 const router = useRouter()
@@ -25,7 +21,6 @@ const hasCustomFields = computed(
   () => !isEmpty(form.data) && !isEmpty(form.data.options) && !isEmpty(form.data.options.fields)
 )
 const customFields = computed(() => {
-  const globalTokenKeys = [...form.data.options.tokens]
   const globalTokenDescriptions = { ...form.data.options.token_descriptions }
   return (hasCustomFields.value ? form.data.options.fields : []).map((field) => {
     if (objectHasKey(field, 'token_descriptions')) {
@@ -47,7 +42,7 @@ const nameHelpText = computed(() =>
           ? ' Aliases can be added below.'
           : ''
       }`
-    : ''
+    : 'This is the main command name. Aliases can be added below'
 )
 const templateOptions = computed(() => {
   return cs.templates.map((template, i) => ({ label: template.name, value: i }))
@@ -63,26 +58,66 @@ const onTemplateChange = (id) => {
   nameInput.value.focus()
 }
 
-const onSave = async () => {
-  const response = await cs.updateCommand(form.data.id, {
+const getFormSubmissionData = () => {
+  const optionsValues =
+    !isEmpty(form.data.options) && !isEmpty(form.data.options.field_values)
+      ? form.data.options.field_values
+      : false
+  return {
     id: form.data.id,
     name: form.data.name,
     enabled: form.data.enabled,
     permission: form.data.permission,
     response: form.data.response,
     description: form.data.description,
-    options: Object.keys(form.data.options.field_values).reduce((acc, key) => {
-      acc[key] = form.data.options.field_values[key]
-      return acc
-    }, form.data.options.field_values)
-  })
-  if (response.message) {
-    ns.append(response.message, response.error ? ns.types.error : ns.types.success)
+    options: optionsValues
+      ? Object.keys(optionsValues).reduce((acc, key) => {
+          acc[key] = optionsValues[key]
+          return acc
+        }, optionsValues)
+      : undefined
   }
 }
 
+const onSave = async () => {
+  const { id } = form.data
+  const data = getFormSubmissionData()
+  const response = await (isCreateMode.value ? cs.createCommand(data) : cs.updateCommand(id, data))
+
+  if (response.message) {
+    ns.append(response.message, response.error ? ns.types.error : ns.types.success)
+  }
+
+  if (response.data && response.data.id) {
+    router.push({ name: 'config.commands.edit', params: { id: response.data.id } })
+  }
+}
+
+const onClose = () => {
+  router.push({
+    name: isCustomCommand.value ? 'config.commands.list.custom' : 'config.commands.list.general'
+  })
+}
+
 const onSaveAndClose = async () => {
-  await onSave()
+  const { id } = form.data
+  const data = getFormSubmissionData()
+  const response = await (isCreateMode.value ? cs.createCommand(data) : cs.updateCommand(id, data))
+  if (response.message) {
+    ns.append(response.message, response.error ? ns.types.error : ns.types.success)
+  }
+  onClose()
+}
+
+const onDelete = async () => {
+  const confirmed = confirm('Are you sure you want to delete this command? This cannot be undone.')
+  if (!confirmed) return false
+
+  const response = await cs.deleteCommand(form.data.id)
+  if (response.message) {
+    ns.append(response.message, response.error ? ns.types.error : ns.types.success)
+  }
+  onClose()
 }
 
 const onCustomFieldSave = async (field_id, field_value) => {
@@ -92,7 +127,6 @@ const onCustomFieldSave = async (field_id, field_value) => {
     objectHasKey(ogData.options, 'field_values') &&
     objectHasKey(ogData.options.field_values, field_id)
   ) {
-    console.log(field_value)
     if (objectHasKey(field_value, 'value')) {
       field_value = field_value.value
     }
@@ -106,6 +140,7 @@ const onCustomFieldSave = async (field_id, field_value) => {
 }
 
 onMounted(async () => {
+  cs.fetchTemplates()
   if (!isCreateMode.value) {
     const { id } = route.params
     const command = await cs.getCommand(id)
@@ -147,18 +182,20 @@ onMounted(async () => {
         <FormFieldSelect
           label="Template"
           :options="templateOptions"
+          help="Templates will change the functionality as well as the response"
           @input="(id) => onTemplateChange(id)"
         />
-        <FormField label="Response">
-          <textarea v-model="form.data.response"></textarea>
-          <template v-slot:helpopup>
-            <FormHelpTokens :command-options="form.data.options" />
-          </template>
-        </FormField>
+        <FormFieldTextarea
+          label="Response"
+          :value="form.data.response"
+          :helpTokens="form.data?.options?.token_descriptions"
+          @input="(value) => (form.data.response = value)"
+        />
         <FormFieldAliases
+          label="Aliases"
           :value="form.data.aliases"
           tag-prefix="!"
-          @input="(value) => (form.data.aliases = [...form.data.aliases, value])"
+          @input="(value) => onCustomFieldSave('aliases', value)"
         />
       </template>
 
@@ -172,6 +209,7 @@ onMounted(async () => {
           { label: 'Broadcaster', value: 3 }
         ]"
         @input="(value) => (form.data.permission = value)"
+        help="Who can use this command"
       />
       <FormFieldSwitch
         label="Enabled"
@@ -191,10 +229,17 @@ onMounted(async () => {
 
     <div class="edit-form__buttons">
       <FormButtons style="--button-height: 3em; max-width: 30em">
-        <RouterLink :to="{ name: 'config.commands' }" class="button button--fw">
+        <button
+          class="button button--fw button--transparent button--danger-hover"
+          @click.prevent="onDelete"
+        >
+          <span class="icon"><SvgIcon type="mdi" :path="mdiDelete" /></span>
+          <span class="text">Delete</span>
+        </button>
+        <button class="button button--fw" @click.prevent="onClose">
           <span class="text">Close</span>
-        </RouterLink>
-        <button class="button button--secondary button--fw" @click.prevent="onSave">
+        </button>
+        <button class="button button--fw" @click.prevent="onSave">
           <span class="text">Save</span>
         </button>
         <button class="button button--primary button--fw" @click.prevent="onSaveAndClose">

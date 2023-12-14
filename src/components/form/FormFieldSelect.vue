@@ -7,35 +7,15 @@ import { isString, isNumeric, objectHasKey, isEmpty } from '../../util'
 const $slots = useSlots()
 const emit = defineEmits(['input'])
 const props = defineProps({
-  label: {
-    type: String
-  },
-  help: {
-    type: String
-  },
-  helpTokens: {
-    type: [Object]
-  },
-  horizontal: {
-    type: Boolean,
-    default: true
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  },
-  value: {
-    type: [Array, Object, String, Number]
-  },
-  hasSearch: {
-    type: Boolean
-  },
-  multiple: {
-    type: Boolean
-  },
-  options: {
-    type: Array
-  }
+  label: { type: String },
+  help: { type: String },
+  helpTokens: { type: [Object] },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false },
+  value: { type: [Array, Object, String, Number] },
+  hasSearch: { type: Boolean },
+  multiple: { type: Boolean },
+  options: { type: Array }
 })
 const dd = ref(null)
 const isOpen = ref(false)
@@ -130,13 +110,7 @@ const selectOptionLabel = computed(() => {
 })
 </script>
 <template>
-  <FormField
-    :label="props.label"
-    :horizontal="props.horizontal"
-    :vertical="props.vertical"
-    class="field--input-select"
-    :data-selected="props.value"
-  >
+  <FormField v-bind="props" class="field--input-select">
     <div ref="dd" class="input-select" :class="{ 'is-open': isOpen, 'is-closed': isClosed }">
       <div class="input-select__v" @click.prevent="() => toggleMenu()">
         <div class="input-select__vv">

@@ -1,5 +1,7 @@
 <script setup>
+import SvgIcon from '@jamescoyle/vue-icon'
 import { useCommandsStore } from '../../../../stores/commands'
+import { mdiPlus } from '@mdi/js'
 const cs = useCommandsStore()
 </script>
 <template>
@@ -13,12 +15,10 @@ const cs = useCommandsStore()
           <p>No commands found, consider adding one.</p>
         </template>
         <p>
-          <a
-            href="#"
-            class="button button--primary button--inline"
-            @click.prevent="() => cs.selectSubTab('create')"
-            >Add Custom Command</a
-          >
+          <RouterLink class="button button--inline" :to="{ name: 'config.commands.create' }">
+            <span class="text">Create</span>
+            <span class="icon"><SvgIcon type="mdi" :path="mdiPlus" /></span>
+          </RouterLink>
         </p>
       </div>
     </div>

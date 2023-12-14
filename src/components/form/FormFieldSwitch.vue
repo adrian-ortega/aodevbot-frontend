@@ -6,9 +6,12 @@ const $emit = defineEmits(['input'])
 const inputValue = ref(false)
 const inputCheckbox = ref(null)
 const props = defineProps({
-  value: {
-    type: [Boolean]
-  }
+  label: { type: String },
+  help: { type: String },
+  helpTokens: { type: [Object] },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false },
+  value: { type: [Boolean] }
 })
 const onChange = () => {
   $emit('input', inputCheckbox.value.checked)
@@ -18,7 +21,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <FormField class="field--input-switch">
+  <FormField v-bind="props" class="field--input-switch">
     <label class="input-switch">
       <input
         ref="inputCheckbox"
