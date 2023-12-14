@@ -50,7 +50,7 @@ export const useSpotifyStore = defineStore('spotify', () => {
       case 'spotify.up-next':
         upNext.data = { ...payload }
         setTimeout(() => {
-          upNext.data = null;
+          upNext.data = null
         }, ONE_SECOND * 15)
         break
     }

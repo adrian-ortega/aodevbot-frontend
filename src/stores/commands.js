@@ -151,8 +151,8 @@ export const useCommandsStore = defineStore('commands', () => {
   }
 
   const updateCommand = async (id, data) => {
-    let responseData;
-    isFetching();
+    let responseData
+    isFetching()
     try {
       const response = await fetch(`/api/commands/${id}`, {
         method: 'PATCH',
@@ -164,11 +164,11 @@ export const useCommandsStore = defineStore('commands', () => {
       responseData = await response.json()
       state.lastSubmission = { ...data }
     } catch (err) {
-      responseData = { error: true };
-      console.log(err);
+      responseData = { error: true }
+      console.log(err)
     }
-    doneFetching();
-    return responseData;
+    doneFetching()
+    return responseData
   }
 
   const deleteCommand = async (id) => {
@@ -179,16 +179,16 @@ export const useCommandsStore = defineStore('commands', () => {
       responseData = await response.json()
       state.lastSubmission = { id }
     } catch (err) {
-      responseData = { error: true };
-      console.log(err);
+      responseData = { error: true }
+      console.log(err)
     }
     doneFetching()
-    return responseData;
+    return responseData
   }
 
   const resetCustomCommand = async (id) => {
-    let responseData = {};
-    isFetching();
+    let responseData = {}
+    isFetching()
     try {
       const response = await fetch(`/api/commands/${id}/reset`, {
         method: 'POST',
@@ -200,11 +200,11 @@ export const useCommandsStore = defineStore('commands', () => {
       responseData = await response.json()
       state.lastSubmission = { id }
     } catch (err) {
-      responseData = { error: true };
-      console.log(err);
+      responseData = { error: true }
+      console.log(err)
     }
-    doneFetching();
-    return responseData;
+    doneFetching()
+    return responseData
   }
 
   return {
@@ -237,6 +237,6 @@ export const useCommandsStore = defineStore('commands', () => {
     updateCommand,
     resetCustomCommand,
     deleteCommand,
-    lastSubmission: computed(() => state.lastSubmission),
+    lastSubmission: computed(() => state.lastSubmission)
   }
 })

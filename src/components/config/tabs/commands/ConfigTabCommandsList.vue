@@ -27,7 +27,13 @@ watch(() => route.name, refresh)
       </div>
       <div class="table__body">
         <ConfigTabCommandsListNotFound v-if="!cs.fetching && !cs.hasItems" />
-        <ConfigTabCommandsListRow v-else v-for="row in cs.items" :key="row.id" :row="row" :type="route.meta?.listType" />
+        <ConfigTabCommandsListRow
+          v-else
+          v-for="row in cs.items"
+          :key="row.id"
+          :row="row"
+          :type="route.meta?.listType"
+        />
       </div>
     </div>
     <ConfigTabCommandsListPagination />

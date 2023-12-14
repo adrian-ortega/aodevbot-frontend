@@ -87,7 +87,7 @@ export const useChattersStore = defineStore('users', () => {
     return filterSearch(type)
   }
 
-  const getUser = () => { }
+  const getUser = () => {}
 
   const syncing = ref(false)
   const syncPercentage = ref(100)

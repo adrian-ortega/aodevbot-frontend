@@ -9,7 +9,7 @@
       border-bottom-right-radius: 0;
       color: var(--gray-bis);
       padding: 0.35em 0.5em 0.15em;
-    } 
+    }
 
     &__items {
       max-height: 10em;
@@ -21,7 +21,6 @@
       padding: 1em 0;
     }
 
-
     &__item {
       display: flex;
       justify-content: space-between;
@@ -29,5 +28,4 @@
       font-size: 0.8em;
     }
   }
-
 }
