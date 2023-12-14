@@ -4,7 +4,7 @@
   display: flex;
   gap: 0.5em;
   padding: 0 1em;
-  border-bottom: 1px solid var(--white-alpha-10);
+  border-bottom: 0.25em solid var(--base-color-bg-bis);
 
   &__trigger {
     display: inline-flex;
@@ -32,7 +32,7 @@
       background: var(--gray-bis);
       position: absolute;
       left: 0;
-      bottom: -0.125em;
+      bottom: -0.25em;
       border-radius: var(--radius);
     }
 
