@@ -9,14 +9,14 @@ export const useCommandsStore = defineStore('commands', () => {
   const pages = ref(1)
   const pageLimit = ref(10)
   const pageTotal = ref(1)
-  const editId = ref(null)
   const state = reactive({
     items: [],
     templates: [],
     filters: {
       limit: pageLimit.value,
       status: -1
-    }
+    },
+    lastSubmission: null
   })
 
   const isFetching = () => {
@@ -135,6 +135,7 @@ export const useCommandsStore = defineStore('commands', () => {
         body: JSON.stringify(data)
       })
       responseData = await response.json()
+      state.lastSubmission = { ...data }
     } catch (err) {
       responseData = null
       console.log(err)
@@ -161,6 +162,7 @@ export const useCommandsStore = defineStore('commands', () => {
         body: JSON.stringify(data)
       })
       responseData = await response.json()
+      state.lastSubmission = { ...data }
     } catch (err) {
       responseData = { error: true };
       console.log(err);
@@ -189,6 +191,7 @@ export const useCommandsStore = defineStore('commands', () => {
         body: JSON.stringify({ id })
       })
       responseData = await response.json()
+      state.lastSubmission = { id }
     } catch (err) {
       responseData = { error: true };
       console.log(err);
@@ -226,6 +229,7 @@ export const useCommandsStore = defineStore('commands', () => {
     enableCommand,
     updateCommand,
     resetCustomCommand,
-    deleteCommand
+    deleteCommand,
+    lastSubmission: computed(() => state.lastSubmission),
   }
 })

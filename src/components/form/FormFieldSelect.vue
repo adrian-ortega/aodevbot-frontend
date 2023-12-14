@@ -3,21 +3,18 @@ import { ref, computed, useSlots } from 'vue'
 import FormField from './FormField.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiCheck, mdiChevronDown, mdiChevronUp } from '@mdi/js'
-import { isString, isNumeric, objectHasKey } from '../../util'
+import { isString, isNumeric, objectHasKey, isEmpty } from '../../util'
 const $slots = useSlots()
 const emit = defineEmits(['input'])
 const props = defineProps({
-  value: {
-    type: [String, Number, Array]
-  },
   label: {
     type: String
   },
-  hasSearch: {
-    type: Boolean
+  help: {
+    type: String
   },
-  multiple: {
-    type: Boolean
+  helpTokens: {
+    type: [Object]
   },
   horizontal: {
     type: Boolean,
@@ -26,6 +23,15 @@ const props = defineProps({
   vertical: {
     type: Boolean,
     default: false
+  },
+  value: {
+    type: [Array, Object, String, Number]
+  },
+  hasSearch: {
+    type: Boolean
+  },
+  multiple: {
+    type: Boolean
   },
   options: {
     type: Array
@@ -100,8 +106,7 @@ const parsedOptions = computed(() => {
 })
 const selectOptionLabel = computed(() => {
   const value = props.multiple ? [...props.value] : props.value
-
-  if (!value || value.length === 0) {
+  if (value === undefined || value === null) {
     return '---'
   }
 

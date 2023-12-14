@@ -2,8 +2,6 @@
 
 .field {
   margin: 0 0 1.5em;
-  // position: relative;
-  // z-index: 1;
 
   &__label,
   &__pre,
@@ -44,11 +42,11 @@
   &__content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--page-gap);
 
     &.has-pre,
     &.has-post {
       grid-template-columns: auto auto;
+      gap: var(--page-gap);
     }
 
     &.has-help {
@@ -85,13 +83,21 @@
     grid-template-columns: auto 1fr;
     align-items: flex-start;
     font-size: var(--font-size-small);
-    margin-top: calc(var(--page-gap) + 0.2em);
     color: var(--input-color-label);
     gap: var(--page-gap);
+    line-height: 1;
 
     .icon {
       color: var(--info-bis);
     }
+
+    .text {
+      padding-top: 0.15em;
+    }
+  }
+
+  &__help-and-tokens {
+    margin-top: calc(var(--page-gap) + 0.2em);
   }
 
   &__help-popup {

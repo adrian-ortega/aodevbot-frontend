@@ -38,7 +38,7 @@ const router = createRouter({
       component: ConfigView,
       redirect: { name: 'config.accounts' },
       meta: {
-        containerClasses: ['is-page']
+        containerClasses: ['is-page', 'v-debug']
       },
       children: [
         {

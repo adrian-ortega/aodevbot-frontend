@@ -74,6 +74,13 @@
   --link-hover-color: hsl(199, 98%, 48%);
   --link-active-color: var(--primary);
 
+  --button-height: 2.1rem;
+  --button-height-sm: 1.25rem;
+  --button-color-fg: var(--gray-bis);
+  --button-color-bg: hsl(223, 20%, 15%);
+  --button-color-hover-fg: var(--white);
+  --button-color-hover-bg: var(--black);
+
   --input-font-size: 0.9em;
   --input-height: 2.5em;
   --input-height-offset: 0em;
@@ -82,7 +89,7 @@
   --input-color-label: hsl(223, 18%, 40%);
   --input-color-placeholder: hsl(223, 18%, 60%);
   --input-color-bg: hsl(223, 30%, 10%);
-  --input-color-b: var(--base-color-bg-bis);
+  --input-color-b: var(--button-color-bg);
   --input-checkbox-color-bg: var(--white-alpha-10);
   --input-checkbox-color-fg: var(--primary);
   --input-checkbox-color-b: var(--white-alpha-20);
@@ -94,13 +101,6 @@
   --radius-small: 0.1em;
   --radius: 0.25em;
   --radius-rounded: 3000em;
-
-  --button-height: 2.1rem;
-  --button-height-sm: 1.25rem;
-  --button-color-fg: var(--gray-bis);
-  --button-color-bg: hsl(223, 20%, 15%);
-  --button-color-hover-fg: var(--white);
-  --button-color-hover-bg: var(--black);
 
   --page-gap: 0.25em;
   --page-header-height: auto;

@@ -1,13 +1,16 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-const $emit = defineEmits(['input'])
+
 const inputValue = ref(null)
 const props = defineProps({
-  value: {
-    type: [String, Number, Array]
-  },
   label: {
     type: String
+  },
+  help: {
+    type: String
+  },
+  helpTokens: {
+    type: [Object]
   },
   horizontal: {
     type: Boolean,
@@ -16,7 +19,14 @@ const props = defineProps({
   vertical: {
     type: Boolean,
     default: false
+  },
+  value: {
+    type: [String, Number, Array]
   }
+})
+
+onMounted(() => {
+  inputValue.value = props.value
 })
 </script>
 <template>
@@ -26,11 +36,6 @@ const props = defineProps({
     :vertical="props.vertical"
     class="field--input-text"
   >
-    <input
-      type="text"
-      ref="inputValue"
-      :value="props.value"
-      @input="() => $emit('input', inputValue.value)"
-    />
+    <textarea v-model="inputValue"></textarea>
   </FormField>
 </template>

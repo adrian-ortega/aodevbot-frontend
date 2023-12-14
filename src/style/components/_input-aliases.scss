@@ -14,6 +14,10 @@
       .field__post {
         flex: 0 1 auto;
       }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -27,5 +31,42 @@
     border-radius: var(--radius);
     padding: 0.25em;
     background-color: var(--input-color-bg);
+
+    & + .field {
+      margin-top: 0.5em;
+    }
+
+    .tag {
+      appearance: none;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      justify-content: center;
+      align-items: center;
+      font-size: 0.875em;
+      line-height: 1;
+      word-break: keep-all;
+      white-space: nowrap;
+      transition: all 0.1s linear;
+      text-decoration: none;
+
+      font-family: var(--font-family-mono);
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      background-color: var(--secondary-ter);
+
+      .text,
+      .button .icon {
+        padding: calc(var(--page-gap) + 0.1em);
+      }
+
+      .button {
+        border: none;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
   }
 }

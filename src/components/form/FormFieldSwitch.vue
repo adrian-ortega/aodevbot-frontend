@@ -2,7 +2,7 @@ import FormField from './FormField.vue';
 <script setup>
 import { onMounted, ref } from 'vue'
 import FormField from './FormField.vue'
-const emit = defineEmits(['input'])
+const $emit = defineEmits(['input'])
 const inputValue = ref(false)
 const inputCheckbox = ref(null)
 const props = defineProps({
@@ -11,7 +11,7 @@ const props = defineProps({
   }
 })
 const onChange = () => {
-  emit('input', inputCheckbox.value.checked)
+  $emit('input', inputCheckbox.value.checked)
 }
 onMounted(() => {
   inputValue.value = !!props.value

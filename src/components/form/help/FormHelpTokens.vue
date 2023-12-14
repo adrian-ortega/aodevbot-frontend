@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  commandOptions: {
+  tokens: {
     type: [Object],
     default: () => {
       return {}
@@ -13,13 +13,11 @@ const props = defineProps({
     <h4>Tokens</h4>
     <p>Use these placeholder tokens as such <code>{token_name}</code></p>
     <dl class="token-descriptions">
-      <template v-for="token in commandOptions.tokens" :key="token">
+      <template v-for="(description, token) in props.tokens" :key="token">
         <dt>
           <code>{{ token }}</code>
         </dt>
-        <dd>
-          {{ commandOptions.token_descriptions[token] }}
-        </dd>
+        <dd>{{ description }}</dd>
       </template>
     </dl>
   </div>

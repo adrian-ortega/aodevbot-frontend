@@ -3,33 +3,16 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import FormField from './FormField.vue'
 import { mdiClose, mdiPlus } from '@mdi/js'
 import { ref, computed } from 'vue'
-import { isNumeric, isString, isArray } from '../../util'
+import { isEmpty, isNumeric, isString, isArray } from '../../util'
 const $emit = defineEmits(['input'])
 const props = defineProps({
-  label: {
-    type: String,
-    default: 'Aliases'
-  },
-  value: {
-    type: [Object, String, Array]
-  },
-  horizontal: {
-    type: Boolean,
-    default: true
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  },
-  tagPrefix: {
-    type: String
-  },
-  commandOptions: {
-    type: [Object],
-    default: () => {
-      return {}
-    }
-  }
+  label: { type: String },
+  help: { type: String },
+  helpTokens: { type: [Object] },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false },
+  value: { type: [Object, String, Array] },
+  tagPrefix: { type: String }
 })
 
 const input = ref(null)
@@ -52,9 +35,19 @@ const append = () => {
   if (value.includes('!')) {
     value = value.replace('!', '')
   }
-  $emit('input', value)
+
+  if (isEmpty(value.trim())) return
+
+  $emit('input', [...aliases.value, value])
   alias.value = ''
   input.value.focus()
+}
+
+const remove = (value) => {
+  $emit(
+    'input',
+    aliases.value.filter((alias) => alias !== value)
+  )
 }
 </script>
 
@@ -62,9 +55,22 @@ const append = () => {
   <FormField
     class="field--input-aliases"
     :label="label"
-    :horizontal="props.horizontal"
-    :vertical="props.vertical"
+    :help="help"
+    :horizontal="horizontal"
+    :vertical="vertical"
   >
+    <div class="aliases" v-if="aliases.length > 0">
+      <div v-for="(alias, i) in aliases" :key="i" class="tag">
+        <span class="text">{{ tagPrefix }}{{ alias }}</span>
+        <button
+          class="button button--close"
+          @click.prevent="remove(alias)"
+          :title="`Remove ${tagPrefix ?? ''}'${alias}'`"
+        >
+          <span class="icon"><SvgIcon type="mdi" :path="mdiClose" /></span>
+        </button>
+      </div>
+    </div>
     <FormField>
       <input type="text" v-model="alias" @keypress.enter="append" ref="input" />
       <template v-slot:post>
@@ -76,13 +82,5 @@ const append = () => {
         </button>
       </template>
     </FormField>
-    <div class="aliases" v-if="aliases.length > 0">
-      <button v-for="(alias, i) in aliases" :key="i" class="button button--tag">
-        <span class="text">{{ tagPrefix }}{{ alias }}</span>
-        <span class="icon">
-          <SvgIcon type="mdi" :path="mdiClose" />
-        </span>
-      </button>
-    </div>
   </FormField>
 </template>

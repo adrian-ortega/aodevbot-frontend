@@ -23,25 +23,25 @@ const toggleCollapsed = () => {
   <PageHeader title="Debug" />
   <PageContent>
     <div class="container" :class="{ 'sidebar-collapsed': isCollapsed }">
-    <div class="content">
-      <div class="content__scroller">
-        <fieldset class="overlay-debug">
-          <legend>Browser Source</legend>
-          <BrowserSourceOverlay />
-        </fieldset>
-        <BrowserSourceControls />
-        <BrowserSourceTerminal />
+      <div class="content">
+        <div class="content__scroller">
+          <fieldset class="overlay-debug">
+            <legend>Browser Source</legend>
+            <BrowserSourceOverlay />
+          </fieldset>
+          <BrowserSourceControls />
+          <BrowserSourceTerminal />
+        </div>
+      </div>
+      <div class="sidebar">
+        <button class="button button--close" @click.prevent="toggleCollapsed">
+          <span class="icon">
+            <SvgIcon v-if="isCollapsed" type="mdi" :path="mdiArrowCollapseLeft" />
+            <SvgIcon v-else type="mdi" :path="mdiArrowRight" />
+          </span>
+        </button>
+        <Chat v-if="!isCollapsed" />
       </div>
     </div>
-    <div class="sidebar">
-      <button class="button button--close" @click.prevent="toggleCollapsed">
-        <span class="icon">
-          <SvgIcon v-if="isCollapsed" type="mdi" :path="mdiArrowCollapseLeft" />
-          <SvgIcon v-else type="mdi" :path="mdiArrowRight" />
-        </span>
-      </button>
-      <Chat v-if="!isCollapsed" />
-    </div>
-  </div>
   </PageContent>
 </template>

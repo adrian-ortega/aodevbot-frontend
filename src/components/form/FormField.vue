@@ -1,28 +1,20 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiClose, mdiHelp, mdiHelpCircle } from '@mdi/js'
+import { mdiArrowRightBottom, mdiClose, mdiFindReplace } from '@mdi/js'
 import { ref, computed, useSlots } from 'vue'
+import FormHelpTokens from './help/FormHelpTokens.vue'
 const $slots = useSlots()
 const props = defineProps({
-  label: {
-    type: String
-  },
-  help: {
-    type: String
-  },
-  horizontal: {
-    type: Boolean,
-    default: true
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  }
+  label: { type: String },
+  help: { type: String },
+  helpTokens: { type: [Object] },
+  horizontal: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: false }
 })
 
 const hasHelp = computed(() => props.help && props.help.length > 0)
+const hasHelpTokens = computed(() => props.helpTokens && Object.keys(props.helpTokens).length > 0)
 const hasLabel = computed(() => !!($slots.label || props.label))
-const hasHelpPopup = computed(() => !!$slots.helpopup)
 const fieldCssClasses = computed(() => {
   const cssClasses = ['field']
   if (props.vertical) {
@@ -76,7 +68,9 @@ const closeHelpPopup = () => {
           </button>
         </div>
         <div class="field__help-popup__content">
-          <slot name="helpopup"></slot>
+          <slot name="helpopup">
+            <FormHelpTokens :tokens="helpTokens" />
+          </slot>
         </div>
       </div>
     </div>
@@ -84,13 +78,6 @@ const closeHelpPopup = () => {
       <slot name="label">
         <span>{{ props.label }}</span>
       </slot>
-      <template v-if="hasHelpPopup">
-        <button class="button button--help" title="Show Field Help" @click.prevent="openHelpPopup">
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiHelpCircle" />
-          </span>
-        </button>
-      </template>
     </div>
     <div
       class="field__content"
@@ -109,12 +96,44 @@ const closeHelpPopup = () => {
       <div v-if="$slots.post" class="field__post">
         <slot name="post"></slot>
       </div>
-      <p v-if="hasHelp" class="field__help">
-        <span class="icon">
-          <SvgIcon type="mdi" :path="mdiHelpCircle" />
-        </span>
-        <span v-html="props.help"></span>
-      </p>
+      <div class="field__help-and-tokens" v-if="hasHelp || hasHelpTokens">
+        <p v-if="hasHelp" class="field__help">
+          <span class="icon">
+            <SvgIcon type="mdi" :path="mdiArrowRightBottom" />
+          </span>
+          <span class="text" v-html="props.help"></span>
+        </p>
+        <p v-if="hasHelpTokens" class="field__help-tokens">
+          <button class="button button--sm" title="Show Tokens" @click.prevent="openHelpPopup">
+            <span class="icon">
+              <SvgIcon type="mdi" :path="mdiFindReplace" />
+            </span>
+            <span class="text">Tokens</span>
+          </button>
+        </p>
+      </div>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.field__help-and-tokens {
+  display: flex;
+}
+.field__help-tokens {
+  margin-left: auto;
+  .button--sm {
+    font-size: 0.675em;
+    padding: 0 0.45em;
+    text-transform: uppercase;
+
+    .icon {
+      font-size: 1em;
+
+      svg {
+        width: 1.5em;
+      }
+    }
+  }
+}
+</style>

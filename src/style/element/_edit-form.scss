@@ -44,18 +44,17 @@
     display: grid;
     column-count: 2;
     grid-template-columns: auto minmax(250px, 450px);
-    grid-template-rows: 1fr auto 1fr;
+    grid-template-rows: calc(32px + 0.5em) max-content 3em;
     grid-template-areas:
       'header header'
       'content sidebar'
       'buttons sidebar';
-    column-gap: 2em;
+    gap: 2em;
 
     .edit-form__header {
       grid-area: header;
       border-bottom: 2px solid var(--input-color-b);
-      padding-bottom: 1em;
-      margin-bottom: 2em;
+      padding-bottom: 0.5em;
     }
 
     .edit-form__sidebar {
@@ -81,6 +80,7 @@
   &__buttons {
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end;
 
     .form-buttons {
       margin: 0;
@@ -144,10 +144,6 @@
     padding: 0.5em 0 1em;
 
     pre {
-      padding: 0.5em;
-      border-radius: var(--radius);
-      border: 2px solid var(--input-color-b);
-      background: var(--input-color-bg);
       overflow: auto;
     }
 

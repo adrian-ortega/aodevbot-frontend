@@ -190,29 +190,6 @@
     width: 100%;
   }
 
-  &--tag {
-    font-family: var(--font-family-mono);
-    height: inherit;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--page-gap);
-    background-color: var(--secondary-ter);
-
-    .icon,
-    .text {
-      padding: calc(var(--page-gap) + 0.1em);
-    }
-
-    // Needs to be specific because of the above
-    // "magic" trick for icons
-    //
-    .text + .icon:last-child {
-      margin: 0;
-      padding-left: 0;
-    }
-  }
-
   &[disabled='true'],
   &.is-disabled {
     opacity: 0.5;
