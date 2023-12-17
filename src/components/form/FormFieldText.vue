@@ -8,6 +8,7 @@ const props = defineProps({
   helpTokens: { type: [Object] },
   horizontal: { type: Boolean, default: true },
   vertical: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
   value: { type: [String] }
 })
 
@@ -21,7 +22,12 @@ onMounted(() => {
       type="text"
       ref="inputValue"
       :value="props.value"
-      @input="() => $emit('input', inputValue.value)"
+      :disabled="props.disabled"
+      @input="
+        (evt) => {
+          $emit('input', evt.target.value)
+        }
+      "
     />
   </FormField>
 </template>

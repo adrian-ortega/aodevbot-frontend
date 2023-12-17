@@ -12,6 +12,7 @@ const props = defineProps({
   helpTokens: { type: [Object] },
   horizontal: { type: Boolean, default: true },
   vertical: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false }, // @TODO implement this
   value: { type: [Array, Object, String, Number] },
   hasSearch: { type: Boolean },
   multiple: { type: Boolean },

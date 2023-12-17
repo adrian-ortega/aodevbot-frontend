@@ -70,6 +70,7 @@ const getFormSubmissionData = () => {
     permission: form.data.permission,
     response: form.data.response,
     description: form.data.description,
+    aliases: form.data.aliases,
     options: optionsValues
       ? Object.keys(optionsValues).reduce((acc, key) => {
           acc[key] = optionsValues[key]
@@ -161,9 +162,18 @@ onMounted(async () => {
       @input="(value) => (form.data = { ...value })"
     />
     <div class="edit-form__content">
-      <FormField label="Name" :help="nameHelpText">
-        <input type="text" ref="nameInput" v-model="form.data.name" :disabled="isCustomCommand" />
-      </FormField>
+      <FormFieldText
+        label="Name"
+        :help="nameHelpText"
+        :value="form.data.name"
+        :disabled="isCustomCommand"
+        @input="(value) => (form.data.name = value)"
+      />
+      <FormFieldTextarea
+        v-if="!isCustomCommand"
+        label="Description"
+        help="This is only visible to the admin."
+      />
 
       <!-- Custom fields -->
       <template v-if="hasCustomFields">
@@ -172,7 +182,6 @@ onMounted(async () => {
           :key="field.id"
           v-bind="field"
           :is="`form-field-${field.type}`"
-          :command-options="form.data.options"
           @input="(value) => onCustomFieldSave(field.id, value)"
         />
       </template>
@@ -195,13 +204,13 @@ onMounted(async () => {
           label="Aliases"
           :value="form.data.aliases"
           tag-prefix="!"
-          @input="(value) => onCustomFieldSave('aliases', value)"
+          @input="(value) => (form.data.aliases = [...value])"
         />
       </template>
 
       <FormFieldSelect
         label="Permission"
-        :value="form.data.permission"
+        :value="form.data?.permission"
         :options="[
           { label: 'Everyone', value: 0 },
           { label: 'Subscribers', value: 1 },
@@ -213,7 +222,7 @@ onMounted(async () => {
       />
       <FormFieldSwitch
         label="Enabled"
-        :value="form.data.enabled"
+        :value="form.data?.enabled"
         @input="(value) => (form.data.enabled = value)"
         help="Turn this command on or off"
       />

@@ -9,7 +9,8 @@ const props = defineProps({
   help: { type: String },
   helpTokens: { type: [Object] },
   horizontal: { type: Boolean, default: true },
-  vertical: { type: Boolean, default: false }
+  vertical: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false }
 })
 
 const hasHelp = computed(() => props.help && props.help.length > 0)

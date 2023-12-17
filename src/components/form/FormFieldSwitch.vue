@@ -11,14 +11,12 @@ const props = defineProps({
   helpTokens: { type: [Object] },
   horizontal: { type: Boolean, default: true },
   vertical: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false }, // @TODO implement this
   value: { type: [Boolean] }
 })
 const onChange = () => {
   $emit('input', inputCheckbox.value.checked)
 }
-onMounted(() => {
-  inputValue.value = !!props.value
-})
 </script>
 <template>
   <FormField v-bind="props" class="field--input-switch">
@@ -27,7 +25,7 @@ onMounted(() => {
         ref="inputCheckbox"
         type="checkbox"
         class="input-switch__cb"
-        v-model="inputValue"
+        :checked="props.value"
         @change="onChange"
       />
       <span class="input-switch__s"></span>

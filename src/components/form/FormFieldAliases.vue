@@ -11,6 +11,7 @@ const props = defineProps({
   helpTokens: { type: [Object] },
   horizontal: { type: Boolean, default: true },
   vertical: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
   value: { type: [Object, String, Array] },
   tagPrefix: { type: String }
 })
