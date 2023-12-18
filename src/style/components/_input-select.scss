@@ -43,10 +43,10 @@
     left: 0;
     width: 100%;
     min-width: 10em;
-    background-color: var(--base-color-bg);
+    background-color: var(--input-select-color-dd-bg);
     opacity: 0;
     visibility: hidden;
-    border: 1px solid var(--black-alpha-30);
+    border: 1px solid var(--input-select-color-b);
     box-shadow: inset 0 1px var(--white-alpha-5), 0 2px var(--black-alpha-20);
     z-index: 3;
   }

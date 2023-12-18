@@ -38,6 +38,9 @@ const toggleCollapsed = () => {
             <SvgIcon v-if="isCollapsed" type="mdi" :path="mdiArrowCollapseLeft" />
             <SvgIcon v-else type="mdi" :path="mdiArrowRight" />
           </span>
+          <span class="popup-text popup-text--bottom">{{
+            isCollapsed ? 'Open Chat' : 'Close Chat'
+          }}</span>
         </button>
         <Chat v-if="!isCollapsed" />
       </div>

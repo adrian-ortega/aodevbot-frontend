@@ -1,7 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
 const $emit = defineEmits(['input'])
-const inputValue = ref(null)
 const props = defineProps({
   label: { type: String },
   help: { type: String },
@@ -11,15 +9,11 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   value: { type: [String] }
 })
-
-onMounted(() => {
-  inputValue.value = props.value
-})
 </script>
 <template>
   <FormField v-bind="props" class="field--input-textarea">
     <textarea
-      v-model="inputValue"
+      v-model="props.value"
       :disabled="props.disabled"
       @input="
         (evt) => {

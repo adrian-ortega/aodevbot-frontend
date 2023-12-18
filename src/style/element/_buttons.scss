@@ -33,6 +33,8 @@
   }
 
   .popup-text {
+    $size: 0.5em;
+
     position: absolute;
     bottom: calc(100% + 0.5em);
     background: var(--black);
@@ -45,7 +47,6 @@
     transform: translateY(-10%);
 
     &:after {
-      $size: 0.5em;
       content: '';
       position: absolute;
       top: 99%;
@@ -56,6 +57,18 @@
       border-left: $size solid transparent;
       border-right: $size solid transparent;
       border-top: $size solid var(--black);
+    }
+
+    &--bottom {
+      bottom: unset;
+      top: calc(100% + 0.5em);
+
+      &:after {
+        bottom: 99%;
+        top: unset;
+        border-bottom: $size solid var(--black);
+        border-top: none;
+      }
     }
   }
 

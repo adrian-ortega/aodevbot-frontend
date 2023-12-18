@@ -49,12 +49,6 @@
       gap: var(--page-gap);
     }
 
-    &.has-help {
-      grid-template-areas:
-        'input'
-        'help';
-    }
-
     &.has-pre {
       grid-template-columns: auto 1fr;
       grid-template-areas:
@@ -79,25 +73,30 @@
 
   &__help {
     grid-area: help;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: flex-start;
     font-size: var(--font-size-small);
-    color: var(--input-color-label);
-    gap: var(--page-gap);
-    line-height: 1;
-
-    .icon {
-      color: var(--info-bis);
-    }
-
-    .text {
-      padding-top: 0.15em;
-    }
+    color: var(--input-color-help);
   }
 
   &__help-and-tokens {
-    margin-top: calc(var(--page-gap) + 0.2em);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__help-tokens {
+    .button--sm {
+      font-size: 0.675em;
+      padding: 0 0.45em;
+      text-transform: uppercase;
+
+      .icon {
+        font-size: 1em;
+
+        svg {
+          width: 1.5em;
+        }
+      }
+    }
   }
 
   &__help-popup {
@@ -174,11 +173,19 @@
 
   &.is-horizontal {
     display: grid;
-    grid-template-columns: minmax(350px, 20em) auto;
+    grid-template-columns: minmax(250px, 18em) auto;
     grid-template-areas: 'content content';
 
     &.has-label {
       grid-template-areas: 'label content';
+      column-gap: 2em;
+    }
+
+    &.has-help.has-label {
+      grid-template-areas:
+        'label content'
+        'help content';
+      grid-template-rows: 2em auto;
     }
 
     .field__label {

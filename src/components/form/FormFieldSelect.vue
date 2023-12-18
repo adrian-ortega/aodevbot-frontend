@@ -16,7 +16,7 @@ const props = defineProps({
   value: { type: [Array, Object, String, Number] },
   hasSearch: { type: Boolean },
   multiple: { type: Boolean },
-  options: { type: Array }
+  options: { type: [Array, Object] }
 })
 const dd = ref(null)
 const isOpen = ref(false)

@@ -44,10 +44,9 @@ const nameHelpText = computed(() =>
       }`
     : 'This is the main command name. Aliases can be added below'
 )
-const templateOptions = computed(() => {
-  return cs.templates.map((template, i) => ({ label: template.name, value: i }))
-})
-
+const templateOptions = computed(() =>
+  cs.templates.map((template, i) => ({ label: template.name, value: i }))
+)
 const onTemplateChange = (id) => {
   const template = cs.templates[id]
   Object.keys(form).forEach((key) => {
@@ -57,7 +56,6 @@ const onTemplateChange = (id) => {
   })
   nameInput.value.focus()
 }
-
 const getFormSubmissionData = () => {
   const optionsValues =
     !isEmpty(form.data.options) && !isEmpty(form.data.options.field_values)
@@ -79,7 +77,6 @@ const getFormSubmissionData = () => {
       : undefined
   }
 }
-
 const onSave = async () => {
   const { id } = form.data
   const data = getFormSubmissionData()
@@ -93,13 +90,11 @@ const onSave = async () => {
     router.push({ name: 'config.commands.edit', params: { id: response.data.id } })
   }
 }
-
 const onClose = () => {
   router.push({
     name: isCustomCommand.value ? 'config.commands.list.custom' : 'config.commands.list.general'
   })
 }
-
 const onSaveAndClose = async () => {
   const { id } = form.data
   const data = getFormSubmissionData()
@@ -109,7 +104,6 @@ const onSaveAndClose = async () => {
   }
   onClose()
 }
-
 const onDelete = async () => {
   const confirmed = confirm('Are you sure you want to delete this command? This cannot be undone.')
   if (!confirmed) return false
@@ -120,7 +114,6 @@ const onDelete = async () => {
   }
   onClose()
 }
-
 const onCustomFieldSave = async (field_id, field_value) => {
   const ogData = { ...form.data }
   if (
@@ -139,7 +132,6 @@ const onCustomFieldSave = async (field_id, field_value) => {
   }
   form.data = { ...ogData }
 }
-
 onMounted(async () => {
   cs.fetchTemplates()
   if (!isCreateMode.value) {
@@ -162,6 +154,13 @@ onMounted(async () => {
       @input="(value) => (form.data = { ...value })"
     />
     <div class="edit-form__content">
+      <FormFieldSelect
+        v-if="!isCustomCommand"
+        label="Template"
+        :options="templateOptions"
+        help="Templates will change the functionality as well as the response"
+        @input="(id) => onTemplateChange(id)"
+      />
       <FormFieldText
         label="Name"
         :help="nameHelpText"
@@ -172,7 +171,9 @@ onMounted(async () => {
       <FormFieldTextarea
         v-if="!isCustomCommand"
         label="Description"
-        help="This is only visible to the admin."
+        help="This is only visible to the admin, like a little note to yourself!"
+        :value="form.data.description"
+        @input="(value) => (form.data.description = value)"
       />
 
       <!-- Custom fields -->
@@ -182,32 +183,27 @@ onMounted(async () => {
           :key="field.id"
           v-bind="field"
           :is="`form-field-${field.type}`"
+          class="form-field--custom"
           @input="(value) => onCustomFieldSave(field.id, value)"
         />
       </template>
 
       <!-- General Commands -->
-      <template v-if="!isCustomCommand">
-        <FormFieldSelect
-          label="Template"
-          :options="templateOptions"
-          help="Templates will change the functionality as well as the response"
-          @input="(id) => onTemplateChange(id)"
-        />
-        <FormFieldTextarea
-          label="Response"
-          :value="form.data.response"
-          :helpTokens="form.data?.options?.token_descriptions"
-          @input="(value) => (form.data.response = value)"
-        />
-        <FormFieldAliases
-          label="Aliases"
-          :value="form.data.aliases"
-          tag-prefix="!"
-          @input="(value) => (form.data.aliases = [...value])"
-        />
-      </template>
-
+      <FormFieldTextarea
+        v-if="!isCustomCommand"
+        label="Response"
+        :value="form.data.response"
+        :helpTokens="form.data?.options?.token_descriptions"
+        @input="(value) => (form.data.response = value)"
+        help="What would you like the bot to reply when this is triggered?"
+      />
+      <FormFieldAliases
+        v-if="!isCustomCommand"
+        label="Aliases"
+        :value="form.data.aliases"
+        tag-prefix="!"
+        @input="(value) => (form.data.aliases = [...value])"
+      />
       <FormFieldSelect
         label="Permission"
         :value="form.data?.permission"

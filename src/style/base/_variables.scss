@@ -88,13 +88,16 @@
   --input-height-offset: 0em;
   --input-min-width: 16em;
   --input-border-width: 0.01625em;
-  --input-color-label: hsl(223, 18%, 40%);
+  --input-color-label: var(--white-bis);
+  --input-color-help: hsl(223, 20%, 40%);
   --input-color-placeholder: hsl(223, 18%, 60%);
-  --input-color-bg: hsl(223, 30%, 10%);
-  --input-color-b: var(--button-color-bg);
+  --input-color-bg: hsl(223, 20%, 10%);
+  --input-color-b: hsl(223, 20%, 20%);
   --input-checkbox-color-bg: var(--white-alpha-10);
   --input-checkbox-color-fg: var(--primary);
   --input-checkbox-color-b: var(--white-alpha-20);
+  --input-select-color-dd-bg: hsl(223, 25%, 20%);
+  --input-select-color-b: var(--input-color-bg);
 
   --code-color-bg: hsl(261, 18%, 16%);
   --code-color-fg: hsl(261, 43%, 45%);

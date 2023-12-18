@@ -26,6 +26,9 @@ const fieldCssClasses = computed(() => {
   if (hasLabel.value) {
     cssClasses.push('has-label')
   }
+  if (hasHelp.value || hasHelpTokens) {
+    cssClasses.push('has-help')
+  }
   return cssClasses
 })
 
@@ -80,12 +83,22 @@ const closeHelpPopup = () => {
         <span>{{ props.label }}</span>
       </slot>
     </div>
+    <div class="field__help-and-tokens" v-if="hasHelp || hasHelpTokens">
+      <p v-if="hasHelp" class="field__help" v-html="props.help"></p>
+      <p v-if="hasHelpTokens" class="field__help-tokens">
+        <button class="button button--sm" title="Show Tokens" @click.prevent="openHelpPopup">
+          <span class="icon">
+            <SvgIcon type="mdi" :path="mdiFindReplace" />
+          </span>
+          <span class="text">Tokens</span>
+        </button>
+      </p>
+    </div>
     <div
       class="field__content"
       :class="{
         'has-pre': $slots.pre,
-        'has-post': $slots.post,
-        'has-help': hasHelp
+        'has-post': $slots.post
       }"
     >
       <div v-if="$slots.pre" class="field__pre">
@@ -97,44 +110,6 @@ const closeHelpPopup = () => {
       <div v-if="$slots.post" class="field__post">
         <slot name="post"></slot>
       </div>
-      <div class="field__help-and-tokens" v-if="hasHelp || hasHelpTokens">
-        <p v-if="hasHelp" class="field__help">
-          <span class="icon">
-            <SvgIcon type="mdi" :path="mdiArrowRightBottom" />
-          </span>
-          <span class="text" v-html="props.help"></span>
-        </p>
-        <p v-if="hasHelpTokens" class="field__help-tokens">
-          <button class="button button--sm" title="Show Tokens" @click.prevent="openHelpPopup">
-            <span class="icon">
-              <SvgIcon type="mdi" :path="mdiFindReplace" />
-            </span>
-            <span class="text">Tokens</span>
-          </button>
-        </p>
-      </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.field__help-and-tokens {
-  display: flex;
-}
-.field__help-tokens {
-  margin-left: auto;
-  .button--sm {
-    font-size: 0.675em;
-    padding: 0 0.45em;
-    text-transform: uppercase;
-
-    .icon {
-      font-size: 1em;
-
-      svg {
-        width: 1.5em;
-      }
-    }
-  }
-}
-</style>
