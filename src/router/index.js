@@ -20,7 +20,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      redirect: {
+        name: 'config.accounts'
+      }
     },
     {
       path: '/components',
