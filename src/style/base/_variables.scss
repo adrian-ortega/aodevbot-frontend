@@ -127,9 +127,10 @@
   --dd-menu-color-border: var(--black-alpha-20);
   --dd-menu-min-width: 10em;
 
-  --table-color-bg: var(--input-color-bg);
-  --table-border-color: hsl(223, 20%, 15%);
-  --table-header-color-bg: var(--table-border-color);
+  --table-color-bg: var(--base-color-bg);
+  --table-color-b: var(--base-color-bg-bis);
+  --table-color-b-bis: hsl(223, 20%, 20%);
+  --table-header-color-bg: var(--table-color-b);
 
   --loader-size: 2em;
   --loader-stroke-width: calc(var(--loader-size) / 6);

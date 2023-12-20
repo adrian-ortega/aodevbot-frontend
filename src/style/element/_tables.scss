@@ -67,7 +67,7 @@
 }
 
 .table {
-  border: 0.25em solid var(--table-border-color);
+  border: 0.25em solid var(--table-color-b);
   border-radius: var(--radius);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -78,7 +78,6 @@
 
     .table__row {
       align-items: center;
-      border-bottom: 0.25em solid var(--table-border-color);
     }
 
     .table__cell--h:not(.cb) {
@@ -113,7 +112,7 @@
     .table__row {
       background: var(--table-color-bg);
       padding: 1em;
-      border-bottom: 1px solid var(--table-border-color);
+      border-bottom: 1px solid var(--table-color-b-bis);
 
       &--hovered {
         background: var(--white-alpha-2);
@@ -133,11 +132,13 @@
 
       &,
       a {
-        color: var(--secondary);
+        color: var(--white-bis);
       }
     }
 
     .description {
+      font-size: var(--font-size-small);
+      color: var(--input-color-help);
     }
   }
 }

@@ -1,4 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "workbench.colorTheme": "Ayu Mirage Bordered"
+  "workbench.colorTheme": "Ayu Mirage Bordered",
+  "cSpell.words": ["jamescoyle"]
 }
