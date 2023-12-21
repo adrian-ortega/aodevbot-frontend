@@ -41,8 +41,7 @@ const props = defineProps({
       <div class="table__cell-content">
         <h4 class="title">
           <router-link :to="{ name: 'config.commands.edit', params: { id: props.row.id } }">
-            <span>{{ props.row.formatted_name }}</span>
-            <code>{{ props.row.name }}</code>
+            <span>!{{ props.row.name }}</span>
           </router-link>
         </h4>
         <p class="description">{{ props.row.description }}</p>

@@ -2,7 +2,7 @@
 import ConfigTabCommandsListTableActions from './ConfigTabCommandsListTableActions.vue'
 import ConfigTabCommandsListNotFound from './ConfigTabCommandsListNotFound.vue'
 import ConfigTabCommandsListRow from './ConfigTabCommandsListRow.vue'
-import ConfigTabCommandsListPagination from './ConfigTabCommandsListPagination.vue'
+import TablePagination from '../../../table/TablePagination.vue'
 import { useCommandsStore } from '../../../../stores/commands'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
@@ -36,6 +36,6 @@ watch(() => route.name, refresh)
         />
       </div>
     </div>
-    <ConfigTabCommandsListPagination />
+    <TablePagination :type="route.meta?.listType" :store="cs" />
   </div>
 </template>

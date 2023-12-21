@@ -2,7 +2,8 @@
 import FormField from '../../../form/FormField.vue'
 import FormFieldSelect from '../../../form/FormFieldSelect.vue'
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiLoading, mdiPlus, mdiChevronRight } from '@mdi/js'
+import debounce from 'lodash.debounce'
+import { mdiPlus } from '@mdi/js'
 import { useCommandsStore } from '../../../../stores/commands'
 const cs = useCommandsStore()
 const props = defineProps({
@@ -13,6 +14,13 @@ const props = defineProps({
     }
   }
 })
+
+const filterSearch = (data = {}) => {
+  Object.keys(data).map((key) => cs.updateFilter(key, data[key]))
+  return cs.filterSearch(props.type)
+}
+const blurredTimeout = 500
+const blurredSearch = debounce(() => cs.filterSearch(props.type), blurredTimeout)
 </script>
 <template>
   <div class="table-actions table-actions--header">
@@ -22,7 +30,7 @@ const props = defineProps({
           type="search"
           placeholder="Search commands"
           v-model="cs.search"
-          @keyup.enter="() => cs.filterSearch(props.type)"
+          @input="blurredSearch"
         />
       </FormField>
       <FormFieldSelect
@@ -34,29 +42,15 @@ const props = defineProps({
           { label: 'Enabled', value: 1 },
           { label: 'Disabled', value: 0 }
         ]"
-        @input="(value) => cs.updateFilter('status', value)"
+        @input="(status) => filterSearch({ status })"
       />
       <FormFieldSelect
         label="Limit"
         vertical
         :value="cs.filters.limit"
         :options="[5, 10, 25, 100]"
-        @input="(value) => cs.updateFilter('limit', value)"
-      >
-      </FormFieldSelect>
-      <FormField vertical>
-        <button
-          class="button"
-          :class="{ 'is-disabled': cs.fetching }"
-          :disabled="cs.fetching"
-          @click.prevent="cs.filterSearch(props.type)"
-        >
-          <span class="text">Filter</span>
-          <span class="icon" :class="{ 'is-spinner': cs.fetching }">
-            <SvgIcon type="mdi" :path="cs.fetching ? mdiLoading : mdiChevronRight" />
-          </span>
-        </button>
-      </FormField>
+        @input="(limit) => filterSearch({ limit })"
+      />
     </div>
     <div class="table-actions__right" v-if="props.type !== 'custom'">
       <FormField vertical>

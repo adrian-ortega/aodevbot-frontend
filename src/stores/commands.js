@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
 import { computed, ref, reactive } from 'vue'
 import { createUrlSearchParams, isEmpty, objectHasKey } from '../util'
+import { useLocalStore } from './local';
 
 export const useCommandsStore = defineStore('commands', () => {
+  const ls = useLocalStore()
   const fetching = ref(false)
   const search = ref('')
   const page = ref(1)
   const pages = ref(1)
-  const pageLimit = ref(10)
+  const pageLimit = ref(ls.get('cmd.list.limit', 10))
   const pageTotal = ref(1)
   const state = reactive({
     items: [],
@@ -57,6 +59,7 @@ export const useCommandsStore = defineStore('commands', () => {
   const updateFilter = (key, value) => {
     if (objectHasKey(state.filters, key)) {
       state.filters[key] = value
+      ls.save(`cmd.list.${key}`, value)
     }
   }
 
@@ -92,7 +95,7 @@ export const useCommandsStore = defineStore('commands', () => {
     return fetchItems(type)
   }
 
-  const hasNextPage = computed(() => page.value + 1 > pages.value)
+  const hasNextPage = computed(() => ((page.value + 1) < pages.value))
   const nextPage = (type) => {
     if (hasNextPage.value) {
       page.value++
@@ -209,7 +212,9 @@ export const useCommandsStore = defineStore('commands', () => {
 
   return {
     page,
+    pages,
     pageLimit,
+    pageTotal,
 
     search,
     setSearch,
