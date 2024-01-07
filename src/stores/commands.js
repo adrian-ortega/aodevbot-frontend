@@ -2,37 +2,25 @@ import { defineStore } from 'pinia'
 import { computed, ref, reactive } from 'vue'
 import { createUrlSearchParams, isEmpty, objectHasKey } from '../util'
 import { useLocalStore } from './local';
+import { useDataTable } from './mixins/data-table';
 
 export const useCommandsStore = defineStore('commands', () => {
   const ls = useLocalStore()
   const fetching = ref(false)
   const search = ref('')
-  const page = ref(1)
-  const pages = ref(1)
-  const pageLimit = ref(ls.get('cmd.list.limit', 10))
-  const pageTotal = ref(1)
+  const dataTable = useDataTable({
+    storeName: 'cmd',
+    fetchItems: (...args) => fetchItems(...args)
+  })
   const state = reactive({
     items: [],
     templates: [],
     filters: {
-      limit: pageLimit.value,
+      limit: dataTable.pageLimit,
       status: -1
     },
     lastSubmission: null
   })
-
-  const isFetching = () => {
-    fetching.value = true
-  }
-  const doneFetching = (() => {
-    let id
-    return () => {
-      clearTimeout(id)
-      id = setTimeout(() => {
-        fetching.value = false
-      }, 10)
-    }
-  })()
 
   const fetchTemplates = async () => {
     if (state.templates.length > 0) {
@@ -40,7 +28,7 @@ export const useCommandsStore = defineStore('commands', () => {
     }
 
     let responseData
-    isFetching()
+    dataTable.isFetching()
     try {
       const response = await fetch('/api/commands/templates')
       responseData = await response.json()
@@ -48,7 +36,7 @@ export const useCommandsStore = defineStore('commands', () => {
       responseData = { data: [] }
       console.log(err)
     }
-    doneFetching()
+    dataTable.doneFetching()
     state.templates = [...responseData.data]
   }
 
@@ -64,51 +52,32 @@ export const useCommandsStore = defineStore('commands', () => {
   }
 
   const fetchItems = async (type = 'general') => {
-    isFetching()
+    dataTable.isFetching()
     let responseData
     try {
       const response = await fetch(
         `/api/commands?${createUrlSearchParams({
           type,
-          page: page.value,
-          limit: pageLimit.value,
+          page: dataTable.page.value,
+          limit: dataTable.pageLimit.value,
           search: search.value
         })}`
       )
       responseData = await response.json()
     } catch (err) {
-      responseData = { data: [], pagination: { page: page.value, limit: pageLimit.value } }
+      responseData = { data: [], pagination: { page: dataTable.page.value, limit: dataTable.pageLimit.value } }
       console.log(err)
     }
-    doneFetching()
+    dataTable.doneFetching()
     state.items = [...responseData.data]
     if (responseData.pagination) {
-      page.value = responseData.pagination.page
-      pageLimit.value = responseData.pagination.limit
-      pages.value = responseData.pagination.pages
-      pageTotal.value = responseData.pagination.total
+      dataTable.setPagination(responseData.pagination)
     }
   }
 
   const filterSearch = (type) => {
     pageLimit.value = state.filters.limit
     return fetchItems(type)
-  }
-
-  const hasNextPage = computed(() => ((page.value + 1) < pages.value))
-  const nextPage = (type) => {
-    if (hasNextPage.value) {
-      page.value++
-    }
-    return filterSearch(type)
-  }
-
-  const hasPreviousPage = computed(() => page.value - 1 > 1)
-  const previousPage = (type) => {
-    if (hasPreviousPage.value) {
-      page.value--
-    }
-    return filterSearch(type)
   }
 
   const getCommand = async (id) => {
@@ -211,11 +180,7 @@ export const useCommandsStore = defineStore('commands', () => {
   }
 
   return {
-    page,
-    pages,
-    pageLimit,
-    pageTotal,
-
+    ...dataTable,
     search,
     setSearch,
     hasSearch: computed(() => search.value.length > 0),
@@ -227,10 +192,6 @@ export const useCommandsStore = defineStore('commands', () => {
     filters: computed(() => state.filters),
     updateFilter,
     filterSearch,
-    hasNextPage,
-    nextPage,
-    hasPreviousPage,
-    previousPage,
 
     fetchTemplates,
     templates: computed(() => state.templates),

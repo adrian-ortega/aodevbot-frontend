@@ -12,7 +12,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <div class="table-actions table-actions--footer">
+  <div class="table-actions table-actions--footer" v-if="props.store">
     <div class="table-actions__left">
       <button
         v-if="store.hasPreviousPage"
