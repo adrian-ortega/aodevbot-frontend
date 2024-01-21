@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
-import { createUrlSearchParams } from '../util'
+import { ONE_SECOND, createUrlSearchParams } from '../util'
 
 export const useChattersStore = defineStore('users', () => {
   const fetching = ref(false)
+  const syncing = ref(false)
+  const syncPercent = ref(0)
+  const syncTotal = ref(0)
+  const syncStatus = ref(0)
   const search = ref('')
   const page = ref(1)
   const pages = ref(1)
@@ -15,6 +19,62 @@ export const useChattersStore = defineStore('users', () => {
       limit: 5
     }
   })
+
+  const isSyncing = () => {
+    syncing.value = true
+  }
+  const doneSyncing = () => {
+    let id
+    return () => {
+      clearTimeout(id)
+      id = setTimeout(() => {
+        syncing.value = false
+      }, 10)
+    }
+  }
+
+  const getSyncStatus = async () => {
+    try {
+      const response = await fetch('/api/chatters/sync-status')
+      return await response.json();
+    } catch (err) {
+      console.log(err)
+    }
+    return null;
+  }
+
+  let statusOffset = .1;
+  let statusId
+  const updateSyncStatus = () => getSyncStatus().then(({ total, status }) => {
+    syncStatus.value = status
+    syncTotal.value = total
+    syncPercent.value = Math.ceil(status / total)
+    console.log(total / status)
+
+    if (status !== total) {
+      statusId = setTimeout(async () => {
+        await updateSyncStatus()
+        statusOffset += .000001 * statusOffset
+      }, ONE_SECOND + statusOffset)
+      return;
+    }
+
+    clearTimeout(statusId)
+    page.value = 1;
+    fetchItems();
+  })
+
+  const sync = async () => {
+    isSyncing()
+    try {
+      window.navigator.sendBeacon('/api/chatters/sync')
+
+      setTimeout(updateSyncStatus, ONE_SECOND * 3)
+      console.log('done')
+    } catch (err) {
+
+    }
+  }
 
   const isFetching = () => {
     fetching.value = true
@@ -69,6 +129,13 @@ export const useChattersStore = defineStore('users', () => {
   const getUser = () => { }
 
   return {
+    sync,
+    syncing,
+    syncPercent,
+    syncTotal,
+    syncStatus,
+    updateSyncStatus,
+
     page,
     pageLimit,
 

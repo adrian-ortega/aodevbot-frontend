@@ -4,7 +4,11 @@ import FormField from './FormField.vue'
 import FormFieldSelect from './FormFieldSelect.vue'
 import { mdiSync } from '@mdi/js'
 import { useChattersStore } from '../stores/chatters'
+import { onMounted } from 'vue'
 const cs = useChattersStore()
+onMounted(() => {
+  cs.updateSyncStatus()
+})
 </script>
 <template>
   <div class="table-actions">
@@ -41,11 +45,22 @@ const cs = useChattersStore()
     </div>
     <div class="table-actions__right">
       <FormField>
-        <button class="button" title="Sync with Twitch">
+        <button
+          class="button"
+          :class="{ 'is-disabled': cs.syncing }"
+          :disabled="cs.syncing"
+          title="Sync with Twitch"
+          @click.prevent="cs.sync()"
+        >
           <span class="text">Sync</span>
-          <span class="icon">
+          <span class="icon" :class="{ 'is-spinner': cs.syncing }">
             <SvgIcon type="mdi" :path="mdiSync" />
           </span>
+          <span
+            class="progress"
+            :data-progress="cs.syncPercent.value"
+            :style="{ width: `${cs.syncPercent.value}%` }"
+          ></span>
         </button>
       </FormField>
     </div>
