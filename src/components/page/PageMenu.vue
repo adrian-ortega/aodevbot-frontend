@@ -1,9 +1,10 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiTuneVerticalVariant, mdiBug, mdiChat } from '@mdi/js'
+import { mdiTuneVerticalVariant, mdiBug, mdiChat, mdiMusic } from '@mdi/js'
 import { RouterLink } from 'vue-router'
 
 const dd_links = [
+  { label: 'Music', to: { name: 'music' }, icon: mdiMusic },
   { label: 'Chat', to: { name: 'chat' }, icon: mdiChat },
   { label: 'Debug', to: { name: 'debug' }, icon: mdiBug },
   {

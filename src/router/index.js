@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BrowserSourceView from '../views/BrowserSourceView.vue'
-import HomeView from '../views/HomeView.vue'
 import ChatView from '../views/ChatView.vue'
-import DebugView from '../views/DebugView.vue'
 import ComponentsView from '../views/ComponentsView.vue'
 import ConfigView from '../views/ConfigView.vue'
 import ConfigTabAccount from '../components/config/tabs/accounts/ConfigTabAccount.vue'
@@ -12,6 +10,9 @@ import ConfigTabCommands from '../components/config/tabs/commands/ConfigTabComma
 import ConfigTabEvents from '../components/config/tabs/events/ConfigTabEvents.vue'
 import ConfigTabRedeemables from '../components/config/tabs/redeemables/ConfigTabRedeemables.vue'
 import ConfigTabUsers from '../components/config/tabs/users/ConfigTabUsers.vue'
+import MusicView from '../views/MusicView.vue'
+import DebugView from '../views/DebugView.vue'
+import HomeView from '../views/HomeView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
 const router = createRouter({
@@ -22,8 +23,13 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       redirect: {
-        name: 'config.accounts'
+        name: 'music'
       }
+    },
+    {
+      path: '/music',
+      name: 'music',
+      component: MusicView
     },
     {
       path: '/components',
