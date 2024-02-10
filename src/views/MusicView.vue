@@ -1,9 +1,11 @@
 <script setup>
-import LayoutSidebar from '../layouts/LayoutSidebar.vue';
+import LayoutSidebar from '../layouts/LayoutSidebar.vue'
+import MusicTabs from '../components/music/MusicTabs.vue'
 </script>
 
 <template>
   <LayoutSidebar title="Music">
-    Music Content
+    <MusicTabs/>
+    <router-view class="tabs__content" />
   </LayoutSidebar>
 </template>

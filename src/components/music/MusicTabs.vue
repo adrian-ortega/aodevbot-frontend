@@ -3,5 +3,5 @@ import RouterTabs from '../tabs/RouterTabs.vue';
 </script>
 
 <template>
-  <RouterTabs top-level parent="config"/>
+  <RouterTabs top-level parent="music"/>
 </template>
