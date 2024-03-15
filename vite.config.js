@@ -9,7 +9,7 @@ export default defineConfig({
     cors: false,
     proxy: {
       '^/api/.*': {
-        target: 'http://localhost:8080',
+        target: 'http://casaortega.local:8031',
         changeOrigin: true
       }
     }

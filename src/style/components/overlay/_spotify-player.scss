@@ -3,6 +3,8 @@
 @keyframes spotify-player-in {
   0% {
     transform: translateY(100em);
+    opacity: 0;
+    visibility: hidden;
   }
   80% {
     transform: translateY(-5%);
@@ -12,6 +14,8 @@
   }
   100% {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -24,6 +28,8 @@
   }
   100% {
     transform: translateY(100em);
+    opacity: 0;
+    visibility: hidden;
   }
 }
 

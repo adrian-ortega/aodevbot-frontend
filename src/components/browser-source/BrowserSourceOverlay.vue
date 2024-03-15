@@ -35,11 +35,11 @@ const fontSize = computed(() => {
   switch (true) {
     case w < 1600:
       return `1em`
-    case w > 1600:
+    case w > 1600 && w < 1900:
       offset = 0.85
       break
     case w > 1900:
-      offset = 0.65
+      offset = 1.2
       break
     default:
       offset = 0.25
