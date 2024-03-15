@@ -14,6 +14,7 @@ export const useWebsocketStore = defineStore('websockets', () => {
 
   const connect = () => {
     try {
+      console.log('Connecting...', getConnectUrl())
       ws = new WebSocket(getConnectUrl())
       ws.onopen = () => {
         connected.value = true
