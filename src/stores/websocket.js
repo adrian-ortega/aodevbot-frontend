@@ -10,13 +10,7 @@ export const useWebsocketStore = defineStore('websockets', () => {
   const messageActions = reactive([])
   let ws, errorNotificationId
 
-  const getConnectUrl = () => {
-    // @TODO Adrian Ortega
-    //       implement a way to pull this url dynamically
-    //       so it matches the environment inside the
-    //       Docker container for the bot server.
-    return 'ws://localhost:8080/websockets'
-  }
+  const getConnectUrl = () => `ws://${window.location.host}/websockets`
 
   const connect = () => {
     try {
